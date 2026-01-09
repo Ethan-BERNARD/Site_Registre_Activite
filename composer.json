@@ -14,7 +14,8 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "laminas/laminas-escaper": "^2.14",
-        "psr/log": "^3.0"
+        "psr/log": "^3.0",
+        "vlucas/phpdotenv": "^5.6"
     },
     "require-dev": {
         "codeigniter/coding-standard": "^1.7",

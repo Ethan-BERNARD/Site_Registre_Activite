@@ -1,0 +1,29 @@
+# === ENVIRONNEMENT ===
+.env
+
+# === DEPENDANCES ===
+vendor/
+
+# === FICHIERS TEMPORAIRES ===
+writable/cache/*
+writable/logs/*
+writable/session/*
+writable/uploads/*
+writable/debugbar/*
+
+# Garder les index.html
+!writable/*/index.html
+
+# === SYSTEME ===
+.DS_Store
+Thumbs.db
+
+# === IDE / EDITORS ===
+.vscode/
+.idea/
+
+# === COMPOSER ===
+composer.lock
+
+# === NODE (si tu utilises npm) ===
+node_modules/
