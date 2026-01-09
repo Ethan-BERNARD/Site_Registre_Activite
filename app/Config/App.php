@@ -16,7 +16,15 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/';
+    public $baseURL;
+    
+    public function __construct() 
+    {
+        parent::__construct(); 
+        
+        // Charge la valeur depuis .env ou utilise un fallback 
+        $this->baseURL = getenv('CI_BASE_URL') ?: 'http://localhost/'; 
+    }
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
