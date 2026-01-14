@@ -473,3 +473,16 @@ ALTER TABLE IMPLIQUE_PAR_ACTEUR
   ADD FOREIGN KEY FK_IMPLIQUE_PAR_ACTEUR_TRAITEMENT (REF)
       REFERENCES TRAITEMENT (REF) ;
 
+
+DROP USER IF EXISTS 'userRegistre'@'%';
+
+
+-- modifier le mot de passe et éventuellement le nom utilisateur
+-- pour plus de sécurité remplacer % par adresse ip et créer un user par adresse autorisé a accceder au site
+CREATE USER 'userRegistre'@'%' IDENTIFIED BY '@dmin123';
+
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON REGISTRE_DCP.* TO 'userRegistre'@'%';
+
+
+FLUSH PRIVILEGES;
