@@ -3,28 +3,27 @@
 use CodeIgniter\Model;
 use \App\Models\DataAccess;
 
+/**
+ * Classe de gestion de l'authentification des utilisateurs.
+ */
 class Authentif extends Model
 {
+    /** @var \CodeIgniter\Session\Session */
     private $session;
 
     /**
      * Constructeur : initialise l'accès à la session
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->session = session();
     }
 
     /**
-     * Vérifie si l'utilisateur connecté possède le rôle "rssi"
-     * (administrateur du registre des traitements).
+     * Vérifie si l'utilisateur connecté possède le rôle "rssi".
      *
-     * Retourne true si :
-     *   - un utilisateur est connecté (ID présent en session)
-     *   - son rôle est exactement "rssi"
-     *
-     * Retourne false sinon.
+     * @return bool
      */
     public function estRssi()
     {
@@ -39,14 +38,9 @@ class Authentif extends Model
     }
 
     /**
-     * Vérifie si l'utilisateur connecté possède le rôle "utilisateur"
-     * (membre de l'équipe éducative avec droits limités).
+     * Vérifie si l'utilisateur connecté possède le rôle "utilisateur".
      *
-     * Retourne true si :
-     *   - un utilisateur est connecté (ID présent en session)
-     *   - son rôle est exactement "utilisateur"
-     *
-     * Retourne false sinon.
+     * @return bool
      */
     public function estUtilisateur()
     {
@@ -63,10 +57,7 @@ class Authentif extends Model
     /**
      * Enregistre dans la session les informations de l'utilisateur connecté.
      *
-     * @param array $authUser Tableau associatif contenant :
-     *   - ID
-     *   - LOGIN
-     *   - DROIT
+     * @param array $authUser Tableau associatif : ID, LOGIN, DROIT
      */
     public function connecter($authUser)
     {
@@ -76,10 +67,9 @@ class Authentif extends Model
     }
 
     /**
-     * Déconnecte l'utilisateur :
-     *   - supprime les variables de session
-     *   - détruit la session
-     *   - redirige vers la page de connexion
+     * Déconnecte l'utilisateur et redirige vers la page de connexion.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse
      */
     public function deconnecter()
     {
@@ -90,21 +80,29 @@ class Authentif extends Model
     }
 
     /**
-     * Vérifie si les identifiants fournis correspondent à un utilisateur existant.
+     * Authentifie un utilisateur à partir de son login et mot de passe.
+     * Ici on suppose que les mots de passe en BDD sont DÉJÀ hashés.
      *
-     * @param string $login  Login saisi
-     * @param string $mdp    Mot de passe saisi (en clair dans ta base actuelle)
+     * @param string $login Login saisi
+     * @param string $mdp   Mot de passe saisi (en clair)
      *
-     * @return array|null    Retourne les infos de l'utilisateur si correct,
-     *                       sinon null.
+     * @return array|null   Données utilisateur si OK, sinon null
      */
     public function authentifier($login, $mdp)
     {
         $dao = new DataAccess();
         $authUser = $dao->getUtilisateur($login);
 
-        // Si aucun utilisateur trouvé OU mot de passe incorrect → échec
-        if (empty($authUser) || $authUser['MDP'] != $mdp) {
+        // Aucun utilisateur trouvé → échec
+        if (empty($authUser)) {
+            return null;
+        }
+
+        // Mot de passe hashé stocké en BDD (colonne MDP)
+        $hashBDD = $authUser['MDP'];
+
+        // Vérification du mot de passe saisi par rapport au hash
+        if (!password_verify($mdp, $hashBDD)) {
             return null;
         }
 
@@ -112,5 +110,47 @@ class Authentif extends Model
         $authUser['MDP'] = '';
 
         return $authUser;
+    }
+
+    /**
+     * Crée un nouvel utilisateur dans la base de données
+     * en hashant automatiquement son mot de passe.
+     *
+     * @param string $login  Le nom d'utilisateur choisi
+     * @param string $mdp    Le mot de passe en clair (fourni par l'utilisateur)
+     * @return bool          true si l'insertion réussit, false sinon
+     */
+    public function creerUtilisateur($login, $mdp)
+    {
+        // Hash sécurisé du mot de passe
+        $hash = password_hash($mdp, PASSWORD_DEFAULT);
+
+        // Insertion dans la table "utilisateur"
+        return $this->db->table('utilisateur')->insert([
+            'LOGIN' => $login,   // identifiant de connexion
+            'MDP'   => $hash     // mot de passe hashé
+        ]);
+    }
+
+    /**
+     * Vérifie si un utilisateur peut se connecter (version simple).
+     * À n'utiliser que si tu sais que tous les mots de passe sont hashés.
+     *
+     * @param string $login  Le login saisi dans le formulaire
+     * @param string $mdp    Le mot de passe saisi (en clair)
+     * @return bool          true si la connexion est valide, false sinon
+     */
+    public function verifierConnexion($login, $mdp)
+    {
+        $user = $this->db->table('utilisateur')
+                         ->where('LOGIN', $login)
+                         ->get()
+                         ->getRow();
+
+        if (!$user) {
+            return false;
+        }
+
+        return password_verify($mdp, $user->MDP);
     }
 }

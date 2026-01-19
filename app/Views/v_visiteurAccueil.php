@@ -1,33 +1,58 @@
 <?= $this->extend('l_visiteur') ?>
 
 <?= $this->section('body') ?>
+<div id="contenu">
 
-<h2>Gestion des frais des visiteurs</h2>
+    <h2>Espace Utilisateur</h2>
 
-<div id="notify">
-    Bienvenue <?= esc($identite) ?>, vous êtes connecté en tant que <strong>Utilisateur</strong>.
+    <div id="notify">
+        Bienvenue <?= esc($identite) ?>, vous êtes connecté en tant que <strong>Utilisateur</strong>.
+    </div>
+
+    <p>
+        Cet espace vous permet d’accéder aux documents internes, aux communications du RSSI
+        et aux informations essentielles de l’établissement.
+        Vous disposez d’un accès simplifié et sécurisé pour consulter les ressources mises à votre disposition.
+    </p>
+
+    <h3>Fonctionnalités principales</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Documents internes</td>
+                <td>Consulter les documents mis à disposition par l’établissement</td>
+            </tr>
+            <tr>
+                <td>Communications</td>
+                <td>Lire les messages et annonces du RSSI</td>
+            </tr>
+            <tr>
+                <td>Profil</td>
+                <td>Mettre à jour certaines informations personnelles</td>
+            </tr>
+            <tr>
+                <td>Support</td>
+                <td>Accéder aux informations d’aide et de contact</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Navigation</h3>
+    <p>Utilisez le menu latéral pour accéder aux différentes fonctionnalités :</p>
+    <ul>
+        <li><strong>Accueil</strong> – cette page</li>
+        <li><strong>Documents internes</strong> – accès aux fichiers</li>
+        <li><strong>Communications</strong> – messages du RSSI</li>
+        <li><strong>Profil</strong> – informations personnelles</li>
+        <li><strong>Déconnexion</strong> – quitter l’espace sécurisé</li>
+    </ul>
+
 </div>
-
-<p>
-    Bienvenue dans votre application de gestion des frais de déplacements.
-    Vous pouvez y renseigner vos dépenses professionnelles et suivre l’état de vos remboursements.
-</p>
-
-<h3>Fonctionnement des fiches de frais</h3>
-
-<ul>
-    <li>Une fiche couvre la période du 1er au dernier jour du mois.</li>
-    <li>Les fiches sont créées automatiquement au fil de votre utilisation.</li>
-    <li>Vous pouvez les compléter à votre rythme.</li>
-    <li>Une fois complètes, vous devez les <strong>signer</strong> pour validation par le service comptable.</li>
-</ul>
-
-<h3>Navigation</h3>
-<p>Le menu à gauche vous permet d’accéder aux fonctionnalités :</p>
-
-<ul>
-    <li>Gérer vos fiches de frais (modifier, signer, imprimer)</li>
-    <li>Se déconnecter</li>
-</ul>
-
 <?= $this->endSection() ?>
+
