@@ -1,0 +1,246 @@
+/* -------------------------------------------------- */
+/*   STYLE GLOBAL                                      */
+/* -------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+#page {
+    width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------------------------------------- */
+/*   ENTÊTE                                            */
+/* -------------------------------------------------- */
+
+#entete {
+    background: #0b4f6c;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#logoGSB {
+    height: 80px;
+    border-radius: 4px;
+}
+
+#entete h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 300;
+}
+
+/* -------------------------------------------------- */
+/*   MENU LATÉRAL RSSI                                 */
+/* -------------------------------------------------- */
+
+#menuGauche {
+    width: 260px;
+    background: #0b4f6c;
+    color: white;
+    padding: 20px;
+    min-height: 100%;
+    float: left;
+}
+
+#infosUtil h2 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+#menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menuList .smenu {
+    margin-bottom: 12px;
+}
+
+#menuList .smenu a {
+    display: block;
+    padding: 10px 12px;
+    background: #0f6286;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+#menuList .smenu a:hover {
+    background: #09445e;
+}
+
+/* -------------------------------------------------- */
+/*   CONTENU DYNAMIQUE                                 */
+/* -------------------------------------------------- */
+
+#contenu {
+    padding: 30px;
+    margin-left: 260px; /* espace pour le menu */
+}
+
+#contenu h2 {
+    margin-top: 0;
+    color: #0b4f6c;
+    font-weight: 400;
+}
+
+#contenu h3 {
+    color: #0b4f6c;
+    margin-top: 25px;
+}
+
+/* -------------------------------------------------- */
+/*   FORMULAIRES (connexion + formulaires internes)    */
+/* -------------------------------------------------- */
+
+form p {
+    margin-bottom: 18px;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    padding: 8px;
+    width: 260px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.2s;
+    font-size: 14px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #0b4f6c;
+    outline: none;
+}
+
+input[type="submit"],
+input[type="reset"],
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="submit"],
+button.validate {
+    background: #0b4f6c;
+    color: white;
+}
+
+input[type="submit"]:hover,
+button.validate:hover {
+    background: #093d52;
+}
+
+input[type="reset"],
+button.cancel {
+    background: #ccc;
+}
+
+input[type="reset"]:hover,
+button.cancel:hover {
+    background: #b3b3b3;
+}
+
+/* -------------------------------------------------- */
+/*   MESSAGES D’ERREUR / NOTIFICATION                  */
+/* -------------------------------------------------- */
+
+.erreur {
+    background: #ffdddd;
+    border-left: 4px solid #d9534f;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.erreur ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+#notify {
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+/* -------------------------------------------------- */
+/*   TABLEAUX (pour les listes de traitements)         */
+/* -------------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th {
+    background: #0b4f6c;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+    background: #f1f7fb;
+}
+
+/* -------------------------------------------------- */
+/*   PIED DE PAGE                                      */
+/* -------------------------------------------------- */
+
+#pied {
+    background: #eee;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: auto;
+}
