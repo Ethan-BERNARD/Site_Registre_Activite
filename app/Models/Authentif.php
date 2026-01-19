@@ -5,74 +5,112 @@ use \App\Models\DataAccess;
 
 class Authentif extends Model
 {
-	private $session;
-	
+    private $session;
+
+    /**
+     * Constructeur : initialise l'accès à la session
+     */
     function __construct()
     {
-      parent::__construct();
-			$this->session = session();
+        parent::__construct();
+        $this->session = session();
     }
 
-	public function estComptable()
-	{
-		if (!is_null($this->session->get('idUser'))) {
-			return $this->session->get('typeUtil') === "comptable";
-		}
-		return false;
-	}
+    /**
+     * Vérifie si l'utilisateur connecté possède le rôle "rssi"
+     * (administrateur du registre des traitements).
+     *
+     * Retourne true si :
+     *   - un utilisateur est connecté (ID présent en session)
+     *   - son rôle est exactement "rssi"
+     *
+     * Retourne false sinon.
+     */
+    public function estRssi()
+    {
+        $id   = $this->session->get('ID');
+        $role = $this->session->get('DROIT');
 
-	public function estVisiteur()
-	{
-		if (!is_null($this->session->get('idUser'))) {
-			return $this->session->get('typeUtil') === "visiteur";
-		}
-		return false;
-	}
-	
-	/**
-	 * Enregistre dans une variable de session les infos de l'utilisateur connecté
-	 * 
-	 * @param $authUser tableau assocatif contenant les caractéristiques de l'utilisateur à enregistrer
-	 */
-	public function connecter($authUser)
-	{ // TODO : Lorsqu'il y aura d'autres profils d'utilisateurs (comptables, etc.)
-	  // il faudra ajouter cette information de profil dans la session MODIF
-		$this->session->set('idUser', $authUser['id']);
-		$this->session->set('nom', $authUser['nom']);
-		$this->session->set('prenom', $authUser['prenom']);
-		$this->session->set('login', $authUser['login']);
-		$this->session->set('typeUtil', $authUser['typeUtil']);
-	}
+        if ($id === null) {
+            return false;
+        }
 
-	/**
-	 * Détruit la session active et redirige vers le contrôleur par défaut
-	 */
-	public function deconnecter()
-	{
-		$authUser = array('idUser', 'nom', 'prenom', 'login');
-		$this->session->remove($authUser);
-		$this->session->destroy();
+        return $role === 'rssi';
+    }
 
-		return redirect()->to('/anonyme');
-	}
+    /**
+     * Vérifie si l'utilisateur connecté possède le rôle "utilisateur"
+     * (membre de l'équipe éducative avec droits limités).
+     *
+     * Retourne true si :
+     *   - un utilisateur est connecté (ID présent en session)
+     *   - son rôle est exactement "utilisateur"
+     *
+     * Retourne false sinon.
+     */
+    public function estUtilisateur()
+    {
+        $id   = $this->session->get('ID');
+        $role = $this->session->get('DROIT');
 
-	/**
-	 * Vérifie en base de données si les informations de connexions sont correctes
-	 * 
-	 * @return : renvoie l'id, le nom et le prenom de l'utilisateur dans un tableau s'il est reconnu, sinon un tableau vide.
-	 */
-	public function authentifier ($login, $mdp) 
-	{
-		$dao = new DataAccess();
-		$authUser = $dao->getUtilisateur($login);
-		
-		if (empty($authUser) or ($authUser['mdp'] != $mdp)) {
-			$authUser = null;
-		}
-		else {
-			$authUser['mdp'] ='';
-		}
+        if ($id === null) {
+            return false;
+        }
 
-		return $authUser;
-	}
+        return $role === 'utilisateur';
+    }
+
+    /**
+     * Enregistre dans la session les informations de l'utilisateur connecté.
+     *
+     * @param array $authUser Tableau associatif contenant :
+     *   - ID
+     *   - LOGIN
+     *   - DROIT
+     */
+    public function connecter($authUser)
+    {
+        $this->session->set('ID',    $authUser['ID']);
+        $this->session->set('LOGIN', $authUser['LOGIN']);
+        $this->session->set('DROIT', $authUser['DROIT']);
+    }
+
+    /**
+     * Déconnecte l'utilisateur :
+     *   - supprime les variables de session
+     *   - détruit la session
+     *   - redirige vers la page de connexion
+     */
+    public function deconnecter()
+    {
+        $this->session->remove(['ID', 'LOGIN', 'DROIT']);
+        $this->session->destroy();
+
+        return redirect()->to('/anonyme');
+    }
+
+    /**
+     * Vérifie si les identifiants fournis correspondent à un utilisateur existant.
+     *
+     * @param string $login  Login saisi
+     * @param string $mdp    Mot de passe saisi (en clair dans ta base actuelle)
+     *
+     * @return array|null    Retourne les infos de l'utilisateur si correct,
+     *                       sinon null.
+     */
+    public function authentifier($login, $mdp)
+    {
+        $dao = new DataAccess();
+        $authUser = $dao->getUtilisateur($login);
+
+        // Si aucun utilisateur trouvé OU mot de passe incorrect → échec
+        if (empty($authUser) || $authUser['MDP'] != $mdp) {
+            return null;
+        }
+
+        // On efface le mot de passe avant de renvoyer les données
+        $authUser['MDP'] = '';
+
+        return $authUser;
+    }
 }

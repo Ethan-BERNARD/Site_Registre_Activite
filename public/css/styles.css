@@ -1,5 +1,5 @@
 /* -------------------------------------------------- */
-/*   STYLE GLOBAL                                      */
+/*   STYLE GLOBAL                                     */
 /* -------------------------------------------------- */
 
 body {
@@ -22,7 +22,7 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*   ENTÊTE                                            */
+/*   ENTÊTE                                           */
 /* -------------------------------------------------- */
 
 #entete {
@@ -30,13 +30,8 @@ body {
     color: white;
     padding: 20px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-}
-
-#logoGSB {
-    height: 80px;
-    border-radius: 4px;
 }
 
 #entete h1 {
@@ -46,7 +41,17 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*   MENU LATÉRAL RSSI                                 */
+/*   STRUCTURE PRINCIPALE (MENU + CONTENU)            */
+/* -------------------------------------------------- */
+
+#corps {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* -------------------------------------------------- */
+/*   MENU LATÉRAL RSSI                                */
 /* -------------------------------------------------- */
 
 #menuGauche {
@@ -54,8 +59,7 @@ body {
     background: #0b4f6c;
     color: white;
     padding: 20px;
-    min-height: 100%;
-    float: left;
+    flex-shrink: 0;
 }
 
 #infosUtil h2 {
@@ -89,12 +93,12 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*   CONTENU DYNAMIQUE                                 */
+/*   CONTENU DYNAMIQUE                                */
 /* -------------------------------------------------- */
 
 #contenu {
     padding: 30px;
-    margin-left: 260px; /* espace pour le menu */
+    flex-grow: 1;
 }
 
 #contenu h2 {
@@ -109,7 +113,7 @@ body {
 }
 
 /* -------------------------------------------------- */
-/*   FORMULAIRES (connexion + formulaires internes)    */
+/*   FORMULAIRES                                      */
 /* -------------------------------------------------- */
 
 form p {
@@ -182,7 +186,7 @@ button.cancel:hover {
 }
 
 /* -------------------------------------------------- */
-/*   MESSAGES D’ERREUR / NOTIFICATION                  */
+/*   MESSAGES D’ERREUR / NOTIFICATION                 */
 /* -------------------------------------------------- */
 
 .erreur {
@@ -207,7 +211,7 @@ button.cancel:hover {
 }
 
 /* -------------------------------------------------- */
-/*   TABLEAUX (pour les listes de traitements)         */
+/*   TABLEAUX                                         */
 /* -------------------------------------------------- */
 
 table {
@@ -233,7 +237,7 @@ table tr:hover {
 }
 
 /* -------------------------------------------------- */
-/*   PIED DE PAGE                                      */
+/*   PIED DE PAGE                                     */
 /* -------------------------------------------------- */
 
 #pied {

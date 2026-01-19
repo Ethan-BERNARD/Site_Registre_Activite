@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <title>Intranet – Registre des Activités de Traitement</title>
+    <title>Intranet – Gestion des frais</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" />
 
@@ -19,7 +19,7 @@
 
         <!-- En-tête -->
         <div id="entete">
-            <h1>Registre des Activités de Traitement – Espace RSSI</h1>
+            <h1>Gestion du remboursement des frais</h1>
         </div>
 
         <!-- Corps principal : menu + contenu -->
@@ -29,32 +29,24 @@
             <div id="menuGauche">
                 <div id="infosUtil">
                     <h2>
-                        RSSI : 
+                        Visiteur : 
                         <?= esc($identite) ?>
                     </h2>
                 </div>
 
                 <ul id="menuList">
                     <li class="smenu">
-                        <?= anchor('rssi/', 'Accueil', 'title="Accueil RSSI"') ?>
+                        <?= anchor('utilisateur/', 'Accueil', 'title="Page d\'accueil"') ?>
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('rssi/traitements', 'Gestion des traitements', 'title="Liste des activités de traitement"') ?>
-                    </li>
-
-                    <li class="smenu">
-                        <?= anchor('rssi/historique', 'Historique des modifications', 'title="Historique des actions"') ?>
-                    </li>
-
-                    <li class="smenu">
-                        <?= anchor('rssi/exportPDF', 'Exporter la fiche PDF', 'title="Génération automatique du PDF"') ?>
+                        <?= anchor('utilisateur/mesFiches', 'Mes fiches de frais', 'title="Consultation de mes fiches de frais"') ?>
                     </li>
 
                     <br>
 
                     <li class="smenu">
-                        <?= anchor('rssi/seDeconnecter', 'Se déconnecter', 'title="Déconnexion"') ?>
+                        <?= anchor('utilisateur/seDeconnecter', 'Se déconnecter', 'title="Déconnexion"') ?>
                     </li>
                 </ul>
             </div>

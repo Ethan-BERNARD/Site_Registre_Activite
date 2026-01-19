@@ -11,12 +11,12 @@ use \App\Models\ActionsRSSI; // a creer
 /**
  * Contrôleur du module RSSI de l'application
  */
-class RSSI extends BaseController {
+class Rssi extends BaseController {
 
 	private $authentif; // a modif
-	private $idComptable; // a modif
+	private $idRssi; // a modif
 	private $data; // a modif
-	private $actComptable; // a modif
+	private $actRssi; // a modif
    
 	/**
 	 * Constructeur du contrôleur : constructeur fourni par CodeIgniter. S'exécute après le 
@@ -37,10 +37,10 @@ class RSSI extends BaseController {
 		// Initialisation des attributs de la classe
 		$this->authentif = new Authentif();
 		$this->session = session();
-		$this->idComptable = $this->session->get('idUser');
-		$this->data['identite'] = $this->session->get('prenom').' '.$this->session->get('nom');
-        //$this->typeUtil = $this->session->get('idUser');
-		$this->actComptable = new ActionsComptable($this->idComptable);
+		$this->idRssi = $this->session->get('ID');
+		$this->data['identite'] = $this->session->get('LOGIN');
+        //$this->typeUtil = $this->session->get('ID');
+		$this->actRssi = new ActionsRSSI($this->idRssi);
 
 	}
 
@@ -50,7 +50,8 @@ class RSSI extends BaseController {
 	public function index()
 	{
 		// envoie de la vue accueil du visiteur
-		return view('v_comptableAccueil', $this->data); //modif
+		return view('v_RSSIAccueil', $this->data);
+
 	}
 
 	/**

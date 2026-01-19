@@ -1,0 +1,232 @@
+CRITICAL - 2026-01-19 09:11:09 --> CodeIgniter\Database\Exceptions\DatabaseException: You must set the database table to be used with your query.
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 941.
+ 1 SYSTEMPATH\Model.php(714): CodeIgniter\Database\BaseConnection->table(null)
+ 2 SYSTEMPATH\Model.php(920): CodeIgniter\Model->builder()
+ 3 APPPATH\Controllers\Anonyme.php(20): CodeIgniter\Model->__call('estRssi', [])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 09:11:17 --> CodeIgniter\Database\Exceptions\DatabaseException: You must set the database table to be used with your query.
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 941.
+ 1 SYSTEMPATH\Model.php(714): CodeIgniter\Database\BaseConnection->table(null)
+ 2 SYSTEMPATH\Model.php(920): CodeIgniter\Model->builder()
+ 3 APPPATH\Controllers\Anonyme.php(20): CodeIgniter\Model->__call('estRssi', [])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 09:14:41 --> Error: Class "App\Models\DataAccess" not found
+[Method: POST, Route: anonyme/seConnecter]
+in APPPATH\Models\Authentif.php on line 64.
+ 1 APPPATH\Controllers\Anonyme.php(52): App\Models\Authentif->authentifier('ebernard', 'admin')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->seConnecter()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 09:24:13 --> Error: Class "App\Models\DataAccess" not found
+[Method: POST, Route: anonyme/seConnecter]
+in APPPATH\Models\Authentif.php on line 64.
+ 1 APPPATH\Controllers\Anonyme.php(52): App\Models\Authentif->authentifier('ebernard', 'admin')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->seConnecter()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 10:31:47 --> Error: Class "App\Models\DataAccess" not found
+[Method: POST, Route: anonyme/seConnecter]
+in APPPATH\Models\Authentif.php on line 64.
+ 1 APPPATH\Controllers\Anonyme.php(52): App\Models\Authentif->authentifier('ebernard', 'admin')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->seConnecter()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 10:44:15 --> Error: Class "App\Models\DataAccess" not found
+[Method: POST, Route: anonyme/seConnecter]
+in APPPATH\Models\Authentif.php on line 64.
+ 1 APPPATH\Controllers\Anonyme.php(52): App\Models\Authentif->authentifier('ebernard', 'admin')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Anonyme->seConnecter()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anonyme))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:02:01 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:02:03 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:10 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:12 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:36 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:03:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_comptableAccueil.php"
+[Method: GET, Route: rssi]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_comptableAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_comptableAccueil', [], true)
+ 3 APPPATH\Controllers\RSSI.php(53): view('v_comptableAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RSSI->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RSSI))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:21:27 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_equipe_eduAccueil.php"
+[Method: GET, Route: utilisateur]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_equipe_eduAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_equipe_eduAccueil', [], true)
+ 3 APPPATH\Controllers\Utilisateur.php(51): view('v_equipe_eduAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Utilisateur->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Utilisateur))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-19 14:22:26 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "v_equipe_eduAccueil.php"
+[Method: GET, Route: utilisateur]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('v_equipe_eduAccueil.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('v_equipe_eduAccueil', [], true)
+ 3 APPPATH\Controllers\Utilisateur.php(51): view('v_equipe_eduAccueil', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Utilisateur->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Utilisateur))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

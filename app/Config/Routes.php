@@ -9,6 +9,10 @@ $routes->get('/', 'Anonyme::index');
 $routes->get('/anonyme', 'Anonyme::index');
 $routes->post('/anonyme/seConnecter', 'Anonyme::seConnecter');
 
-$routes->get('/rssi', 'RSSI::index');
+// Routes RSSI
+$routes->get('/rssi', 'Rssi::index');
+$routes->get('/rssi/seDeconnecter', 'Rssi::seDeconnecter');
 
+// Routes Utilisateur
 $routes->get('/utilisateur', 'Utilisateur::index');
+$routes->get('/utilisateur/seDeconnecter', 'Utilisateur::seDeconnecter');

@@ -17,11 +17,11 @@ class Anonyme extends BaseController
 	{
 		$authentif = new Authentif();
 
-		if ($authentif->estVisiteur() === true) {
-			return redirect()->to('/visiteur');
+		if ($authentif->estRssi() === true) {//a modif la fonction estRssi
+			return redirect()->to('/rssi');
 		} 
-		elseif ($authentif->estComptable() === true) {
-			return redirect()->to('/comptable');
+		elseif ($authentif->estUtilisateur() === true) { //a modif la fonction estUtilisateur
+			return redirect()->to('/utilisateur');
 		} 
 		else {
 			return $this->login();
@@ -45,8 +45,8 @@ class Anonyme extends BaseController
 	public function seConnecter () 
 	{	// TODO : conrôler que l'obtention des données postées ne rend pas d'erreurs 
 
-		$login = $this->request->getPost('login');
-		$mdp = $this->request->getPost('mdp');
+		$login = $this->request->getPost('LOGIN');
+		$mdp = $this->request->getPost('MDP');
 		
 		$authentif = new Authentif();
 		$authUser = $authentif->authentifier($login, $mdp);

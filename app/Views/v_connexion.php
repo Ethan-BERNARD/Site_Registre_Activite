@@ -14,12 +14,12 @@
 
     <form method="post" action="<?= site_url('anonyme/seConnecter') ?>">
         <p>
-            <label for="login">Login*</label>
-            <input id="login" type="text" name="login"  size="30" maxlength="45">
+            <label for="LOGIN">Login*</label>
+            <input id="LOGIN" type="text" name="LOGIN"  size="30" maxlength="45">
         </p>
         <p>
-            <label for="mdp">Mot de passe*</label>
-            <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
+            <label for="MDP">Mot de passe*</label>
+            <input id="MDP"  type="password"  name="MDP" size="30" maxlength="45">
         </p>
         <p>
             <input type="submit" value="Valider" name="valider">
