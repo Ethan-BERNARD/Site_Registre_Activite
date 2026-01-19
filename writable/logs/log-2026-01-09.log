@@ -1,0 +1,33 @@
+CRITICAL - 2026-01-09 14:13:32 --> ErrorException: Cannot modify header information - headers already sent by (output started at /home/mmatthieu/stage_bts_sio/Site_Registre_Activite/app/Config/Events.php:33)
+[Method: GET, Route: /]
+in SYSTEMPATH/Debug/Toolbar.php on line 471.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Debug/Toolbar.php(471): header()
+ 3 APPPATH/Config/Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 4 SYSTEMPATH/Events/Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+ 5 SYSTEMPATH/CodeIgniter.php(339): CodeIgniter\Events\Events::trigger()
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(75): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-01-09 14:15:52 --> ErrorException: Cannot modify header information - headers already sent by (output started at /home/mmatthieu/stage_bts_sio/Site_Registre_Activite/app/Config/Events.php:33)
+[Method: GET, Route: /]
+in SYSTEMPATH/Debug/Toolbar.php on line 471.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Debug/Toolbar.php(471): header()
+ 3 APPPATH/Config/Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 4 SYSTEMPATH/Events/Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+ 5 SYSTEMPATH/CodeIgniter.php(339): CodeIgniter\Events\Events::trigger()
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(75): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-01-09 14:16:10 --> ErrorException: Cannot modify header information - headers already sent by (output started at /home/mmatthieu/stage_bts_sio/Site_Registre_Activite/app/Config/Events.php:33)
+[Method: GET, Route: /]
+in SYSTEMPATH/Debug/Toolbar.php on line 471.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Debug/Toolbar.php(471): header()
+ 3 APPPATH/Config/Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 4 SYSTEMPATH/Events/Events.php(155): CodeIgniter\Events\Events::Config\{closure}()
+ 5 SYSTEMPATH/CodeIgniter.php(339): CodeIgniter\Events\Events::trigger()
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 8 FCPATH/index.php(75): CodeIgniter\Boot::bootWeb()
