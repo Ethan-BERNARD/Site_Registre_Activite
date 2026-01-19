@@ -8,3 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Anonyme::index');
 $routes->get('/anonyme', 'Anonyme::index');
 $routes->post('/anonyme/seConnecter', 'Anonyme::seConnecter');
+
+$routes->get('/rssi', 'RSSI::index');
+
+$routes->get('/utilisateur', 'Utilisateur::index');
