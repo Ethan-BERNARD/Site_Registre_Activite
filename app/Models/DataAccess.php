@@ -44,4 +44,24 @@ class DataAccess extends Model
         $rs = $this->db->query($req, [$login]);
         return $rs->getFirstRow('array'); // Renvoie un tableau associatif
     }
+
+    public function getHashUtilisateur($login)
+    {
+        $sql = "SELECT MDP FROM utilisateur WHERE LOGIN = ?";
+        $query = $this->db->query($sql, [$login]);
+
+        $row = $query->getRow();
+        return $row ? $row->MDP : null;
+    }
+
+    public function insertUtilisateur($login, $hash)
+    {
+        $sql = "INSERT INTO utilisateur (LOGIN, MDP) VALUES (?, ?)";
+        return $this->db->query($sql, [$login, $hash]);
+    }
+
+
+
+
+
 }

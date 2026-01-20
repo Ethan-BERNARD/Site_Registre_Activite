@@ -132,14 +132,12 @@ class Authentif extends Model
      */
     public function creerUtilisateur($login, $mdp)
     {
+        $dao = new DataAccess();
+
         // Hash sécurisé du mot de passe
         $hash = password_hash($mdp, PASSWORD_DEFAULT);
 
-        // Insertion dans la table utilisateur
-        return $this->db->table('utilisateur')->insert([
-            'LOGIN' => $login,
-            'MDP'   => $hash
-        ]);
+        return $dao->insertUtilisateur($login, $hash);
     }
 
     /**
@@ -155,15 +153,9 @@ class Authentif extends Model
      */
     public function verifierConnexion($login, $mdp)
     {
-        $user = $this->db->table('utilisateur')
-                         ->where('LOGIN', $login)
-                         ->get()
-                         ->getRow();
+        $dao = new DataAccess();
+        $hash = $dao->getHashUtilisateur($login);
 
-        if (!$user) {
-            return false;
-        }
-
-        return password_verify($mdp, $user->MDP);
+        return $hash && password_verify($mdp, $hash);
     }
 }
