@@ -1,32 +1,21 @@
 <?php namespace App\Models;
 
 use CodeIgniter\Model;
-use \App\Models\DataAccess;
-use \DateTime;
-use \DateInterval;
+use App\Models\DataAccess;
 
 /**
- * Modèle représentant tous les traitements possibles attachés à un Rssi désigné
+ * Logique métier liée aux actions du RSSI.
  */
-class ActionsRssi extends Model {
-	private $dao;
-	private $idRssi;
-	 
-	function __construct($idRssi)
-	{
-		parent::__construct();
+class ActionsRssi extends Model
+{
+    private $dao;
+    private $idRssi;
 
-		$this->dao = new DataAccess();
-		$this->idRssi = $idRssi;
-	}	
+    public function __construct($idRssi)
+    {
+        parent::__construct();
 
-	/**
-	 * Liste les fiches existantes des visiteurs
-	 *
-	 * @param $message : message facultatif destiné à notifier l'utilisateur du résultat d'une action précédemment exécutée
-	*/
-	public function getLesFichesUtilisateur($message=null)
-	{		
-		return $this->dao->getLesFiches($this->idRssi);
-	}
+        $this->dao = new DataAccess();
+        $this->idRssi = $idRssi;
+    }
 }

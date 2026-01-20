@@ -4,24 +4,13 @@ use CodeIgniter\Model;
 use App\Models\DataAccess;
 
 /**
- * Modèle de gestion de l’authentification.
- *
- * Cette classe centralise :
- * - la vérification des identifiants
- * - la gestion des rôles (RSSI / Utilisateur)
- * - l’écriture et la suppression des données de session
- * - la création d’utilisateurs (avec hashage automatique)
- *
- * Elle constitue le cœur du système d’authentification de l’application.
+ * Gestion de l’authentification et des rôles utilisateur.
  */
 class Authentif extends Model
 {
-    /** @var \CodeIgniter\Session\Session Instance de la session utilisateur */
+    /** @var \CodeIgniter\Session\Session */
     private $session;
 
-    /**
-     * Constructeur : initialise l’accès à la session.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -29,55 +18,37 @@ class Authentif extends Model
     }
 
     /**
-     * Vérifie si l’utilisateur connecté possède le rôle RSSI.
-     *
-     * @return bool true si l’utilisateur est RSSI, false sinon
+     * Indique si l'utilisateur connecté est RSSI.
      */
-    public function estRssi()
+    public function estRssi(): bool
     {
-        $id   = $this->session->get('ID');
-        $role = $this->session->get('DROIT');
-
-        if ($id === null) {
-            return false;
-        }
-
-        return $role === 'rssi';
+        return $this->session->get('ID') !== null
+            && $this->session->get('DROIT') === 'rssi';
     }
 
     /**
-     * Vérifie si l’utilisateur connecté possède le rôle Utilisateur.
-     *
-     * @return bool true si l’utilisateur est un utilisateur standard, false sinon
+     * Indique si l'utilisateur connecté est un utilisateur standard.
      */
-    public function estUtilisateur()
+    public function estUtilisateur(): bool
     {
-        $id   = $this->session->get('ID');
-        $role = $this->session->get('DROIT');
-
-        if ($id === null) {
-            return false;
-        }
-
-        return $role === 'utilisateur';
+        return $this->session->get('ID') !== null
+            && $this->session->get('DROIT') === 'utilisateur';
     }
 
     /**
-     * Enregistre dans la session les informations de l’utilisateur authentifié.
-     *
-     * @param array $authUser Tableau associatif contenant : ID, LOGIN, DROIT
+     * Enregistre les informations de l'utilisateur en session.
      */
-    public function connecter($authUser)
+    public function connecter(array $authUser): void
     {
-        $this->session->set('ID',    $authUser['ID']);
-        $this->session->set('LOGIN', $authUser['LOGIN']);
-        $this->session->set('DROIT', $authUser['DROIT']);
+        $this->session->set([
+            'ID'    => $authUser['ID'],
+            'LOGIN' => $authUser['LOGIN'],
+            'DROIT' => $authUser['DROIT']
+        ]);
     }
 
     /**
-     * Déconnecte l’utilisateur et détruit la session.
-     *
-     * @return \CodeIgniter\HTTP\RedirectResponse Redirection vers la page de connexion
+     * Déconnecte l'utilisateur et détruit la session.
      */
     public function deconnecter()
     {
@@ -88,70 +59,43 @@ class Authentif extends Model
     }
 
     /**
-     * Authentifie un utilisateur à partir de son login et mot de passe.
-     *
-     * Les mots de passe en base doivent être préalablement hashés.
-     *
-     * @param string $login Identifiant saisi
-     * @param string $mdp   Mot de passe saisi (en clair)
-     *
-     * @return array|null Données utilisateur si authentification réussie, sinon null
+     * Authentifie un utilisateur via login + mot de passe.
+     * Retourne les données utilisateur ou null si échec.
      */
-    public function authentifier($login, $mdp)
+    public function authentifier(string $login, string $mdp): ?array
     {
         $dao = new DataAccess();
         $authUser = $dao->getUtilisateur($login);
 
-        // Aucun utilisateur correspondant
         if (empty($authUser)) {
             return null;
         }
 
-        // Mot de passe hashé stocké en base
-        $hashBDD = $authUser['MDP'];
-
-        // Vérification du mot de passe
-        if (!password_verify($mdp, $hashBDD)) {
+        if (!password_verify($mdp, $authUser['MDP'])) {
             return null;
         }
 
-        // On retire le hash avant de renvoyer les données
+        // On ne renvoie jamais le hash
         $authUser['MDP'] = '';
 
         return $authUser;
     }
 
     /**
-     * Crée un nouvel utilisateur dans la base de données
-     * en hashant automatiquement son mot de passe.
-     *
-     * @param string $login Identifiant choisi
-     * @param string $mdp   Mot de passe en clair
-     *
-     * @return bool true si l’insertion réussit, false sinon
+     * Crée un utilisateur avec hashage automatique du mot de passe.
      */
-    public function creerUtilisateur($login, $mdp)
+    public function creerUtilisateur(string $login, string $mdp): bool
     {
         $dao = new DataAccess();
-
-        // Hash sécurisé du mot de passe
         $hash = password_hash($mdp, PASSWORD_DEFAULT);
 
         return $dao->insertUtilisateur($login, $hash);
     }
 
     /**
-     * Vérifie rapidement si un utilisateur peut se connecter.
-     *
-     * Méthode alternative simplifiée, à utiliser uniquement si
-     * l’on sait que tous les mots de passe en base sont hashés.
-     *
-     * @param string $login Identifiant saisi
-     * @param string $mdp   Mot de passe en clair
-     *
-     * @return bool true si les identifiants sont valides, false sinon
+     * Vérification rapide des identifiants (hash déjà connu).
      */
-    public function verifierConnexion($login, $mdp)
+    public function verifierConnexion(string $login, string $mdp): bool
     {
         $dao = new DataAccess();
         $hash = $dao->getHashUtilisateur($login);

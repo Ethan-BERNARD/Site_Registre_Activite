@@ -3,17 +3,13 @@
 use CodeIgniter\Model;
 
 /**
- * Modèle d'accès aux données pour les utilisateurs.
- * Fournit les fonctions nécessaires pour récupérer les informations
- * d'un utilisateur à partir de son login.
+ * Accès SQL brut à la base de données.
+ * Toutes les requêtes SQL de l'application passent par ce modèle.
  */
 class DataAccess extends Model
 {
     protected $db;
 
-    /**
-     * Constructeur : initialise la connexion à la base de données.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -21,47 +17,34 @@ class DataAccess extends Model
     }
 
     /**
-     * Récupère les informations d'un utilisateur à partir de son login.
-     *
-     * Cette méthode interroge la table `utilisateurs` et renvoie
-     * la première ligne trouvée sous forme de tableau associatif.
-     *
-     * @param string $login  Identifiant de connexion recherché.
-     *
-     * @return array|null    Tableau associatif contenant :
-     *                       - ID
-     *                       - LOGIN
-     *                       - MDP
-     *                       - DROIT
-     *                       Retourne null si aucun utilisateur ne correspond.
+     * Retourne les données d'un utilisateur via son login.
      */
-    public function getUtilisateur($login)
+    public function getUtilisateur(string $login): ?array
     {
-        $req = "SELECT ID, LOGIN, MDP, DROIT
+        $sql = "SELECT ID, LOGIN, MDP, DROIT
                 FROM utilisateurs
                 WHERE LOGIN = ?";
 
-        $rs = $this->db->query($req, [$login]);
-        return $rs->getFirstRow('array'); // Renvoie un tableau associatif
+        return $this->db->query($sql, [$login])->getFirstRow('array');
     }
 
-    public function getHashUtilisateur($login)
+    /**
+     * Retourne uniquement le hash du mot de passe d'un utilisateur.
+     */
+    public function getHashUtilisateur(string $login): ?string
     {
         $sql = "SELECT MDP FROM utilisateur WHERE LOGIN = ?";
-        $query = $this->db->query($sql, [$login]);
+        $row = $this->db->query($sql, [$login])->getRow();
 
-        $row = $query->getRow();
         return $row ? $row->MDP : null;
     }
 
-    public function insertUtilisateur($login, $hash)
+    /**
+     * Insère un nouvel utilisateur (login + mot de passe hashé).
+     */
+    public function insertUtilisateur(string $login, string $hash): bool
     {
         $sql = "INSERT INTO utilisateur (LOGIN, MDP) VALUES (?, ?)";
         return $this->db->query($sql, [$login, $hash]);
     }
-
-
-
-
-
 }
