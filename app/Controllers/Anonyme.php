@@ -1,64 +1,88 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use \App\Models\Authentif;
+use App\Models\Authentif;
 
 /**
- * Accès à l'application par défaut pour tout utilisateur non authentifié.
- * Gestion du formulaire de connexion et sa soumission
+ * Contrôleur d’accès public (non authentifié).
+ *
+ * Il gère :
+ * - l’affichage du formulaire de connexion
+ * - la soumission du formulaire
+ * - la redirection automatique vers l’espace correspondant au rôle
+ *   (RSSI ou Utilisateur) si l’utilisateur est déjà connecté.
+ *
+ * Ce contrôleur est le point d’entrée de l’application pour tout visiteur
+ * non authentifié.
  */
 class Anonyme extends BaseController
 {
-	/**
-	 * Détecte si l'utilisateur est authentifié et envoie la view adaptée à son profil ou 
-	 * le formulaire de connexion s'il n'est pas authentifié.
-	 */
-	public function index()
-	{
-		$authentif = new Authentif();
+    /**
+     * Page d’accueil publique.
+     *
+     * Si l’utilisateur est déjà authentifié, il est automatiquement redirigé
+     * vers l’espace correspondant à son rôle :
+     *   - RSSI → /rssi
+     *   - Utilisateur → /utilisateur
+     *
+     * Sinon, le formulaire de connexion est affiché.
+     */
+    public function index()
+    {
+        $authentif = new Authentif();
 
-		if ($authentif->estRssi() === true) {//a modif la fonction estRssi
-			return redirect()->to('/rssi');
-		} 
-		elseif ($authentif->estUtilisateur() === true) { //a modif la fonction estUtilisateur
-			return redirect()->to('/utilisateur');
-		} 
-		else {
-			return $this->login();
-		}
-	}
+        if ($authentif->estRssi() === true) {
+            return redirect()->to('/rssi');
+        }
+        elseif ($authentif->estUtilisateur() === true) {
+            return redirect()->to('/utilisateur');
+        }
+        else {
+            return $this->login();
+        }
+    }
 
-	/**
-	 * Envoi du formulaire de connexion, lequel peut incorporer un message d'erreur
-	 *
-	 */
-	public function login($errMsg = null)
-	{
-		$data = array('erreur'=>$errMsg);
-		return view('v_connexion', $data);
-	}
+    /**
+     * Affiche le formulaire de connexion.
+     *
+     * Un message d’erreur peut être transmis (ex : identifiants incorrects).
+     *
+     * @param string|null $errMsg Message d’erreur optionnel
+     */
+    public function login($errMsg = null)
+    {
+        $data = ['erreur' => $errMsg];
+        return view('v_connexion', $data);
+    }
 
-	/**
-	 * Traite la soumission du formulaire de connexion afin d'authentifier l'utilisateur
-	 * 
-	 */
-	public function seConnecter () 
-	{	// TODO : conrôler que l'obtention des données postées ne rend pas d'erreurs 
+    /**
+     * Traite la soumission du formulaire de connexion.
+     *
+     * Étapes :
+     *  - récupération du login et du mot de passe postés
+     *  - vérification des identifiants via le modèle Authentif
+     *  - si échec → retour au formulaire avec message d’erreur
+     *  - si succès → enregistrement en session puis redirection
+     *    vers la méthode index(), qui redirigera selon le rôle
+     */
+    public function seConnecter()
+    {
+        // Récupération des données du formulaire
+        $login = $this->request->getPost('LOGIN');
+        $mdp   = $this->request->getPost('MDP');
 
-		$login = $this->request->getPost('LOGIN');
-		$mdp = $this->request->getPost('MDP');
-		
-		$authentif = new Authentif();
-		$authUser = $authentif->authentifier($login, $mdp);
+        // Vérification des identifiants
+        $authentif = new Authentif();
+        $authUser  = $authentif->authentifier($login, $mdp);
 
-		if(empty($authUser))
-		{
-			return $this->login ('Login ou mot de passe incorrect');
-		}
-		else
-		{
-			$authentif->connecter($authUser);
-			return $this->index();
-		}
-	}
+        if (empty($authUser)) {
+            return $this->login('Login ou mot de passe incorrect');
+        } else {
+            // Connexion réussie → enregistrement en session
+            $authentif->connecter($authUser);
+
+            // Redirection automatique selon le rôle
+            return $this->index();
+        }
+    }
 }

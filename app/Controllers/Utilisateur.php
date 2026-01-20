@@ -9,19 +9,39 @@ use App\Models\Authentif;
 use App\Models\ActionsUtilisateur;
 
 /**
- * Contrôleur du module Utilisateur (Visiteur)
- * Gère l'espace personnel des utilisateurs connectés.
+ * Contrôleur dédié à l’espace Utilisateur.
+ *
+ * Il gère l’accès aux fonctionnalités destinées aux utilisateurs standard :
+ * - consultation des documents internes
+ * - lecture des communications du RSSI
+ * - gestion d’informations personnelles
+ * - accès aux ressources de l’intranet
+ *
+ * L’accès à ce contrôleur est protégé par un filtre (voir app/Filters/UtilisateurFilter.php),
+ * garantissant que seuls les utilisateurs authentifiés peuvent y accéder.
  */
 class Utilisateur extends BaseController
 {
-    private $authentif;        // Gestion de l'authentification
-    private $idUtilisateur;    // ID de l'utilisateur connecté
-    private $data = [];        // Données envoyées aux vues
-    private $actUtilisateur;   // Gestion des actions utilisateur
+    /** @var Authentif Gestion de l’authentification et de la session */
+    private $authentif;
+
+    /** @var int|null Identifiant de l’utilisateur connecté */
+    private $idUtilisateur;
+
+    /** @var array Données envoyées aux vues (identité, etc.) */
+    private $data = [];
+
+    /** @var ActionsUtilisateur Gestion des actions propres au rôle utilisateur */
+    private $actUtilisateur;
 
     /**
-     * Constructeur CodeIgniter (initController)
-     * S'exécute automatiquement avant chaque méthode du contrôleur.
+     * Méthode d’initialisation du contrôleur.
+     *
+     * Appelée automatiquement par CodeIgniter avant chaque méthode publique.
+     * Elle initialise :
+     * - la session
+     * - l’identifiant et le login de l’utilisateur connecté
+     * - les modèles nécessaires au fonctionnement du module utilisateur
      */
     public function initController(
         RequestInterface $request,
@@ -30,34 +50,33 @@ class Utilisateur extends BaseController
     ) {
         parent::initController($request, $response, $logger);
 
-        // Instanciation du modèle d'authentification
+        // Gestion de l’authentification
         $this->authentif = new Authentif();
 
-        // Récupération de la session
+        // Session active
         $this->session = session();
 
-        // Récupération des infos utilisateur
+        // Informations de l’utilisateur connecté
         $this->idUtilisateur = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
-        // Instanciation du gestionnaire d'actions utilisateur
-        // (tu le créeras plus tard)
+        // Gestionnaire des actions utilisateur
         $this->actUtilisateur = new ActionsUtilisateur($this->idUtilisateur);
     }
 
     /**
-     * Page d'accueil de l'utilisateur
-     * Affiche la vue principale du visiteur.
+     * Page d’accueil de l’espace utilisateur.
+     *
+     * Affiche la vue principale contenant les informations générales
+     * et les accès rapides aux fonctionnalités de l’intranet.
      */
     public function index()
     {
-        // Envoie la vue d'accueil avec les données utilisateur
         return view('v_visiteurAccueil', $this->data);
     }
 
     /**
-     * Déconnexion de l'utilisateur
-     * Appelle la méthode de déconnexion du modèle Authentif.
+     * Déconnecte l’utilisateur et détruit la session.
      */
     public function seDeconnecter()
     {
