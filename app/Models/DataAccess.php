@@ -47,4 +47,20 @@ class DataAccess extends Model
         $sql = "INSERT INTO utilisateur (LOGIN, MDP) VALUES (?, ?)";
         return $this->db->query($sql, [$login, $hash]);
     }
+
+    public function getAllTraitements()
+    {
+        return $this->db->query("SELECT * FROM traitement ORDER BY REF DESC")->getResultArray();
+    }
+
+    public function getTraitementById($id)
+    {
+        return $this->db->query("SELECT * FROM traitement WHERE REF = ?", [$id])->getRowArray();
+    }
+
+    public function getLogs()
+    {
+        return $this->db->query("SELECT * FROM log ORDER BY DATEMODIFICATION DESC")->getResultArray();
+    }
+
 }

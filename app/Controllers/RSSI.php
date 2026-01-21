@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Authentif;
-use App\Models\ActionsRSSI;
+use App\Models\ActionsRssi;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -23,22 +23,23 @@ class Rssi extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // 🔐 Vérification de session AVANT d'utiliser les données
+        // Vérification de session
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
-            exit; // obligatoire pour stopper l'exécution
+            exit;
         }
 
-        // 🔒 Anti-cache
+        // Anti-cache
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
         $this->response->setHeader("Expires", "0");
 
-        // ✔ Maintenant on peut charger les données
+        // Identité
         $this->idRssi = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
-        $this->actRssi = new ActionsRSSI($this->idRssi);
+        // Modèle métier (aucun SQL ici)
+        $this->actRssi = new ActionsRssi($this->idRssi);
     }
 
     public function index()
@@ -58,13 +59,49 @@ class Rssi extends BaseController
 
     public function logs()
     {
-        // Exemple : récupération des logs
-        // $logs = $this->actRssi->getLogs();
+        // Récupération via logique métier (pas de SQL ici)
+        $logs = $this->actRssi->getLogs();
 
         return view('v_Logs', [
             'identite' => $this->data['identite'],
-            'logs' => $logs ?? []
+            'logs'     => $logs
         ]);
     }
 
+    public function exportPDF()
+    {
+        $traitements = $this->actRssi->getAllTraitements();
+
+        return view('v_ExportPDF', [
+            'identite'    => $this->data['identite'],
+            'traitements' => $traitements
+        ]);
+    }
+
+    public function genererPDF()
+    {
+        $idTraitement = $this->request->getPost('idTraitement');
+
+        if ($idTraitement === 'all') {
+            $traitements = $this->actRssi->getAllTraitements();
+
+            return view('v_ExportPDF_Result', [
+                'identite'    => $this->data['identite'],
+                'mode'        => 'global',
+                'traitements' => $traitements
+            ]);
+        }
+
+        $traitement = $this->actRssi->getTraitementById($idTraitement);
+
+        if (!$traitement) {
+            return redirect()->back()->with('error', 'Traitement introuvable.');
+        }
+
+        return view('v_ExportPDF_Result', [
+            'identite'   => $this->data['identite'],
+            'mode'       => 'single',
+            'traitement' => $traitement
+        ]);
+    }
 }
