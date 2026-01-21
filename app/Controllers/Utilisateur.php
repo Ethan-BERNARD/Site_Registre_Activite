@@ -55,4 +55,9 @@ class Utilisateur extends BaseController
     {
         return view('v_DocumentsInternes', $this->data);
     }
+
+    public function communicationsRSSI()
+    {
+        return view('v_CommunicationsRSSI', $this->data);
+    }
 }   

@@ -21,3 +21,4 @@ $routes->post('/rssi/genererPDF', 'Rssi::genererPDF');    // Traite le POST
 $routes->get('/utilisateur', 'Utilisateur::index');
 $routes->get('/utilisateur/seDeconnecter', 'Utilisateur::seDeconnecter');
 $routes->get('/utilisateur/documents', 'Utilisateur::documentsInternes');
+$routes->get('/utilisateur/communications', 'Utilisateur::communicationsRSSI');
