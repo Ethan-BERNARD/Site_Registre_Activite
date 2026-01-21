@@ -44,7 +44,7 @@
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('rssi/historique', 'Historique des modifications', 'title="Historique des actions"') ?>
+                        <?= anchor('logs', 'Historique des modifications', 'title="Historique des actions"') ?>
                     </li>
 
                     <li class="smenu">

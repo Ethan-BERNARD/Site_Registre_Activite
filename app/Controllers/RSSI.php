@@ -55,4 +55,16 @@ class Rssi extends BaseController
     {
         return view('v_tableau', $this->data);
     }
+
+    public function logs()
+    {
+        // Exemple : récupération des logs
+        // $logs = $this->actRssi->getLogs();
+
+        return view('v_Logs', [
+            'identite' => $this->data['identite'],
+            'logs' => $logs ?? []
+        ]);
+    }
+
 }
