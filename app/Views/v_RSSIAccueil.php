@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>Gérer les traitements</td>
+                <td><a href="<?= site_url('gestionTraitement') ?>">Gérer les traitements</a></td>
                 <td>Créer, modifier ou supprimer une activité de traitement</td>
             </tr>
             <tr>

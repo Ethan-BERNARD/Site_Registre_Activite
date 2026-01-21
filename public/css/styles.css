@@ -1,10 +1,11 @@
-/* -------------------------------------------------- */
-/*   STYLE GLOBAL                                     */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  STYLE GLOBAL  ==============================
+   ============================================================ */
 
 html, body {
     user-select: none;
 }
+
 body {
     margin: 0;
     padding: 0;
@@ -13,8 +14,13 @@ body {
     color: #333;
 }
 
+/* ============================================================
+   ===============  STRUCTURE GLOBALE  =========================
+   ============================================================ */
+
 #page {
-    width: 1100px;
+    width: 95%;
+    max-width: 1600px;
     margin: 40px auto;
     background: #fff;
     box-shadow: 0 0 12px rgba(0,0,0,0.15);
@@ -22,11 +28,12 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    
 }
 
-/* -------------------------------------------------- */
-/*   ENTÊTE                                           */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  ENTÊTE  ====================================
+   ============================================================ */
 
 #entete {
     background: #0b4f6c;
@@ -43,25 +50,30 @@ body {
     font-weight: 300;
 }
 
-/* -------------------------------------------------- */
-/*   STRUCTURE PRINCIPALE (MENU + CONTENU)            */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  LAYOUT PRINCIPAL (FLEX)  ===================
+   ============================================================ */
 
 #corps {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
 }
 
-/* -------------------------------------------------- */
-/*   MENU LATÉRAL RSSI                                */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  MENU LATÉRAL (RSSI + global)  ==============
+   ============================================================ */
 
 #menuGauche {
     width: 260px;
     background: #0b4f6c;
     color: white;
     padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
 }
 
@@ -69,6 +81,7 @@ body {
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 20px;
+    color: white;
 }
 
 #menuList {
@@ -95,13 +108,13 @@ body {
     background: #09445e;
 }
 
-/* -------------------------------------------------- */
-/*   CONTENU DYNAMIQUE                                */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  CONTENU DYNAMIQUE  =========================
+   ============================================================ */
 
 #contenu {
     padding: 30px;
-    flex-grow: 1;
+    flex: 1;
 }
 
 #contenu h2 {
@@ -115,9 +128,83 @@ body {
     margin-top: 25px;
 }
 
-/* -------------------------------------------------- */
-/*   FORMULAIRES                                      */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  PAGE CONNEXION (ISOLÉE)  ===================
+   ============================================================ */
+
+.pageConnexion {
+    max-width: 800px !important;
+    margin: 40px auto;
+}
+
+.pageConnexion #corps {
+    padding: 30px;
+    gap: 20px;
+}
+
+.pageConnexion #colDroite {
+    width: 400px;
+}
+
+.pageConnexion .connexionContenu {
+    padding: 10px !important;
+}
+
+.pageConnexion #contenu form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   ===============  ZONE DROITE (connexion)  ===================
+   ============================================================ */
+
+#colDroite {
+    flex-shrink: 0;
+    width: 400px;
+    padding: 15px;
+    background: #f9fbfd;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.zoneDroite {
+    padding: 30px;
+    background: #f9fbfd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.infoDroite h3 {
+    font-size: 18px;
+    color: #0b4f6c;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.infoDroite p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.rappelRGPD {
+    background: #eef4f8;
+    border-left: 4px solid #0b4f6c;
+    padding: 15px;
+    font-size: 13px;
+    color: #333;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   ===============  FORMULAIRES  ===============================
+   ============================================================ */
 
 form p {
     margin-bottom: 18px;
@@ -188,9 +275,9 @@ button.cancel:hover {
     background: #b3b3b3;
 }
 
-/* -------------------------------------------------- */
-/*   MESSAGES D’ERREUR / NOTIFICATION                 */
-/* -------------------------------------------------- */
+/* ============================================================
+   ===============  NOTIFICATIONS  =============================
+   ============================================================ */
 
 .erreur {
     background: #ffdddd;
@@ -213,35 +300,68 @@ button.cancel:hover {
     border-radius: 4px;
 }
 
-/* -------------------------------------------------- */
-/*   TABLEAUX                                         */
-/* -------------------------------------------------- */
+/* --- TABLEAUX --- */
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-table th {
+table thead tr:first-child th {
     background: #0b4f6c;
     color: white;
+    text-align: center;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    border-right: 1px solid #ccc;
+}
+
+table thead tr:nth-child(2) th {
+    background: #0f6286;
+    color: white;
+    text-align: center;
     padding: 10px;
-    text-align: left;
+    font-weight: 500;
+    border-right: 1px solid #ccc;
+}
+
+table thead tr:hover {
+    background: inherit !important;
 }
 
 table td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ccc;
 }
 
-table tr:hover {
-    background: #f1f7fb;
+table th:last-child,
+table td:last-child {
+    border-right: none;
 }
 
-/* -------------------------------------------------- */
-/*   PIED DE PAGE                                     */
-/* -------------------------------------------------- */
+table td,
+table th {
+    padding: 8px 6px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background: #f7f9fc;
+}
+
+table tbody tr:hover {
+    background: #eef4f8;
+}
+
+/* ============================================================
+   ===============  PIED DE PAGE  ==============================
+   ============================================================ */
 
 #pied {
     background: #eee;
@@ -251,3 +371,4 @@ table tr:hover {
     color: #666;
     margin-top: auto;
 }
+

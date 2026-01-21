@@ -40,7 +40,7 @@
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('rssi/traitements', 'Gestion des traitements', 'title="Liste des activités de traitement"') ?>
+                        <?= anchor('gestionTraitement', 'Gestion des traitements', 'title="Liste des activités de traitement"') ?>
                     </li>
 
                     <li class="smenu">

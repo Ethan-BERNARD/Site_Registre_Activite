@@ -12,6 +12,7 @@ $routes->post('/anonyme/seConnecter', 'Anonyme::seConnecter');
 // Routes RSSI
 $routes->get('/rssi', 'Rssi::index');
 $routes->get('/rssi/seDeconnecter', 'Rssi::seDeconnecter');
+$routes->get('/gestionTraitement', 'Rssi::tab');
 
 // Routes Utilisateur
 $routes->get('/utilisateur', 'Utilisateur::index');
