@@ -50,4 +50,9 @@ class Utilisateur extends BaseController
     {
         return $this->authentif->deconnecter();
     }
+
+    public function documentsInternes()
+    {
+        return view('v_DocumentsInternes', $this->data);
+    }
 }   
