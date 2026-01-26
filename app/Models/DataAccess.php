@@ -63,7 +63,7 @@ class DataAccess extends Model
         return $this->db->query("SELECT * FROM log ORDER BY DATEMODIFICATION DESC")->getResultArray();
     }
 
-    public function getTraitementsAvecFinaliteEtSensibles()
+    public function getTraitementsAvecFinaliteEtSensibles($search = null)
     {
         $sql = "SELECT 
                     t.REF,
@@ -71,9 +71,7 @@ class DataAccess extends Model
                     t.DATECREATION,
                     t.DATEMAJ,
                     t.TRANSFERTHHORSUE,
-
                     f.LIBELLE AS FINALITE,
-
                     CASE 
                         WHEN EXISTS (
                             SELECT 1
@@ -83,13 +81,16 @@ class DataAccess extends Model
                         THEN 'Oui'
                         ELSE 'Non'
                     END AS DONNEESSENSIBLES
-
                 FROM traitement t
-
                 LEFT JOIN finalite f 
                     ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+                WHERE 1 = 1";
 
-                ORDER BY t.NOM ASC";
+        if (!empty($search)) {
+            $sql .= " AND LOWER(t.NOM) LIKE " . $this->db->escape('%' . strtolower($search) . '%');
+        }
+
+        $sql .= " ORDER BY t.NOM ASC";
 
         return $this->db->query($sql)->getResultArray();
     }

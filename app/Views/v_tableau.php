@@ -6,10 +6,17 @@
 
 <h2>Tableau des traitements</h2>
 
-<div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
-    <input type="text" placeholder="Recherche..." style="flex-grow: 1;">
+<form method="get" style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+    <input 
+        type="text" 
+        name="search"
+        autocomplete="off"
+        placeholder="Recherche..." 
+        value="<?= esc($_GET['search'] ?? '') ?>" 
+        style="flex-grow: 1;"
+    >
     <button class="validate">Tag ▼</button>
-</div>
+</form>
 
 <table class="tableTraitements">
     <thead>

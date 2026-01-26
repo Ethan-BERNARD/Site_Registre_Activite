@@ -106,4 +106,16 @@ class Rssi extends BaseController
             'traitement' => $traitement
         ]);
     }
+
+    public function tableau()
+    {
+        $search = $this->request->getGet('search');
+
+        $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($search);
+
+        return view('v_tableau', [
+            'identite' => $this->data['identite'],
+            'traitements' => $traitements
+        ], ['saveData' => true]);
+    }
 }

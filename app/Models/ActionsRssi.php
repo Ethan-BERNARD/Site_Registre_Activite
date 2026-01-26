@@ -28,8 +28,8 @@ class ActionsRssi
         return $this->dao->getLogs();
     }
 
-    public function getTraitementsAvecFinaliteEtSensibles()
+    public function getTraitementsAvecFinaliteEtSensibles($search = null)
     {
-        return $this->dao->getTraitementsAvecFinaliteEtSensibles();
+        return $this->dao->getTraitementsAvecFinaliteEtSensibles($search);
     }
 }
