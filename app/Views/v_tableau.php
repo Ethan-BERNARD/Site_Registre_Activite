@@ -36,31 +36,16 @@
     </thead>
 
     <tbody>
-
-        <!-- Ligne vide (sera remplie automatiquement plus tard) à faire avec le php-->
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td></td>
-
-            <td></td>
-        </tr>
-
-        <!-- Exemple CNIL -->
-        <tr>
-            <td>Gestion de la paie</td>
-            <td>1 - Exemple</td>
-            <td>26/05/18</td>
-            <td>13/05/19</td>
-
-            <td>Gestion de la paie, calcul des rémunérations…</td>
-
-            <td>Non</td>
-        </tr>
-
+        <?php foreach ($traitements as $t) : ?>
+            <tr>
+                <td><?= esc($t['NOM']) ?></td>
+                <td><?= esc($t['REF']) ?></td>
+                <td><?= esc($t['DATECREATION']) ?></td>
+                <td><?= esc($t['DATEMAJ']) ?></td>
+                <td class="finalite"><?= esc($t['FINALITE']) ?></td>
+                <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
 

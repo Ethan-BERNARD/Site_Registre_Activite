@@ -63,4 +63,35 @@ class DataAccess extends Model
         return $this->db->query("SELECT * FROM log ORDER BY DATEMODIFICATION DESC")->getResultArray();
     }
 
+    public function getTraitementsAvecFinaliteEtSensibles()
+    {
+        $sql = "SELECT 
+                    t.REF,
+                    t.NOM,
+                    t.DATECREATION,
+                    t.DATEMAJ,
+                    t.TRANSFERTHHORSUE,
+
+                    f.LIBELLE AS FINALITE,
+
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM listedcpsensible ls
+                            WHERE ls.REF = t.REF
+                        )
+                        THEN 'Oui'
+                        ELSE 'Non'
+                    END AS DONNEESSENSIBLES
+
+                FROM traitement t
+
+                LEFT JOIN finalite f 
+                    ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+                ORDER BY t.NOM ASC";
+
+        return $this->db->query($sql)->getResultArray();
+    }
+
 }

@@ -54,7 +54,12 @@ class Rssi extends BaseController
 
     public function tab()
     {
-        return view('v_tableau', $this->data);
+        $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
+
+        return view('v_tableau', [
+            'identite'    => $this->data['identite'],
+            'traitements' => $traitements
+        ]);
     }
 
     public function logs()
@@ -62,10 +67,7 @@ class Rssi extends BaseController
         // Récupération via logique métier (pas de SQL ici)
         $logs = $this->actRssi->getLogs();
 
-        return view('v_Logs', [
-            'identite' => $this->data['identite'],
-            'logs'     => $logs
-        ]);
+        return view('v_Logs', ['identite' => $this->data['identite'],'logs' => $logs]);
     }
 
     public function exportPDF()

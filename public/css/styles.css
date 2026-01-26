@@ -351,6 +351,12 @@ table th {
     text-align: center;
 }
 
+td.finalite {
+    max-width: 200px;      /* largeur fixe de la colonne */
+    overflow: auto;        /* active le scroll si nécessaire */
+    white-space: normal;   /* autorise les retours à la ligne */
+}
+
 table tr:nth-child(even) {
     background: #f7f9fc;
 }

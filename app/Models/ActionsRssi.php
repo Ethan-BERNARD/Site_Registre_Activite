@@ -27,4 +27,9 @@ class ActionsRssi
     {
         return $this->dao->getLogs();
     }
+
+    public function getTraitementsAvecFinaliteEtSensibles()
+    {
+        return $this->dao->getTraitementsAvecFinaliteEtSensibles();
+    }
 }

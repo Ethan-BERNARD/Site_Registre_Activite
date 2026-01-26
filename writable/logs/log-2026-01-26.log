@@ -1,0 +1,454 @@
+DEBUG - 2026-01-26 08:03:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:09:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:37:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:37:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:37:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:21 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:29 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:31 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:33 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:35 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:37:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:37:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:39 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:43 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:45 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:51 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:37:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:37:56 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:38:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:38:20 --> [DEPRECATED] Creation of dynamic property App\Controllers\Utilisateur::$session is deprecated in APPPATH\Controllers\Utilisateur.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Utilisateur->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:38:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-01-26 08:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:38:30 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 08:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 08:59:07 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:24:37 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-01-26 09:24:38 --> mysqli_sql_exception: Table 'registre_dcp.traitement_categdcpsensible' doesn't exist in C:\xampp\htdocs\Site_Registre_Activite\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\Site_Registre_Activite\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT \r\n      ...', 0)
+#1 C:\xampp\htdocs\Site_Registre_Activite\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 C:\xampp\htdocs\Site_Registre_Activite\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 C:\xampp\htdocs\Site_Registre_Activite\app\Models\DataAccess.php(92): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...')
+#4 C:\xampp\htdocs\Site_Registre_Activite\app\Models\ActionsRssi.php(33): App\Models\DataAccess->getTraitementsAvecFinaliteEtSensibles()
+#5 C:\xampp\htdocs\Site_Registre_Activite\app\Controllers\Rssi.php(57): App\Models\ActionsRssi->getTraitementsAvecFinaliteEtSensibles()
+#6 C:\xampp\htdocs\Site_Registre_Activite\system\CodeIgniter.php(933): App\Controllers\Rssi->tab()
+#7 C:\xampp\htdocs\Site_Registre_Activite\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rssi))
+#8 C:\xampp\htdocs\Site_Registre_Activite\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\Site_Registre_Activite\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\Site_Registre_Activite\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\Site_Registre_Activite\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2026-01-26 09:24:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'registre_dcp.traitement_categdcpsensible' doesn't exist
+[Method: GET, Route: gestionTraitement]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\DataAccess.php(92): CodeIgniter\Database\BaseConnection->query('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 2 APPPATH\Models\ActionsRssi.php(33): App\Models\DataAccess->getTraitementsAvecFinaliteEtSensibles()
+ 3 APPPATH\Controllers\Rssi.php(57): App\Models\ActionsRssi->getTraitementsAvecFinaliteEtSensibles()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Rssi->tab()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rssi))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-26 09:24:38 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'registre_dcp.traitement_categdcpsensible' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 3 APPPATH\Models\DataAccess.php(92): CodeIgniter\Database\BaseConnection->query('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 4 APPPATH\Models\ActionsRssi.php(33): App\Models\DataAccess->getTraitementsAvecFinaliteEtSensibles()
+ 5 APPPATH\Controllers\Rssi.php(57): App\Models\ActionsRssi->getTraitementsAvecFinaliteEtSensibles()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Rssi->tab()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rssi))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-01-26 09:24:38 --> [Caused by] mysqli_sql_exception: Table 'registre_dcp.traitement_categdcpsensible' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 4 APPPATH\Models\DataAccess.php(92): CodeIgniter\Database\BaseConnection->query('SELECT 
+                t.REF,
+                t.NOM,
+                t.DATECREATION,
+                t.DATEMAJ,
+                t.TRANSFERTHHORSUE,
+                f.LIBELLE AS FINALITE,
+                CASE 
+                    WHEN ts.REFTRAITEMENT IS NOT NULL THEN \'Oui\'
+                    ELSE \'Non\'
+                END AS DONNEESSENSIBLES
+            FROM traitement t
+
+            LEFT JOIN finalite f 
+                ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+
+            LEFT JOIN (
+                SELECT DISTINCT REFTRAITEMENT 
+                FROM traitement_categdcpsensible
+            ) ts 
+                ON ts.REFTRAITEMENT = t.REF
+
+            ORDER BY t.NOM ASC')
+ 5 APPPATH\Models\ActionsRssi.php(33): App\Models\DataAccess->getTraitementsAvecFinaliteEtSensibles()
+ 6 APPPATH\Controllers\Rssi.php(57): App\Models\ActionsRssi->getTraitementsAvecFinaliteEtSensibles()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Rssi->tab()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rssi))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:27:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:27:31 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:36:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:36:13 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:39:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:39:13 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:44:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:44:31 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:44:35 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:46:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:46:46 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:46:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:46:58 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:47:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:47:31 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:48:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:48:06 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:48:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:48:28 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:48:37 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:50:20 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-01-26 09:51:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-01-26 09:51:01 --> [DEPRECATED] Creation of dynamic property App\Controllers\Rssi::$session is deprecated in APPPATH\Controllers\Rssi.php on line 24.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Rssi->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
