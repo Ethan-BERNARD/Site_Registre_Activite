@@ -6,7 +6,7 @@ use App\Models\DataAccess;
 /**
  * Logique métier liée aux actions d’un utilisateur authentifié.
  */
-class ActionsUtilisateur extends Model
+class ActionsUser extends Model
 {
     private $dao;
     private $idUtilisateur;

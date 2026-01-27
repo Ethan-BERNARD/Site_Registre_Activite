@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Authentif;
-use App\Models\ActionsUtilisateur;
+use App\Models\ActionsUser;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -11,7 +11,7 @@ class Utilisateur extends BaseController
     private $authentif;
     private $idUtilisateur;
     private $data = [];
-    private $actUtilisateur;
+    private $actUser;
 
     public function initController(
         RequestInterface $request,
@@ -23,22 +23,22 @@ class Utilisateur extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // 🔐 Vérification de session AVANT tout
+        // Vérification de session AVANT tout
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
             exit;
         }
 
-        // 🔒 Anti-cache
+        // Anti-cache
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
         $this->response->setHeader("Expires", "0");
 
-        // ✔ Identité utilisateur
+        // Identité utilisateur
         $this->idUtilisateur = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
-        $this->actUtilisateur = new ActionsUtilisateur($this->idUtilisateur);
+        $this->actUser = new ActionsUser($this->idUtilisateur);
     }
 
     public function index()
