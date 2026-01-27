@@ -1,216 +1,228 @@
-function ajouterSuppression(finalite) {
-    finalite.querySelector('.supprimer').addEventListener('click', function () {
-        finalite.remove();
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ---------------------------------------------------------
+       FONCTION GÉNÉRIQUE POUR GÉRER LES BLOCS DYNAMIQUES
+       + callback pour préremplir les selects
+    --------------------------------------------------------- */
+
+    function gestionBloc(btnId, containerId, templateId, classSupprimer, callback = null) {
+
+        const container = document.getElementById(containerId);
+        const template = document.getElementById(templateId);
+        const btn = document.getElementById(btnId);
+
+        function ajouterElement() {
+            const clone = template.content.cloneNode(true);
+            const element = clone.querySelector('*');
+
+            // Bouton supprimer
+            element.querySelector(classSupprimer).addEventListener("click", () => {
+                element.remove();
+            });
+
+            // Callback pour remplir les selects
+            if (callback) callback(element);
+
+            container.appendChild(element);
+        }
+
+        // Vérification robuste : ignore les espaces, retours à la ligne, commentaires
+        if (container.querySelector('*') === null) {
+            ajouterElement();
+        }
+
+        // Bouton d'ajout
+        btn.addEventListener("click", ajouterElement);
+    }
+
+    /* ---------------------------------------------------------
+       REMPLISSAGE DES SELECT (adapté à ta base)
+    --------------------------------------------------------- */
+
+    function fillSelect(select, data, valueField, labelField) {
+        data.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item[valueField];
+            opt.textContent = item[labelField];
+            select.appendChild(opt);
+        });
+    }
+
+    /* ---------------------------------------------------------
+       INITIALISATION DES BLOCS AVEC LES BONS CHAMPS
+    --------------------------------------------------------- */
+
+    gestionBloc("addActeur", "acteurs-container", "acteur-template", ".supprimer-acteur",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="categorie_type[]"]'),
+                typeActeur,
+                'IDTYPE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addFinalite", "finalites-container", "finalite-template", ".supprimer");
+
+    gestionBloc("addCategorie", "categories-container", "categorie-template", ".supprimer-categorie",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="categorie_type[]"]'),
+                categDCP,
+                'IDCATEGDCP',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addSensible", "sensibles-container", "sensible-template", ".supprimer-sensible",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="sensible_categorie[]"]'),
+                categDCPSensible,
+                'IDCATEGDCPSENSIBLE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addPersonne", "personnes-container", "personne-template", ".supprimer-personne",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="personne_description[]"]'),
+                personnesConcerne,
+                'IDCATEGPERSONNECONCERNE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addDestinataire", "destinataires-container", "destinataire-template", ".supprimer-destinataire",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="destinataire_description[]"]'),
+                typeDestinataire,
+                'IDTYPE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addSecurite", "securite-container", "securite-template", ".supprimer-securite",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="securite_description[]"]'),
+                typeMesureSecurite,
+                'IDTYPE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    gestionBloc("addTransfert", "transfert-container", "transfert-template", ".supprimer-transfert",
+        function (element) {
+            fillSelect(
+                element.querySelector('select[name="transfert_pays[]"]'),
+                pays,
+                'IDPAYS',
+                'NOMPAYS'
+            );
+
+            fillSelect(
+                element.querySelector('select[name="transfert_garantie[]"]'),
+                typeGarantie,
+                'IDTYPE',
+                'LIBELLE'
+            );
+        }
+    );
+
+    /* ---------------------------------------------------------
+       AFFICHAGE / MASQUAGE DU BLOC TRANSFERT
+    --------------------------------------------------------- */
+
+    const checkbox = document.getElementById("checkboxTransfert");
+    const blocTransfert = document.getElementById("blocTransfert");
+
+    checkbox.addEventListener("change", () => {
+        blocTransfert.style.display = checkbox.checked ? "block" : "none";
+
+        if (checkbox.checked) {
+            const container = document.getElementById("transfert-container");
+            if (container.querySelector('*') === null) {
+                document.getElementById("addTransfert").click();
+            }
+        }
     });
-}
 
-function ajouterSuppressionCategorie(categorie) {
-    categorie.querySelector('.supprimer-categorie').addEventListener('click', function () {
-        categorie.remove();
+    /* ---------------------------------------------------------
+        PRÉREMPLISSAGE GÉNÉRIQUE DES BLOCS
+    --------------------------------------------------------- */
+
+    function prefillBloc(dataArray, addButtonId, containerSelector, fillCallback) {
+        if (mode !== "edit" || !dataArray || dataArray.length === 0) return;
+
+        dataArray.forEach(item => {
+            document.getElementById(addButtonId).click();
+            const container = document.querySelector(containerSelector);
+            const element = container.lastElementChild;
+            fillCallback(element, item);
+        });
+    }
+
+    /* ---------------------------------------------------------
+        APPELS DE PRÉREMPLISSAGE POUR CHAQUE BLOC
+    --------------------------------------------------------- */
+
+    prefillBloc(acteursData, "addActeur", "#acteurs-container", (el, item) => {
+        el.querySelector('input[name="acteur_nom[]"]').value = item.NOM;
+        el.querySelector('input[name="acteur_adresse[]"]').value = item.ADRESSE;
+        el.querySelector('input[name="acteur_cp[]"]').value = item.CP;
+        el.querySelector('input[name="acteur_ville[]"]').value = item.VILLE;
+        el.querySelector('input[name="acteur_pays[]"]').value = item.PAYS;
+        el.querySelector('input[name="acteur_tel[]"]').value = item.TEL;
+        el.querySelector('input[name="acteur_mail[]"]').value = item.MAIL;
+        el.querySelector('select[name="categorie_type[]"]').value = item.IDTYPE;
     });
-}
 
-function ajouterSuppressionSensible(sensible) {
-    sensible.querySelector('.supprimer-sensible').addEventListener('click', function () {
-        sensible.remove();
+    prefillBloc(finalitesData, "addFinalite", "#finalites-container", (el, item) => {
+        el.querySelector('input[name="finalite[]"]').value = item.FINALITE;
+        el.querySelector('input[name="est_principal[]"]').checked = item.EST_PRINCIPAL == 1;
     });
-}
 
-function ajouterSuppressionPersonne(personne) {
-    personne.querySelector('.supprimer-personne').addEventListener('click', function () {
-        personne.remove();
+    prefillBloc(categoriesData, "addCategorie", "#categories-container", (el, item) => {
+        el.querySelector('input[name="categorie_description[]"]').value = item.DESCRIPTION;
+        el.querySelector('input[name="categorie_duree[]"]').value = item.DUREE;
+        el.querySelector('select[name="categorie_type[]"]').value = item.IDCATEGDCP;
     });
-}
 
-function ajouterSuppressionDest(dest) {
-    dest.querySelector('.supprimer-destinataire').addEventListener('click', function () {
-        dest.remove();
+    prefillBloc(sensiblesData, "addSensible", "#sensibles-container", (el, item) => {
+        el.querySelector('input[name="sensible_description[]"]').value = item.DESCRIPTION;
+        el.querySelector('input[name="sensible_duree[]"]').value = item.DUREE;
+        el.querySelector('select[name="sensible_categorie[]"]').value = item.IDCATEGDCPSENSIBLE;
     });
-}
 
-function ajouterSuppressionSecurite(securite) {
-    securite.querySelector('.supprimer-securite').addEventListener('click', function () {
-        securite.remove();
+    prefillBloc(personnesData, "addPersonne", "#personnes-container", (el, item) => {
+        el.querySelector('select[name="personne_description[]"]').value = item.IDCATEGPERSONNECONCERNE;
+        el.querySelector('input[name="personne_precision[]"]').value = item.PRECISION;
     });
-}
 
-function ajouterSuppressionTransfert(transfert) {
-    transfert.querySelector('.supprimer-transfert').addEventListener('click', function () {
-        transfert.remove();
+    prefillBloc(destinatairesData, "addDestinataire", "#destinataires-container", (el, item) => {
+        el.querySelector('select[name="destinataire_description[]"]').value = item.IDTYPE;
+        el.querySelector('input[name="destinataire_precision[]"]').value = item.PRECISION;
     });
-}
 
-function ajouterSuppressionActeur(acteur) {
-    acteur.querySelector('.supprimer-acteur').addEventListener('click', function () {
-        acteur.remove();
+    prefillBloc(securitesData, "addSecurite", "#securite-container", (el, item) => {
+        el.querySelector('select[name="securite_description[]"]').value = item.IDTYPE;
+        el.querySelector('input[name="securite_precision[]"]').value = item.PRECISION;
     });
-}
 
-document.addEventListener('DOMContentLoaded', function () {
+    prefillBloc(transfertsData, "addTransfert", "#transfert-container", (el, item) => {
+        el.querySelector('input[name="transfert_destinataire[]"]').value = item.DESTINATAIRE;
+        el.querySelector('select[name="transfert_pays[]"]').value = item.IDPAYS;
+        el.querySelector('select[name="transfert_garantie[]"]').value = item.IDTYPE;
+        el.querySelector('input[name="transfert_lien[]"]').value = item.LIEN;
+    });
 
-    /* ---------------------- FINALITÉS ---------------------- */
-
-    const finalitesContainer = document.getElementById('finalites-container');
-    const finaliteTemplate = document.getElementById('finalite-template');
-
-    function ajouterFinalite() {
-        const clone = finaliteTemplate.content.cloneNode(true);
-        const finalite = clone.querySelector('.finalite');
-
-        ajouterSuppression(finalite);
-        finalitesContainer.appendChild(finalite);
-    }
-
-    if (finalitesContainer.children.length === 0) {
-        ajouterFinalite();
-    }
-
-    document.getElementById('addFinalite').addEventListener('click', ajouterFinalite);
-
-
-
-    /* ---------------------- CATÉGORIES ---------------------- */
-
-    const categoriesContainer = document.getElementById('categories-container');
-    const categorieTemplate = document.getElementById('categorie-template');
-
-    function ajouterCategorie() {
-        const clone = categorieTemplate.content.cloneNode(true);
-        const categorie = clone.querySelector('.categorie');
-
-        ajouterSuppressionCategorie(categorie);
-        categoriesContainer.appendChild(categorie);
-    }
-
-    if (categoriesContainer.children.length === 0) {
-        ajouterCategorie();
-    }
-
-    document.getElementById('addCategorie').addEventListener('click', ajouterCategorie);
-
-
-
-    /* ---------------------- SENSIBLE ---------------------- */
-
-    const sensiblesContainer = document.getElementById('sensibles-container');
-    const sensibleTemplate = document.getElementById('sensible-template');
-
-    function ajouterSensible() {
-        const clone = sensibleTemplate.content.cloneNode(true);
-        const sensible = clone.querySelector('.sensible');
-
-        ajouterSuppressionSensible(sensible);
-        sensiblesContainer.appendChild(sensible);
-    }
-
-    if (sensiblesContainer.children.length === 0) {
-        ajouterSensible();
-    }
-
-    document.getElementById('addSensible').addEventListener('click', ajouterSensible);
-
-
-
-    /* ---------------------- PERSONNES ---------------------- */
-
-    const personnesContainer = document.getElementById('personnes-container');
-    const personneTemplate = document.getElementById('personne-template');
-
-    function ajouterPersonne() {
-        const clone = personneTemplate.content.cloneNode(true);
-        const personne = clone.querySelector('.personne');
-
-        ajouterSuppressionPersonne(personne);
-        personnesContainer.appendChild(personne);
-    }
-
-    if (personnesContainer.children.length === 0) {
-        ajouterPersonne();
-    }
-
-    document.getElementById('addPersonne').addEventListener('click', ajouterPersonne);
-
-
-
-    /* ---------------------- DESTINATAIRES ---------------------- */
-
-    const destContainer = document.getElementById('destinataires-container');
-    const destTemplate = document.getElementById('destinataire-template');
-
-    function ajouterDestinataire() {
-        const clone = destTemplate.content.cloneNode(true);
-        const dest = clone.querySelector('.destinataire');
-
-        ajouterSuppressionDest(dest);
-        destContainer.appendChild(dest);
-    }
-
-    if (destContainer.children.length === 0) {
-        ajouterDestinataire();
-    }
-
-    document.getElementById('addDestinataire').addEventListener('click', ajouterDestinataire);
-
-
-
-    /* ---------------------- SECURITE ---------------------- */
-
-    const securiteContainer = document.getElementById('securite-container');
-    const securiteTemplate = document.getElementById('securite-template');
-
-    function ajouterSecurite() {
-        const clone = securiteTemplate.content.cloneNode(true);
-        const securite = clone.querySelector('.securite');
-
-        ajouterSuppressionSecurite(securite);
-        securiteContainer.appendChild(securite);
-    }
-
-    if (securiteContainer.children.length === 0) {
-        ajouterSecurite();
-    }
-
-    document.getElementById('addSecurite').addEventListener('click', ajouterSecurite);
-
-
-
-    /* ---------------------- TRANSFERT ---------------------- */
-
-    const transfertContainer = document.getElementById('transfert-container');
-    const transfertTemplate = document.getElementById('transfert-template');
-
-    function ajouterTransfert() {
-        const clone = transfertTemplate.content.cloneNode(true);
-        const transfert = clone.querySelector('.transfert');
-
-        ajouterSuppressionTransfert(transfert);
-        transfertContainer.appendChild(transfert);
-    }
-
-    if (transfertContainer.children.length === 0) {
-        ajouterTransfert();
-    }
-
-    document.getElementById('addTransfert').addEventListener('click', ajouterTransfert);
-
-
-
-    /* ---------------------- ACTEUR ---------------------- */
-
-    const acteursContainer = document.getElementById('acteurs-container');
-    const acteurTemplate = document.getElementById('acteur-template');
-
-    function ajouterActeur() {
-        const clone = acteurTemplate.content.cloneNode(true);
-        const acteur = clone.querySelector('.acteur');
-
-        ajouterSuppressionActeur(acteur);
-        acteursContainer.appendChild(acteur);
-    }
-
-    if (acteursContainer.children.length === 0) {
-        ajouterActeur();
-    }
-
-    document.getElementById('addActeur').addEventListener('click', ajouterActeur);
 });
