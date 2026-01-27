@@ -43,7 +43,7 @@ class Utilisateur extends BaseController
 
     public function index()
     {
-        return view('v_user_accueil', $this->data);
+        return view('user/v_user_accueil', $this->data);
     }
 
     public function seDeconnecter()
@@ -53,11 +53,11 @@ class Utilisateur extends BaseController
 
     public function documentsInternes()
     {
-        return view('v_user_documents', $this->data);
+        return view('user/v_user_documents', $this->data);
     }
 
     public function communicationsRSSI()
     {
-        return view('v_rssi_communications', $this->data);
+        return view('user/v_user_communications', $this->data);
     }
 }

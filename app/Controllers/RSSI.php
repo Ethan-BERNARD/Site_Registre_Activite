@@ -44,7 +44,7 @@ class Rssi extends BaseController
 
     public function index()
     {
-        return view('v_rssi_accueil', $this->data);
+        return view('rssi/v_rssi_accueil', $this->data);
     }
 
     public function seDeconnecter()
@@ -56,7 +56,7 @@ class Rssi extends BaseController
     {
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
 
-        return view('v_rssi_traitements', [
+        return view('rssi/v_rssi_traitements', [
             'identite' => $this->data['identite'],
             'traitements' => $traitements
         ]);
@@ -66,7 +66,7 @@ class Rssi extends BaseController
     {
         $logs = $this->actRssi->getLogs();
 
-        return view('v_rssi_logs', [
+        return view('rssi/v_rssi_logs', [
             'identite' => $this->data['identite'],
             'logs' => $logs
         ]);
@@ -76,7 +76,7 @@ class Rssi extends BaseController
     {
         $traitements = $this->actRssi->getAllTraitements();
 
-        return view('v_rssi_export_form', [
+        return view('rssi/v_rssi_export_form', [
             'identite' => $this->data['identite'],
             'traitements' => $traitements
         ]);
@@ -89,7 +89,7 @@ class Rssi extends BaseController
         if ($idTraitement === 'all') {
             $traitements = $this->actRssi->getAllTraitements();
 
-            return view('v_rssi_export_result', [
+            return view('rssi/v_rssi_export_result', [
                 'identite' => $this->data['identite'],
                 'mode' => 'global',
                 'traitements' => $traitements
@@ -102,7 +102,7 @@ class Rssi extends BaseController
             return redirect()->back()->with('error', 'Traitement introuvable.');
         }
 
-        return view('v_rssi_export_result', [
+        return view('rssi/v_rssi_export_result', [
             'identite' => $this->data['identite'],
             'mode' => 'single',
             'traitement' => $traitement
@@ -115,7 +115,7 @@ class Rssi extends BaseController
 
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($search);
 
-        return view('v_rssi_traitements', [
+        return view('rssi/v_rssi_traitements', [
             'identite' => $this->data['identite'],
             'traitements' => $traitements
         ], ['saveData' => true]);
@@ -129,7 +129,7 @@ class Rssi extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
         }
 
-        return view('v_rssi_traitement_detail', [
+        return view('rssi/v_rssi_traitement_detail', [
             'identite'   => $this->data['identite'],
             'traitement' => $traitement
         ]);

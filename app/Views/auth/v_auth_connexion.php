@@ -1,4 +1,4 @@
-﻿<?= $this->extend('l_auth_connexion') ?>
+﻿<?= $this->extend('layouts/l_auth_connexion') ?>
 
 <?= $this->section('body') ?>
 

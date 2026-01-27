@@ -1,4 +1,4 @@
-<?= $this->extend('l_rssi') ?>
+<?= $this->extend('layouts/l_rssi') ?>
 
 <?= $this->section('body') ?>
 

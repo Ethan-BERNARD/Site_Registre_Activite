@@ -1,4 +1,4 @@
-<?= $this->extend('l_user') ?>
+<?= $this->extend('layouts/l_user') ?>
 
 <?= $this->section('body') ?>
 <div id="contenu">
