@@ -24,7 +24,7 @@
                 <option value="all">Tous les traitements</option>
 
                 <?php foreach ($traitements as $t) : ?>
-                    <option value="<?= $t['ID'] ?>">
+                    <option value="<?= $t['REF'] ?>">
                         <?= esc($t['NOMTRAITEMENT']) ?>
                     </option>
                 <?php endforeach; ?>

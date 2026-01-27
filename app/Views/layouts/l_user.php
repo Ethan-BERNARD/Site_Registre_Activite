@@ -35,21 +35,21 @@
 
                 <ul id="menuList">
                     <li class="smenu">
-                        <?= anchor('utilisateur/', 'Accueil', 'title="Accueil utilisateur"') ?>
+                        <?= anchor('user/', 'Accueil', 'title="Accueil utilisateur"') ?>
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('utilisateur/documents', 'Documents internes', 'title="Documents internes"') ?>
+                        <?= anchor('user/documents', 'Documents internes', 'title="Documents internes"') ?>
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('utilisateur/communications', 'Communications RSSI', 'title="Communications"') ?>
+                        <?= anchor('user/communications', 'Communications RSSI', 'title="Communications"') ?>
                     </li>
 
                     <br>
 
                     <li class="smenu">
-                        <?= anchor('utilisateur/seDeconnecter', 'Se déconnecter', 'title="Déconnexion"') ?>
+                        <?= anchor('user/seDeconnecter', 'Se déconnecter', 'title="Déconnexion"') ?>
                     </li>
                 </ul>
             </aside>

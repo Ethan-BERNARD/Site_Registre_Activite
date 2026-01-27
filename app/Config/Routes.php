@@ -19,7 +19,7 @@ $routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
 $routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
 
 // Routes Utilisateur
-$routes->get('/utilisateur', 'Utilisateur::index');
-$routes->get('/utilisateur/seDeconnecter', 'Utilisateur::seDeconnecter');
-$routes->get('/utilisateur/documents', 'Utilisateur::documentsInternes');
-$routes->get('/utilisateur/communications', 'Utilisateur::communicationsRSSI');
+$routes->get('/user', 'User::index');
+$routes->get('/user/seDeconnecter', 'User::seDeconnecter');
+$routes->get('/user/documents', 'User::documentsInternes');
+$routes->get('/user/communications', 'User::communicationsRSSI');

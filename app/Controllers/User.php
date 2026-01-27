@@ -6,7 +6,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class Utilisateur extends BaseController
+class User extends BaseController
 {
     private $authentif;
     private $idUtilisateur;
@@ -23,18 +23,15 @@ class Utilisateur extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // Vérification de session AVANT tout
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
             exit;
         }
 
-        // Anti-cache
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
         $this->response->setHeader("Expires", "0");
 
-        // Identité utilisateur
         $this->idUtilisateur = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 

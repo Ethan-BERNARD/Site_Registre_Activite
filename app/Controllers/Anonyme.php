@@ -20,7 +20,7 @@ class Anonyme extends BaseController
         }
 
         if ($authentif->estUtilisateur()) {
-            return redirect()->to('/utilisateur');
+            return redirect()->to('/user');
         }
 
         return $this->login();
