@@ -38,13 +38,13 @@ class Rssi extends BaseController
         $this->idRssi = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
-        // Modèle métier (aucun SQL ici)
+        // Modèle métier
         $this->actRssi = new ActionsRssi($this->idRssi);
     }
 
     public function index()
     {
-        return view('v_RSSIAccueil', $this->data);
+        return view('v_rssi_accueil', $this->data);
     }
 
     public function seDeconnecter()
@@ -56,26 +56,28 @@ class Rssi extends BaseController
     {
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
 
-        return view('v_tableau', [
-            'identite'    => $this->data['identite'],
+        return view('v_rssi_traitements', [
+            'identite' => $this->data['identite'],
             'traitements' => $traitements
         ]);
     }
 
     public function logs()
     {
-        // Récupération via logique métier (pas de SQL ici)
         $logs = $this->actRssi->getLogs();
 
-        return view('v_Logs', ['identite' => $this->data['identite'],'logs' => $logs]);
+        return view('v_rssi_logs', [
+            'identite' => $this->data['identite'],
+            'logs' => $logs
+        ]);
     }
 
     public function exportPDF()
     {
         $traitements = $this->actRssi->getAllTraitements();
 
-        return view('v_ExportPDF', [
-            'identite'    => $this->data['identite'],
+        return view('v_rssi_export_form', [
+            'identite' => $this->data['identite'],
             'traitements' => $traitements
         ]);
     }
@@ -87,9 +89,9 @@ class Rssi extends BaseController
         if ($idTraitement === 'all') {
             $traitements = $this->actRssi->getAllTraitements();
 
-            return view('v_ExportPDF_Result', [
-                'identite'    => $this->data['identite'],
-                'mode'        => 'global',
+            return view('v_rssi_export_result', [
+                'identite' => $this->data['identite'],
+                'mode' => 'global',
                 'traitements' => $traitements
             ]);
         }
@@ -100,9 +102,9 @@ class Rssi extends BaseController
             return redirect()->back()->with('error', 'Traitement introuvable.');
         }
 
-        return view('v_ExportPDF_Result', [
-            'identite'   => $this->data['identite'],
-            'mode'       => 'single',
+        return view('v_rssi_export_result', [
+            'identite' => $this->data['identite'],
+            'mode' => 'single',
             'traitement' => $traitement
         ]);
     }
@@ -113,9 +115,23 @@ class Rssi extends BaseController
 
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($search);
 
-        return view('v_tableau', [
+        return view('v_rssi_traitements', [
             'identite' => $this->data['identite'],
             'traitements' => $traitements
         ], ['saveData' => true]);
+    }
+
+    public function detail($ref)
+    {
+        $traitement = $this->actRssi->getTraitementById($ref);
+
+        if (!$traitement) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
+        }
+
+        return view('v_rssi_traitement_detail', [
+            'identite'   => $this->data['identite'],
+            'traitement' => $traitement
+        ]);
     }
 }

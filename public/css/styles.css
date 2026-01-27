@@ -420,3 +420,11 @@ table tbody tr:hover {
     text-decoration: underline;
 }
 
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background-color: #f0f0f0;
+}
+

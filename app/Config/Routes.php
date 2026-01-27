@@ -14,8 +14,9 @@ $routes->get('/rssi', 'Rssi::index');
 $routes->get('/rssi/seDeconnecter', 'Rssi::seDeconnecter');
 $routes->get('/gestionTraitement', 'Rssi::tableau');
 $routes->get('/logs', 'Rssi::logs');
-$routes->get('/rssi/exportPDF', 'Rssi::exportPDF');        // Affiche le formulaire
-$routes->post('/rssi/genererPDF', 'Rssi::genererPDF');    // Traite le POST
+$routes->get('/rssi/exportPDF', 'Rssi::exportPDF');
+$routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
+$routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
 
 // Routes Utilisateur
 $routes->get('/utilisateur', 'Utilisateur::index');

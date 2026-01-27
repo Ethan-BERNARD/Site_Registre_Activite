@@ -26,15 +26,15 @@ class Utilisateur extends BaseController
         // 🔐 Vérification de session AVANT tout
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
-            exit; // indispensable pour stopper l'exécution
+            exit;
         }
 
-        // 🔒 Anti-cache (empêche le retour arrière)
+        // 🔒 Anti-cache
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
         $this->response->setHeader("Expires", "0");
 
-        // ✔ Maintenant on peut charger les données utilisateur
+        // ✔ Identité utilisateur
         $this->idUtilisateur = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
@@ -43,7 +43,7 @@ class Utilisateur extends BaseController
 
     public function index()
     {
-        return view('v_visiteurAccueil', $this->data);
+        return view('v_user_accueil', $this->data);
     }
 
     public function seDeconnecter()
@@ -53,11 +53,11 @@ class Utilisateur extends BaseController
 
     public function documentsInternes()
     {
-        return view('v_DocumentsInternes', $this->data);
+        return view('v_user_documents', $this->data);
     }
 
     public function communicationsRSSI()
     {
-        return view('v_CommunicationsRSSI', $this->data);
+        return view('v_rssi_communications', $this->data);
     }
-}   
+}

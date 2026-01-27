@@ -33,7 +33,7 @@ class Anonyme extends BaseController
      */
     public function login($errMsg = null)
     {
-        return view('v_connexion', ['erreur' => $errMsg]);
+        return view('v_auth_connexion', ['erreur' => $errMsg]);
     }
 
     /**

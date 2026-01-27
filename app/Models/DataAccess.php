@@ -90,7 +90,7 @@ class DataAccess extends Model
             $sql .= " AND LOWER(t.NOM) LIKE " . $this->db->escape('%' . strtolower($search) . '%');
         }
 
-        $sql .= " ORDER BY t.NOM ASC";
+        $sql .= " ORDER BY t.REF ASC";
 
         return $this->db->query($sql)->getResultArray();
     }
