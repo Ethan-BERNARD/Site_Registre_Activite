@@ -21,7 +21,7 @@ class PageInfoController extends BaseController
         $data['mode'] = 'create';
         $data['traitement'] = null;
 
-        return view('v-pageInfo', $data);
+        return view('v_rssi_traitements_detail', $data);
     }
 
     /**
@@ -50,7 +50,7 @@ class PageInfoController extends BaseController
         $data['securites'] = $this->actionPageInfo->getSecuritesByTraitement($id);
         $data['transferts'] = $this->actionPageInfo->getTransfertsByTraitement($id);
 
-        return view('v-pageInfo', $data);
+        return view('v_rssi_traitements_detail', $data);
     }
 
     /**
