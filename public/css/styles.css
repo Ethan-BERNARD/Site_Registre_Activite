@@ -441,7 +441,7 @@ html, body {
     color: #333;
 }
 
-form {
+.formInfos {
     width: 1100px;
     margin: 40px auto;
     background: #fff;
@@ -454,7 +454,7 @@ form {
 /*   TITRES                                            */
 /* -------------------------------------------------- */
 
-h2 {
+.barre {
     color: #0b4f6c;
     font-weight: 400;
     margin-top: 30px;
@@ -571,7 +571,7 @@ button.supprimer-transfert:hover {
 /* -------------------------------------------------- */
 
 .acteur,
-.finalite,
+.finaliteBloc,
 .categorie,
 .sensible,
 .personne,

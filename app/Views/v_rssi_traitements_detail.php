@@ -13,9 +13,9 @@
         <h1>Créer un nouveau traitement</h1>
     <?php endif; ?>
 
-    <form>
+    <form class="formInfos">
         <div>
-            <h2>Description du traitement</h2>
+            <h2 class="barre">Description du traitement</h2>
             <p>Nom du traitement : </p>
             <input type="Text">
             <p>N°/Ref</p>
@@ -29,7 +29,7 @@
         </div>
 
         <div>
-            <h2>Acteurs</h2>
+            <h2 class="barre">Acteurs</h2>
             <div id="acteurs-container">
                 <!-- Les acteurs ajoutés apparaîtront ici -->
             </div>
@@ -61,14 +61,14 @@
         </div>
 
         <div>
-            <h2>Finalité(s) du traitement des données</h2>
+            <h2 class="barre">Finalité(s) du traitement des données</h2>
             <div id="finalites-container">
                 <!-- Finalités ajoutées ici -->
             </div>
             <button type="button" id="addFinalite">Ajouter une finalité</button>
             <!-- Modèle invisible -->
             <template id="finalite-template">
-                <div class="finalite">
+                <div class="finaliteBloc">
                     <p>Finalité</p>
                     <input type="text" name="finalite[]">
 
@@ -81,7 +81,7 @@
         </div>
         
         <div>
-            <h2>Catégories de données personnelles concernées</h2>
+            <h2 class="barre">Catégories de données personnelles concernées</h2>
             <div id="categories-container">
                 <!-- Les catégories ajoutées apparaîtront ici -->
             </div>
@@ -106,7 +106,7 @@
         </div>
         
         <div>
-            <h2>Données Sensibles</h2>
+            <h2 class="barre">Données Sensibles</h2>
             <div id="sensibles-container">
                 <!-- Les données sensibles ajoutés apparaîtront ici -->
             </div>
@@ -128,7 +128,7 @@
         </div>
 
         <div>
-            <h2>Catégories de personnes concernées</h2>
+            <h2 class="barre">Catégories de personnes concernées</h2>
             <div id="personnes-container">
                 <!-- Les personnes ajoutés apparaîtront ici -->
             </div>
@@ -148,7 +148,7 @@
         </div>
 
         <div>
-            <h2>Destinataires</h2>
+            <h2 class="barre">Destinataires</h2>
             <div id="destinataires-container">
                 <!-- Les destinataires ajoutés apparaîtront ici -->
             </div>
@@ -169,7 +169,7 @@
         </div>
 
         <div>
-            <h2>Mesures de sécurité</h2>
+            <h2 class="barre">Mesures de sécurité</h2>
             <div id="securite-container">
                 <!-- Les mesures ajoutées apparaîtront ici -->
             </div>
@@ -189,7 +189,7 @@
         </div>
 
         <div id="blocTransfert" style="display:none;">
-            <h2>Transfert hors UE</h2>
+            <h2 class="barre">Transfert hors UE</h2>
             <div id="transfert-container">
                 <!-- Les transferts ajoutés apparaîtront ici -->
             </div>

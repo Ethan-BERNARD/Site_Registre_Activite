@@ -15,7 +15,6 @@
         value="<?= esc($_GET['search'] ?? '') ?>" 
         style="flex-grow: 1;"
     >
-    <button class="validate">Tag ▼</button>
 </form>
 
 <table class="tableTraitements">
