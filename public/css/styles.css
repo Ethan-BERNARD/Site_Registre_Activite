@@ -7,11 +7,6 @@ html, body {
 }
 
 body {
-/* -------------------------------------------------- */
-/*   STYLE GLOBAL                                     */
-/* -------------------------------------------------- */
-
-html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -218,46 +213,6 @@ form p {
 label {
     display: inline-block;
     width: 150px;
-form {
-    width: 1100px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 6px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.15);
-}
-
-/* -------------------------------------------------- */
-/*   TITRES                                            */
-/* -------------------------------------------------- */
-
-h2 {
-    color: #0b4f6c;
-    font-weight: 400;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #0b4f6c;
-    padding-bottom: 5px;
-}
-
-/* -------------------------------------------------- */
-/*   STRUCTURE DES BLOCS                              */
-/* -------------------------------------------------- */
-
-form > div {
-    margin-bottom: 35px;
-    padding: 20px;
-    background: #f9fbfd;
-    border: 1px solid #dce3e8;
-    border-radius: 6px;
-}
-
-/* -------------------------------------------------- */
-/*   FORMULAIRES                                      */
-/* -------------------------------------------------- */
-
-p {
-    margin: 10px 0 5px;
     font-weight: bold;
 }
 
@@ -290,17 +245,6 @@ textarea:focus {
 input[type="submit"],
 input[type="reset"],
 button {
-input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-top: 8px;
-}
-
-/* -------------------------------------------------- */
-/*   BOUTONS                                          */
-/* -------------------------------------------------- */
-
-button,
-input[type="submit"] {
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -312,13 +256,6 @@ input[type="submit"] {
 
 input[type="submit"],
 button.validate {
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-button,
-input[type="submit"] {
     background: #0b4f6c;
     color: white;
 }
@@ -489,6 +426,116 @@ table tbody tr:hover {
 
 .clickable-row:hover {
     background-color: #f0f0f0;
+}
+
+
+/* -------------------------------------------------- */
+/*   STYLE GLOBAL                                     */
+/* -------------------------------------------------- */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+form {
+    width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+/* -------------------------------------------------- */
+/*   TITRES                                            */
+/* -------------------------------------------------- */
+
+h2 {
+    color: #0b4f6c;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #0b4f6c;
+    padding-bottom: 5px;
+}
+
+/* -------------------------------------------------- */
+/*   STRUCTURE DES BLOCS                              */
+/* -------------------------------------------------- */
+
+form > div {
+    margin-bottom: 35px;
+    padding: 20px;
+    background: #f9fbfd;
+    border: 1px solid #dce3e8;
+    border-radius: 6px;
+}
+
+/* -------------------------------------------------- */
+/*   FORMULAIRES                                      */
+/* -------------------------------------------------- */
+
+p {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    padding: 8px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.2s;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #0b4f6c;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-top: 8px;
+}
+
+/* -------------------------------------------------- */
+/*   BOUTONS                                          */
+/* -------------------------------------------------- */
+
+button,
+input[type="submit"] {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+button,
+input[type="submit"] {
+    background: #0b4f6c;
+    color: white;
 }
 
 button:hover,
