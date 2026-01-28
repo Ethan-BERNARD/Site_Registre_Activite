@@ -199,5 +199,11 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+
+         // Charge les valeurs depuis .env 
+        $this->default['hostname'] = getenv('DB_HOST') ?: 'localhost'; 
+        $this->default['username'] = getenv('DB_USER') ?: 'root'; 
+        $this->default['password'] = getenv('DB_PASS') ?: ''; 
+        $this->default['database'] = getenv('DB_NAME') ?: ''; 
     }
 }

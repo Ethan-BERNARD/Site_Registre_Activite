@@ -38,6 +38,11 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 }
 
 /*
+ * LOAD COMPOSER AUTOLOAD
+ */ 
+require FCPATH . '../vendor/autoload.php';
+
+/*
  *---------------------------------------------------------------
  * BOOTSTRAP THE APPLICATION
  *---------------------------------------------------------------
@@ -55,5 +60,10 @@ $paths = new Paths();
 
 // LOAD THE FRAMEWORK BOOTSTRAP FILE
 require $paths->systemDirectory . '/Boot.php';
+
+// Load environment settings from .env file
+$dotenv = Dotenv\Dotenv::createImmutable(FCPATH . '../');
+$dotenv->load();
+
 
 exit(Boot::bootWeb($paths));

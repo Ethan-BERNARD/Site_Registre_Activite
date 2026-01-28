@@ -7,6 +7,11 @@ html, body {
 }
 
 body {
+/* -------------------------------------------------- */
+/*   STYLE GLOBAL                                     */
+/* -------------------------------------------------- */
+
+html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -213,6 +218,46 @@ form p {
 label {
     display: inline-block;
     width: 150px;
+form {
+    width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+/* -------------------------------------------------- */
+/*   TITRES                                            */
+/* -------------------------------------------------- */
+
+h2 {
+    color: #0b4f6c;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #0b4f6c;
+    padding-bottom: 5px;
+}
+
+/* -------------------------------------------------- */
+/*   STRUCTURE DES BLOCS                              */
+/* -------------------------------------------------- */
+
+form > div {
+    margin-bottom: 35px;
+    padding: 20px;
+    background: #f9fbfd;
+    border: 1px solid #dce3e8;
+    border-radius: 6px;
+}
+
+/* -------------------------------------------------- */
+/*   FORMULAIRES                                      */
+/* -------------------------------------------------- */
+
+p {
+    margin: 10px 0 5px;
     font-weight: bold;
 }
 
@@ -245,6 +290,17 @@ textarea:focus {
 input[type="submit"],
 input[type="reset"],
 button {
+input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-top: 8px;
+}
+
+/* -------------------------------------------------- */
+/*   BOUTONS                                          */
+/* -------------------------------------------------- */
+
+button,
+input[type="submit"] {
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -256,6 +312,13 @@ button {
 
 input[type="submit"],
 button.validate {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+button,
+input[type="submit"] {
     background: #0b4f6c;
     color: white;
 }
@@ -428,3 +491,68 @@ table tbody tr:hover {
     background-color: #f0f0f0;
 }
 
+button:hover,
+input[type="submit"]:hover {
+    background: #093d52;
+}
+
+button.supprimer,
+button.supprimer-acteur,
+button.supprimer-categorie,
+button.supprimer-sensible,
+button.supprimer-personne,
+button.supprimer-destinataire,
+button.supprimer-securite,
+button.supprimer-transfert {
+    background: #d9534f;
+    margin-top: 15px;
+}
+
+button.supprimer:hover,
+button.supprimer-acteur:hover,
+button.supprimer-categorie:hover,
+button.supprimer-sensible:hover,
+button.supprimer-personne:hover,
+button.supprimer-destinataire:hover,
+button.supprimer-securite:hover,
+button.supprimer-transfert:hover {
+    background: #b52f2b;
+}
+
+/* -------------------------------------------------- */
+/*   BLOCS DYNAMIQUES (Acteurs, Finalités, etc.)      */
+/* -------------------------------------------------- */
+
+.acteur,
+.finalite,
+.categorie,
+.sensible,
+.personne,
+.destinataire,
+.securite,
+.transfert {
+    background: #ffffff;
+    border: 1px solid #dce3e8;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+/* -------------------------------------------------- */
+/*   RESPONSIVE                                       */
+/* -------------------------------------------------- */
+
+@media (max-width: 1200px) {
+    form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 700px) {
+    input[type="text"],
+    input[type="date"],
+    select {
+        width: 100%;
+    }
+}
