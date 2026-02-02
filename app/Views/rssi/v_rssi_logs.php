@@ -23,7 +23,6 @@
                 <th>Utilisateur</th>
                 <th>Action</th>
                 <th>Détails</th>
-                <th>IP</th>
             </tr>
         </thead>
 
@@ -35,7 +34,6 @@
                         <td><?= esc($log['utilisateur']) ?></td>
                         <td><?= esc($log['action']) ?></td>
                         <td><?= esc($log['details']) ?></td>
-                        <td><?= esc($log['ip']) ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>

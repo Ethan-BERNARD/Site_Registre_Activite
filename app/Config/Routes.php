@@ -18,6 +18,11 @@ $routes->get('/rssi/exportPDF', 'Rssi::exportPDF');
 $routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
 $routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
 
+$routes->get('/gestionTraitement/searchAjax', 'Rssi::searchAjax');
+
+$routes->get('/page-info', 'PageInfoController::index'); 
+$routes->post('pageInfo/save', 'PageInfoController::save');
+
 // Routes Utilisateur
 $routes->get('/user', 'User::index');
 $routes->get('/user/seDeconnecter', 'User::seDeconnecter');
@@ -26,7 +31,6 @@ $routes->get('/user/communications', 'User::communicationsRSSI');
 
 
 
-$routes->get('/page-info', 'PageInfoController::index'); // a deplacer proprement
-$routes->post('pageInfo/save', 'PageInfoController::save');
+
 
 

@@ -17,15 +17,15 @@
         <div>
             <h2 class="barre">Description du traitement</h2>
             <p>Nom du traitement : </p>
-            <input type="Text">
+            <input class="infosInput" type="Text">
             <p>N°/Ref</p>
-            <input type="Text">
+            <input class="infosInput"type="Text">
             <p>Date de création du traitement</p>
-            <input type="Date">
+            <input class="infosInput"type="Date">
             <p>Mise  à jour du traitement</p>
-            <input type="Date">
+            <input class="infosInput"type="Date">
             <p>Transfert hors de l'UE</p>
-            <input type="checkbox" id="checkboxTransfert">
+            <input class="infosInput" type="checkbox" id="checkboxTransfert">
         </div>
 
         <div>
@@ -38,19 +38,19 @@
             <template id="acteur-template">
                 <div class="acteur">
                     <p>Nom</p>
-                    <input type="text" name="acteur_nom[]">
+                    <input class="infosInput"type="text" name="acteur_nom[]">
                     <p>Adresse</p>
-                    <input type="text" name="acteur_adresse[]">
+                    <input class="infosInput" type="text" name="acteur_adresse[]">
                     <p>Code Postal</p>
-                    <input type="text" name="acteur_cp[]">
+                    <input class="infosInput" type="text" name="acteur_cp[]">
                     <p>Ville</p>
-                    <input type="text" name="acteur_ville[]">
+                    <input class="infosInput"type="text" name="acteur_ville[]">
                     <p>Pays</p>
-                    <input type="text" name="acteur_pays[]">
+                    <input class="infosInput" type="text" name="acteur_pays[]">
                     <p>Téléphone</p>
-                    <input type="text" name="acteur_tel[]">
+                    <input class="infosInput" type="text" name="acteur_tel[]">
                     <p>Mail</p>
-                    <input type="text" name="acteur_mail[]">
+                    <input class="infosInput" type="text" name="acteur_mail[]">
                     <p>Type d'acteur</p>
                     <select name="categorie_type[]">
                         <option value="">-- Choisir --</option>
@@ -70,10 +70,10 @@
             <template id="finalite-template">
                 <div class="finaliteBloc">
                     <p>Finalité</p>
-                    <input type="text" name="finalite[]">
+                    <input class="infosInput" type="text" name="finalite[]">
 
                     <p>Est principal</p>
-                    <input type="checkbox" name="est_principal[]">
+                    <input class="infosInput" type="checkbox" name="est_principal[]">
 
                     <button type="button" class="supprimer">Supprimer</button>
                 </div>
@@ -91,10 +91,10 @@
                 <div class="categorie">
 
                     <p>Description</p>
-                    <input type="text" name="categorie_description[]">
+                    <input class="infosInput" type="text" name="categorie_description[]">
 
                     <p>Durée de conservation</p>
-                    <input type="text" name="categorie_duree[]">
+                    <input class="infosInput" type="text" name="categorie_duree[]">
 
                     <p>Catégorie de données personnelles concernées</p>
                     <select name="categorie_type[]">
@@ -115,9 +115,9 @@
             <template id="sensible-template">
                 <div class="sensible">
                     <p>Description</p>
-                    <input type="text" name="sensible_description[]">
+                    <input class="infosInput" type="text" name="sensible_description[]">
                     <p>Durée de conservation</p>
-                    <input type="text" name="sensible_duree[]">
+                    <input class="infosInput" type="text" name="sensible_duree[]">
                     <p>Catégorie de données sensible</p>
                     <select name="sensible_categorie[]">
                         <option value="">-- Choisir --</option>
@@ -141,7 +141,7 @@
                         <option value="">-- Choisir --</option>
                     </select>
                     <p>Précision</p>
-                    <input type="text" name="personne_precision[]">
+                    <input class="infosInput" type="text" name="personne_precision[]">
                     <button type="button" class="supprimer-personne">Supprimer</button>
                 </div>
             </template>
@@ -162,7 +162,7 @@
                         <option value="">-- Choisir --</option>
                     </select>
                     <p>Précision</p>
-                    <input type="text" name="destinataire_precision[]">
+                    <input class="infosInput" type="text" name="destinataire_precision[]">
                     <button type="button" class="supprimer-destinataire">Supprimer</button>
                 </div>
             </template>
@@ -182,7 +182,7 @@
                         <option value="">-- Choisir --</option>
                     </select>
                     <p>Précision</p>
-                    <input type="text" name="securite_precision[]">
+                    <input class="infosInput" type="text" name="securite_precision[]">
                     <button type="button" class="supprimer-securite">Supprimer</button>
                 </div>
             </template>
@@ -198,7 +198,7 @@
             <template id="transfert-template">
                 <div class="transfert">
                     <p>Destinataire</p>
-                    <input type="text" name="transfert_destinataire[]">
+                    <input class="infosInput" type="text" name="transfert_destinataire[]">
                     <p>Pays</p>
                     <select name="transfert_pays[]">
                         <option value="">-- Choisir --</option>
@@ -208,19 +208,19 @@
                         <option value="">-- Choisir --</option>
                     </select>
                     <p>Lien vers la documentation</p>
-                    <input type="text" name="transfert_lien[]">
+                    <input class="infosInput" type="text" name="transfert_lien[]">
                     <button type="button" class="supprimer-transfert">Supprimer</button>
                 </div>
             </template>
         </div>
         <!-- envoie du type de formulaire (création / modification) -->
-        <input type="hidden" name="mode" value="<?= $mode ?>">
+        <input class="infosInput" type="hidden" name="mode" value="<?= $mode ?>">
         <input type="hidden" name="id_traitement" value="<?= $traitement['ID'] ?? '' ?>">
 
         <?php if ($mode === 'edit'): ?>
-            <input type="submit" value="Modifier">
+            <input class="infosInput" type="submit" value="Modifier">
         <?php else: ?>
-            <input type="submit" value="Enregistrer">
+            <input class="infosInput" type="submit" value="Enregistrer">
         <?php endif; ?>
     </form>
 

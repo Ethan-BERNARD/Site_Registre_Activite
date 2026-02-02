@@ -1,7 +1,3 @@
-/* ============================================================
-   ===============  STYLE GLOBAL  ==============================
-   ============================================================ */
-
 html, body {
     user-select: none;
 }
@@ -13,10 +9,6 @@ body {
     background: #f4f6f9;
     color: #333;
 }
-
-/* ============================================================
-   ===============  STRUCTURE GLOBALE  =========================
-   ============================================================ */
 
 #page {
     width: 95%;
@@ -30,10 +22,6 @@ body {
     flex-direction: column;
     
 }
-
-/* ============================================================
-   ===============  ENTÊTE  ====================================
-   ============================================================ */
 
 #entete {
     background: #0b4f6c;
@@ -50,10 +38,6 @@ body {
     font-weight: 300;
 }
 
-/* ============================================================
-   ===============  LAYOUT PRINCIPAL (FLEX)  ===================
-   ============================================================ */
-
 #corps {
     display: flex;
     flex-direction: row;
@@ -61,10 +45,6 @@ body {
     gap: 0;
     padding: 0;
 }
-
-/* ============================================================
-   ===============  MENU LATÉRAL (RSSI + global)  ==============
-   ============================================================ */
 
 #menuGauche {
     width: 260px;
@@ -108,10 +88,6 @@ body {
     background: #09445e;
 }
 
-/* ============================================================
-   ===============  CONTENU DYNAMIQUE  =========================
-   ============================================================ */
-
 #contenu {
     padding: 30px;
     flex: 1;
@@ -127,11 +103,6 @@ body {
     color: #0b4f6c;
     margin-top: 25px;
 }
-
-/* ============================================================
-   ===============  PAGE CONNEXION (ISOLÉE)  ===================
-   ============================================================ */
-
 .pageConnexion {
     max-width: 800px !important;
     margin: 40px auto;
@@ -154,10 +125,6 @@ body {
     max-width: 400px;
     margin: 0 auto;
 }
-
-/* ============================================================
-   ===============  ZONE DROITE (connexion)  ===================
-   ============================================================ */
 
 #colDroite {
     flex-shrink: 0;
@@ -201,10 +168,6 @@ body {
     color: #333;
     border-radius: 4px;
 }
-
-/* ============================================================
-   ===============  FORMULAIRES  ===============================
-   ============================================================ */
 
 form p {
     margin-bottom: 18px;
@@ -274,10 +237,6 @@ input[type="reset"]:hover,
 button.cancel:hover {
     background: #b3b3b3;
 }
-
-/* ============================================================
-   ===============  NOTIFICATIONS  =============================
-   ============================================================ */
 
 .erreur {
     background: #ffdddd;
@@ -352,9 +311,9 @@ table th {
 }
 
 td.finalite {
-    max-width: 200px;      /* largeur fixe de la colonne */
-    overflow: auto;        /* active le scroll si nécessaire */
-    white-space: normal;   /* autorise les retours à la ligne */
+    max-width: 200px;
+    overflow: auto;
+    white-space: normal;
 }
 
 table tr:nth-child(even) {
@@ -365,10 +324,6 @@ table tbody tr:hover {
     background: #eef4f8;
 }
 
-/* ============================================================
-   ===============  PIED DE PAGE  ==============================
-   ============================================================ */
-
 #pied {
     background: #eee;
     padding: 20px;
@@ -377,10 +332,6 @@ table tbody tr:hover {
     color: #666;
     margin-top: auto;
 }
-
-/* ============================================================
-   ===============  TABLE DOCUMENTS INTERNES  =================
-   ============================================================ */
 
 .table-docs {
     width: 100%;
@@ -428,11 +379,6 @@ table tbody tr:hover {
     background-color: #f0f0f0;
 }
 
-
-/* -------------------------------------------------- */
-/*   STYLE GLOBAL                                     */
-/* -------------------------------------------------- */
-
 html, body {
     margin: 0;
     padding: 0;
@@ -450,9 +396,6 @@ html, body {
     box-shadow: 0 0 12px rgba(0,0,0,0.15);
 }
 
-/* -------------------------------------------------- */
-/*   TITRES                                            */
-/* -------------------------------------------------- */
 
 .barre {
     color: #0b4f6c;
@@ -463,10 +406,6 @@ html, body {
     padding-bottom: 5px;
 }
 
-/* -------------------------------------------------- */
-/*   STRUCTURE DES BLOCS                              */
-/* -------------------------------------------------- */
-
 form > div {
     margin-bottom: 35px;
     padding: 20px;
@@ -474,20 +413,15 @@ form > div {
     border: 1px solid #dce3e8;
     border-radius: 6px;
 }
-
-/* -------------------------------------------------- */
-/*   FORMULAIRES                                      */
-/* -------------------------------------------------- */
-
 p {
     margin: 10px 0 5px;
 
 }
 
-input[type="text"],
+input[type="text"], 
 input[type="password"],
 input[type="number"],
-input[type="date"],
+input[type="date"], 
 select,
 textarea {
     padding: 8px;
@@ -517,9 +451,6 @@ input[type="checkbox"] {
     margin-top: 8px;
 }
 
-/* -------------------------------------------------- */
-/*   BOUTONS                                          */
-/* -------------------------------------------------- */
 
 button,
 input[type="submit"] {
@@ -529,7 +460,9 @@ input[type="submit"] {
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
-    margin-top: 10px;
+    height: 38px; 
+    box-sizing: border-box;
+    margin-top: 0; 
 }
 
 button,
@@ -541,6 +474,13 @@ input[type="submit"] {
 button:hover,
 input[type="submit"]:hover {
     background: #093d52;
+}
+
+button.validate {
+    margin-top: 0;
+    height: 38px;
+    padding: 8px 16px;
+    line-height: normal;
 }
 
 button.supprimer,
@@ -566,10 +506,6 @@ button.supprimer-transfert:hover {
     background: #b52f2b;
 }
 
-/* -------------------------------------------------- */
-/*   BLOCS DYNAMIQUES (Acteurs, Finalités, etc.)      */
-/* -------------------------------------------------- */
-
 .acteur,
 .finaliteBloc,
 .categorie,
@@ -586,10 +522,6 @@ button.supprimer-transfert:hover {
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
 }
 
-/* -------------------------------------------------- */
-/*   RESPONSIVE                                       */
-/* -------------------------------------------------- */
-
 @media (max-width: 1200px) {
     form {
         width: 90%;
@@ -602,4 +534,39 @@ button.supprimer-transfert:hover {
     select {
         width: 100%;
     }
+}
+
+.barreRecherche {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.barreRecherche input[type="text"] {
+    flex-grow: 1;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.barreRecherche button.validate {
+    height: 38px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #0b4f6c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.barreRecherche button.validate:hover {
+    background: #093d52;
 }

@@ -87,7 +87,15 @@ class DataAccess extends Model
                 WHERE 1 = 1";
 
         if (!empty($search)) {
-            $sql .= " AND LOWER(t.NOM) LIKE " . $this->db->escape('%' . strtolower($search) . '%');
+            $search = strtolower($search);
+            $escaped = $this->db->escape('%' . $search . '%');
+
+            $sql .= " AND (
+                LOWER(COALESCE(t.NOM, '')) LIKE $escaped
+                OR LOWER(COALESCE(t.REF, '')) LIKE $escaped
+                OR LOWER(COALESCE(f.LIBELLE, '')) LIKE $escaped
+            )";
+            log_message('debug', 'Requête SQL : ' . $sql);
         }
 
         $sql .= " ORDER BY t.REF ASC";

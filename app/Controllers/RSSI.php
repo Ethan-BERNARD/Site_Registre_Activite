@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class Rssi extends BaseController
 {
+    protected $session;
     private $authentif;
     private $idRssi;
     private $data = [];
@@ -134,4 +135,29 @@ class Rssi extends BaseController
             'traitement' => $traitement
         ]);
     }
+
+    public function searchAjax()
+    {
+        $q = $this->request->getGet('q');
+        $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($q);
+
+        $html = '';
+
+        foreach ($traitements as $t) {
+            $html .= '
+                <tr onclick="window.location=\'' . site_url('gestionTraitement/detail/' . $t['REF']) . '\';" class="clickable-row">
+                    <td>' . esc($t['NOM']) . '</td>
+                    <td>' . esc($t['REF']) . '</td>
+                    <td>' . esc($t['DATECREATION']) . '</td>
+                    <td>' . esc($t['DATEMAJ']) . '</td>
+                    <td>' . esc($t['FINALITE']) . '</td>
+                    <td>' . esc($t['DONNEESSENSIBLES']) . '</td>
+                </tr>
+            ';
+        }
+
+        return $this->response->setBody($html);
+    }
+
+
 }
