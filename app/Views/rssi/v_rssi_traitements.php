@@ -63,4 +63,21 @@
 
 </div>
 
+<!-- Script de recherche instantanée -->
+<script>
+let debounceTimer;
+document.getElementById('searchInput').addEventListener('keyup', function () {
+    clearTimeout(debounceTimer);
+    let q = this.value;
+
+    debounceTimer = setTimeout(() => {
+        fetch("<?= site_url('gestionTraitement/searchAjax') ?>?q=" + encodeURIComponent(q) + "&_=" + Date.now())
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('tbodyTraitements').innerHTML = html;
+            });
+    }, 300); // délai en ms
+});
+</script>
+
 <?= $this->endSection() ?>

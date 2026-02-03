@@ -20,7 +20,6 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    
 }
 
 #entete {
@@ -103,6 +102,7 @@ body {
     color: #0b4f6c;
     margin-top: 25px;
 }
+
 .pageConnexion {
     max-width: 800px !important;
     margin: 40px auto;
@@ -259,14 +259,14 @@ button.cancel:hover {
     border-radius: 4px;
 }
 
-/* --- TABLEAUX --- */
+/* --- TABLEAUX GÉNÉRAUX --- */
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     border-radius: 6px;
-    overflow: hidden;
+
 }
 
 table thead tr:first-child th {
@@ -286,10 +286,6 @@ table thead tr:nth-child(2) th {
     padding: 10px;
     font-weight: 500;
     border-right: 1px solid #ccc;
-}
-
-table thead tr:hover {
-    background: inherit !important;
 }
 
 table td {
@@ -379,14 +375,6 @@ table tbody tr:hover {
     background-color: #f0f0f0;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f9;
-    color: #333;
-}
-
 .formInfos {
     width: 1100px;
     margin: 40px auto;
@@ -395,7 +383,6 @@ html, body {
     border-radius: 6px;
     box-shadow: 0 0 12px rgba(0,0,0,0.15);
 }
-
 
 .barre {
     color: #0b4f6c;
@@ -413,37 +400,9 @@ form > div {
     border: 1px solid #dce3e8;
     border-radius: 6px;
 }
+
 p {
     margin: 10px 0 5px;
-
-}
-
-input[type="text"], 
-input[type="password"],
-input[type="number"],
-input[type="date"], 
-select,
-textarea {
-    padding: 8px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border 0.2s;
-    font-size: 14px;
-    display: block;
-    margin-bottom: 12px;
-}
-
-textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #0b4f6c;
-    outline: none;
 }
 
 input[type="checkbox"] {
@@ -451,29 +410,10 @@ input[type="checkbox"] {
     margin-top: 8px;
 }
 
-
 button,
 input[type="submit"] {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    height: 38px; 
+    height: 38px;
     box-sizing: border-box;
-    margin-top: 0; 
-}
-
-button,
-input[type="submit"] {
-    background: #0b4f6c;
-    color: white;
-}
-
-button:hover,
-input[type="submit"]:hover {
-    background: #093d52;
 }
 
 button.validate {
@@ -569,4 +509,35 @@ button.supprimer-transfert:hover {
 
 .barreRecherche button.validate:hover {
     background: #093d52;
+}
+
+/* --- LOGS : WRAPPER SCROLL + THEAD FIXE --- */
+
+/* Scroll sur un conteneur, pas sur le tbody */
+.log-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Le tableau reste normal */
+#tableLogs {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* Header collé */
+#tableLogs thead th {
+    position: sticky;
+    top: 0;
+    background: #0b4f6c;
+    color: white;
+    z-index: 20;
+}
+
+/* Empêche le texte de casser l’alignement */
+#tableLogs th,
+#tableLogs td {
+    word-wrap: break-word;
 }

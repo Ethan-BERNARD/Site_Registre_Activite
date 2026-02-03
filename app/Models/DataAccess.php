@@ -67,12 +67,16 @@ class DataAccess extends Model
         return $this->db->query("SELECT * FROM traitement WHERE REF = ?", [$id])->getRowArray();
     }
 
-    public function getLogs()
+    public function getLogs($limit = 50)
     {
         $sql = "SELECT log.*, utilisateurs.LOGIN
                 FROM log
                 LEFT JOIN utilisateurs ON utilisateurs.ID = log.UTILISATEUR_ID
                 ORDER BY DATEMODIFICATION DESC";
+
+        if ($limit !== 'all') {
+            $sql .= " LIMIT " . intval($limit);
+        }
 
         return $this->db->query($sql)->getResultArray();
     }

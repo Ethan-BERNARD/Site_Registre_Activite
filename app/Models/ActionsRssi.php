@@ -23,9 +23,9 @@ class ActionsRssi
         return $this->dao->getTraitementById($id);
     }
 
-    public function getLogs()
+    public function getLogs($limit = 50)
     {
-        return $this->dao->getLogs();
+        return $this->dao->getLogs($limit);
     }
 
     public function getTraitementsAvecFinaliteEtSensibles($search = null)

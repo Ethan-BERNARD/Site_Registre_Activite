@@ -64,11 +64,14 @@ class Rssi extends BaseController
 
     public function logs()
     {
-        $logs = $this->actRssi->getLogs();
+        $limit = $this->request->getGet('limit') ?? 50;
+
+        $logs = $this->actRssi->getLogs($limit);
 
         return view('rssi/v_rssi_logs', [
             'identite' => $this->data['identite'],
-            'logs' => $logs
+            'logs' => $logs,
+            'limit' => $limit
         ]);
     }
 
@@ -149,9 +152,6 @@ class Rssi extends BaseController
     {
         $q = $this->request->getGet('q');
 
-        // --- LOG METIER : recherche ---
-        $this->logRecherche($q);
-
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($q);
 
         $html = '';
@@ -185,11 +185,6 @@ class Rssi extends BaseController
     private function logConsultationTraitement($ref)
     {
         $this->actRssi->logAction('CONSULTATION', "Consultation du traitement $ref");
-    }
-
-    private function logRecherche($q)
-    {
-        $this->actRssi->logAction('RECHERCHE', "Recherche AJAX : $q");
     }
 
     private function logExportGlobal()
