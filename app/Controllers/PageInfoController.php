@@ -79,20 +79,21 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            2) ACTEURS
         --------------------------------------------------------- */
-
         $noms = $this->request->getPost('acteur_nom');
         if ($noms) {
             foreach ($noms as $i => $nom) {
 
+                if (trim($nom) === '') continue;
+
                 $idActeur = $this->model->insertActeur([
                     'NOM'     => $nom,
-                    'ADRESSE' => $this->request->getPost('acteur_adresse')[$i],
-                    'CP'      => $this->request->getPost('acteur_cp')[$i],
-                    'VILLE'   => $this->request->getPost('acteur_ville')[$i],
-                    'PAYS'    => $this->request->getPost('acteur_pays')[$i],
-                    'TEL'     => $this->request->getPost('acteur_tel')[$i],
-                    'MAIL'    => $this->request->getPost('acteur_mail')[$i],
-                    'IDTYPE'  => $this->request->getPost('acteur_type')[$i],
+                    'ADRESSE' => $this->request->getPost('acteur_adresse')[$i] ?? '',
+                    'CP'      => $this->request->getPost('acteur_cp')[$i] ?? '',
+                    'VILLE'   => $this->request->getPost('acteur_ville')[$i] ?? '',
+                    'PAYS'    => $this->request->getPost('acteur_pays')[$i] ?? '',
+                    'TEL'     => $this->request->getPost('acteur_tel')[$i] ?? '',
+                    'MAIL'    => $this->request->getPost('acteur_mail')[$i] ?? '',
+                    'IDTYPE'  => $this->request->getPost('acteur_type')[$i] ?: null,
                 ]);
 
                 $this->model->linkActeurToTraitement($idActeur, $ref);
@@ -102,14 +103,16 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            3) FINALITÉS
         --------------------------------------------------------- */
-
         $finalites = $this->request->getPost('finalite');
         if ($finalites) {
             foreach ($finalites as $i => $libelle) {
+
+                if (trim($libelle) === '') continue;
+
                 $this->model->insertFinalite([
-                    'REF'         => $ref,
-                    'LIBELLE'     => $libelle,
-                    'ESTPRINCIPAL'=> isset($this->request->getPost('est_principal')[$i]) ? 1 : 0,
+                    'REF'          => $ref,
+                    'LIBELLE'      => $libelle,
+                    'ESTPRINCIPAL' => isset($this->request->getPost('est_principal')[$i]) ? 1 : 0,
                 ]);
             }
         }
@@ -117,15 +120,19 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            4) CATÉGORIES DCP
         --------------------------------------------------------- */
-
         $catDesc = $this->request->getPost('categorie_description');
         if ($catDesc) {
             foreach ($catDesc as $i => $desc) {
+
+                $idCateg = $this->request->getPost('categorie_type')[$i] ?? null;
+
+                if (trim($desc) === '' || !$idCateg) continue;
+
                 $this->model->insertCategorie([
-                    'REF'        => $ref,
-                    'DESCRIPTION'=> $desc,
-                    'DUREECONSERVATION' => $this->request->getPost('categorie_duree')[$i],
-                    'IDCATEG'    => $this->request->getPost('categorie_type')[$i],
+                    'REF'                => $ref,
+                    'DESCRIPTION'        => $desc,
+                    'DUREECONSERVATION'  => $this->request->getPost('categorie_duree')[$i] ?? '',
+                    'IDCATEG'            => $idCateg,
                 ]);
             }
         }
@@ -133,15 +140,19 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            5) DONNÉES SENSIBLES
         --------------------------------------------------------- */
-
         $sensDesc = $this->request->getPost('sensible_description');
         if ($sensDesc) {
             foreach ($sensDesc as $i => $desc) {
+
+                $idCateg = $this->request->getPost('sensible_categorie')[$i] ?? null;
+
+                if (trim($desc) === '' || !$idCateg) continue;
+
                 $this->model->insertSensible([
-                    'REF'        => $ref,
-                    'DESCRIPTION'=> $desc,
-                    'DUREECONSERVATION' => $this->request->getPost('sensible_duree')[$i],
-                    'IDCATEG'    => $this->request->getPost('sensible_categorie')[$i],
+                    'REF'                => $ref,
+                    'DESCRIPTION'        => $desc,
+                    'DUREECONSERVATION'  => $this->request->getPost('sensible_duree')[$i] ?? '',
+                    'IDCATEG'            => $idCateg,
                 ]);
             }
         }
@@ -149,14 +160,16 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            6) PERSONNES CONCERNÉES
         --------------------------------------------------------- */
-
         $persDesc = $this->request->getPost('personne_description');
         if ($persDesc) {
             foreach ($persDesc as $i => $idCat) {
+
+                if (!$idCat) continue;
+
                 $this->model->insertPersonne([
                     'REF'        => $ref,
                     'ID_EST_DE_CATEGORIE_PERSONNE' => $idCat,
-                    'PRECIS'     => $this->request->getPost('personne_precision')[$i],
+                    'PRECIS'     => $this->request->getPost('personne_precision')[$i] ?? '',
                 ]);
             }
         }
@@ -164,14 +177,16 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            7) DESTINATAIRES
         --------------------------------------------------------- */
-
         $destDesc = $this->request->getPost('destinataire_description');
         if ($destDesc) {
             foreach ($destDesc as $i => $idType) {
+
+                if (!$idType) continue;
+
                 $this->model->insertDestinataire([
                     'REF'        => $ref,
                     'ID_EST_DE_TYPE_DESTINATAIRE' => $idType,
-                    'PRECIS'     => $this->request->getPost('destinataire_precision')[$i],
+                    'PRECIS'     => $this->request->getPost('destinataire_precision')[$i] ?? '',
                 ]);
             }
         }
@@ -179,14 +194,16 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            8) MESURES DE SÉCURITÉ
         --------------------------------------------------------- */
-
         $secDesc = $this->request->getPost('securite_description');
         if ($secDesc) {
             foreach ($secDesc as $i => $idType) {
+
+                if (!$idType) continue;
+
                 $this->model->insertSecurite([
                     'REF'        => $ref,
                     'ID_EST_DE_TYPE_DE_MESURE' => $idType,
-                    'PRECIS'     => $this->request->getPost('securite_precision')[$i],
+                    'PRECIS'     => $this->request->getPost('securite_precision')[$i] ?? '',
                 ]);
             }
         }
@@ -194,16 +211,21 @@ class PageInfoController extends BaseController
         /* ---------------------------------------------------------
            9) TRANSFERTS HORS UE
         --------------------------------------------------------- */
-
         $transDest = $this->request->getPost('transfert_destinataire');
         if ($transDest) {
             foreach ($transDest as $i => $dest) {
+
+                $paysId     = $this->request->getPost('transfert_pays')[$i] ?? null;
+                $garantieId = $this->request->getPost('transfert_garantie')[$i] ?? null;
+
+                if (trim($dest) === '' || !$paysId || !$garantieId) continue;
+
                 $this->model->insertTransfert([
-                    'REF'        => $ref,
-                    'DESTINATAIRE' => $dest,
-                    'ID_TRANSFERT_VERS_PAYS' => $this->request->getPost('transfert_pays')[$i],
-                    'ID_GARANTIE_APPLIQUEE'  => $this->request->getPost('transfert_garantie')[$i],
-                    'LIENDOC'    => $this->request->getPost('transfert_lien')[$i],
+                    'REF'                     => $ref,
+                    'DESTINATAIRE'            => $dest,
+                    'ID_TRANSFERT_VERS_PAYS'  => $paysId,
+                    'ID_GARANTIE_APPLIQUEE'   => $garantieId,
+                    'LIENDOC'                 => $this->request->getPost('transfert_lien')[$i] ?? '',
                 ]);
             }
         }
