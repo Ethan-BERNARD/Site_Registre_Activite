@@ -173,7 +173,7 @@ class Rssi extends BaseController
     }
 
     /* ============================================================
-     *  🔥 SECTION LOGS METIER (actions non SQL)
+     *  SECTION LOGS METIER (actions non SQL)
      *  Ces logs restent car les triggers ne couvrent pas ces actions
      * ============================================================ */
 
