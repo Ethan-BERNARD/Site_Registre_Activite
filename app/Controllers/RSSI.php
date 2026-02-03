@@ -24,22 +24,18 @@ class Rssi extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // Vérification de session
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
             exit;
         }
 
-        // Anti-cache
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
         $this->response->setHeader("Expires", "0");
 
-        // Identité
         $this->idRssi = $this->session->get('ID');
         $this->data['identite'] = $this->session->get('LOGIN');
 
-        // Modèle métier
         $this->actRssi = new ActionsRssi($this->idRssi);
     }
 
@@ -55,6 +51,9 @@ class Rssi extends BaseController
 
     public function tab()
     {
+        // --- LOG METIER : consultation liste ---
+        $this->logConsultationListe();
+
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
 
         return view('rssi/v_rssi_traitements', [
@@ -88,6 +87,10 @@ class Rssi extends BaseController
         $idTraitement = $this->request->getPost('idTraitement');
 
         if ($idTraitement === 'all') {
+
+            // --- LOG METIER : export global ---
+            $this->logExportGlobal();
+
             $traitements = $this->actRssi->getAllTraitements();
 
             return view('rssi/v_rssi_export_result', [
@@ -96,6 +99,9 @@ class Rssi extends BaseController
                 'traitements' => $traitements
             ]);
         }
+
+        // --- LOG METIER : export d’un traitement ---
+        $this->logExportTraitement($idTraitement);
 
         $traitement = $this->actRssi->getTraitementById($idTraitement);
 
@@ -130,6 +136,9 @@ class Rssi extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
         }
 
+        // --- LOG METIER : consultation d’un traitement ---
+        $this->logConsultationTraitement($ref);
+
         return view('rssi/v_rssi_traitement_detail', [
             'identite'   => $this->data['identite'],
             'traitement' => $traitement
@@ -139,6 +148,10 @@ class Rssi extends BaseController
     public function searchAjax()
     {
         $q = $this->request->getGet('q');
+
+        // --- LOG METIER : recherche ---
+        $this->logRecherche($q);
+
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($q);
 
         $html = '';
@@ -159,5 +172,33 @@ class Rssi extends BaseController
         return $this->response->setBody($html);
     }
 
+    /* ============================================================
+     *  🔥 SECTION LOGS METIER (actions non SQL)
+     *  Ces logs restent car les triggers ne couvrent pas ces actions
+     * ============================================================ */
 
+    private function logConsultationListe()
+    {
+        $this->actRssi->logAction('CONSULTATION_LISTE', 'Consultation de la liste des traitements');
+    }
+
+    private function logConsultationTraitement($ref)
+    {
+        $this->actRssi->logAction('CONSULTATION', "Consultation du traitement $ref");
+    }
+
+    private function logRecherche($q)
+    {
+        $this->actRssi->logAction('RECHERCHE', "Recherche AJAX : $q");
+    }
+
+    private function logExportGlobal()
+    {
+        $this->actRssi->logAction('EXPORT', 'Export PDF global du registre');
+    }
+
+    private function logExportTraitement($idTraitement)
+    {
+        $this->actRssi->logAction('EXPORT', "Export PDF du traitement $idTraitement");
+    }
 }

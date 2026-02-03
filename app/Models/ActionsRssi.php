@@ -9,8 +9,8 @@ class ActionsRssi
 
     public function __construct($idRssi)
     {
-        $this->dao = new DataAccess();
         $this->idRssi = $idRssi;
+        $this->dao = new DataAccess($idRssi);
     }
 
     public function getAllTraitements()
@@ -31,5 +31,14 @@ class ActionsRssi
     public function getTraitementsAvecFinaliteEtSensibles($search = null)
     {
         return $this->dao->getTraitementsAvecFinaliteEtSensibles($search);
+    }
+
+    public function logAction($typeAction, $details)
+    {
+        $this->dao->enregistrerLog(
+            $typeAction,
+            $this->idRssi,
+            $details
+        );
     }
 }

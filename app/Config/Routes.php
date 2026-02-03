@@ -30,7 +30,4 @@ $routes->get('/user/documents', 'User::documentsInternes');
 $routes->get('/user/communications', 'User::communicationsRSSI');
 
 
-
-
-
-
+$routes->get('rssi/testUpdate', 'Rssi::testUpdate');

@@ -9,11 +9,20 @@ use CodeIgniter\Model;
 class DataAccess extends Model
 {
     protected $db;
+    private $userId;
 
-    public function __construct()
+    public function __construct($userId = null)
     {
         parent::__construct();
         $this->db = \Config\Database::connect();
+
+        // On stocke l'utilisateur courant
+        $this->userId = $userId;
+
+        // On transmet l'utilisateur à MySQL pour les triggers
+        if ($this->userId !== null) {
+            $this->db->query("SET @user_id = " . intval($this->userId));
+        }
     }
 
     /**
@@ -60,7 +69,12 @@ class DataAccess extends Model
 
     public function getLogs()
     {
-        return $this->db->query("SELECT * FROM log ORDER BY DATEMODIFICATION DESC")->getResultArray();
+        $sql = "SELECT log.*, utilisateurs.LOGIN
+                FROM log
+                LEFT JOIN utilisateurs ON utilisateurs.ID = log.UTILISATEUR_ID
+                ORDER BY DATEMODIFICATION DESC";
+
+        return $this->db->query($sql)->getResultArray();
     }
 
     public function getTraitementsAvecFinaliteEtSensibles($search = null)
@@ -101,6 +115,18 @@ class DataAccess extends Model
         $sql .= " ORDER BY t.REF ASC";
 
         return $this->db->query($sql)->getResultArray();
+    }
+
+    public function enregistrerLog($typeAction, $idUtilisateur, $details)
+    {
+        $sql = "INSERT INTO log (UTILISATEUR_ID, TYPEACTION, DETAILS, DATEMODIFICATION)
+                VALUES (?, ?, ?, NOW())";
+
+        return $this->db->query($sql, [
+            $idUtilisateur,
+            $typeAction,
+            $details
+        ]);
     }
 
 }

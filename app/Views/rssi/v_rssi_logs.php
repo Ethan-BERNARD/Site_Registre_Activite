@@ -30,10 +30,10 @@
             <?php if (!empty($logs)) : ?>
                 <?php foreach ($logs as $log) : ?>
                     <tr>
-                        <td><?= esc($log['date']) ?></td>
-                        <td><?= esc($log['utilisateur']) ?></td>
-                        <td><?= esc($log['action']) ?></td>
-                        <td><?= esc($log['details']) ?></td>
+                        <td><?= esc($log['DATEMODIFICATION']) ?></td>
+                        <td><?= esc($log['LOGIN']) ?></td>
+                        <td><?= esc($log['TYPEACTION']) ?></td>
+                        <td><?= esc($log['DETAILS']) ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
