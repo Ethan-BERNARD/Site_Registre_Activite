@@ -4,228 +4,210 @@ use App\Models\ActionPageInfo;
 
 class PageInfoController extends BaseController
 {
-    protected $actionPageInfo;
+    protected $model;
 
     public function __construct() {
-        $this->actionPageInfo = new ActionPageInfo();
+        $this->model = new ActionPageInfo();
     }
 
-    /**
-     * Mode création : formulaire vide
-     */
     public function index() {
-
         $data = $this->loadCommonData();
-
-        // Aucune donnée de traitement → création
         $data['mode'] = 'create';
         $data['traitement'] = null;
 
         return view('v_rssi_traitements_detail', $data);
     }
 
-    /**
-     * Mode édition : formulaire prérempli
-     */
-    public function edit($id) {
-
+    public function edit($ref) {
         $data = $this->loadCommonData();
 
-        // Récupération du traitement existant
-        $data['traitement'] = $this->actionPageInfo->getTraitementById($id);
-
+        $data['traitement'] = $this->model->getTraitementByRef($ref);
         if (!$data['traitement']) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
         }
 
         $data['mode'] = 'edit';
 
-        $data['traitement'] = $this->actionPageInfo->getTraitementById($id);
-        $data['acteurs'] = $this->actionPageInfo->getActeursByTraitement($id);
-        $data['finalites'] = $this->actionPageInfo->getFinalitesByTraitement($id);
-        $data['categories'] = $this->actionPageInfo->getCategoriesByTraitement($id);
-        $data['sensibles'] = $this->actionPageInfo->getSensiblesByTraitement($id);
-        $data['personnes'] = $this->actionPageInfo->getPersonnesByTraitement($id);
-        $data['destinataires'] = $this->actionPageInfo->getDestinatairesByTraitement($id);
-        $data['securites'] = $this->actionPageInfo->getSecuritesByTraitement($id);
-        $data['transferts'] = $this->actionPageInfo->getTransfertsByTraitement($id);
+        $data['acteurs']        = $this->model->getActeursByTraitement($ref);
+        $data['finalites']      = $this->model->getFinalitesByTraitement($ref);
+        $data['categories']     = $this->model->getCategoriesByTraitement($ref);
+        $data['sensibles']      = $this->model->getSensiblesByTraitement($ref);
+        $data['personnes']      = $this->model->getPersonnesByTraitement($ref);
+        $data['destinataires']  = $this->model->getDestinatairesByTraitement($ref);
+        $data['securites']      = $this->model->getSecuritesByTraitement($ref);
+        $data['transferts']     = $this->model->getTransfertsByTraitement($ref);
 
         return view('v_rssi_traitements_detail', $data);
     }
 
-    /**
-     * Chargement des listes communes (selects)
-     */
     private function loadCommonData() {
         return [
-            'categDCP'            => $this->actionPageInfo->getCategDCP(),
-            'categDCPSensible'    => $this->actionPageInfo->getCategDCPSensible(),
-            'personnesConcerne'   => $this->actionPageInfo->getPersonnesConcerne(),
-            'typeActeur'          => $this->actionPageInfo->getTypeActeur(),
-            'typeMesureSecurite'  => $this->actionPageInfo->getTypeMesureSecurite(),
-            'typeDestinataire'    => $this->actionPageInfo->getTypeDestinataire(),
-            'typeGarantie'        => $this->actionPageInfo->getTypeGarantie(),
-            'pays'                => $this->actionPageInfo->getPays(),
+            'categDCP'            => $this->model->getCategDCP(),
+            'categDCPSensible'    => $this->model->getCategDCPSensible(),
+            'personnesConcerne'   => $this->model->getPersonnesConcerne(),
+            'typeActeur'          => $this->model->getTypeActeur(),
+            'typeMesureSecurite'  => $this->model->getTypeMesureSecurite(),
+            'typeDestinataire'    => $this->model->getTypeDestinataire(),
+            'typeGarantie'        => $this->model->getTypeGarantie(),
+            'pays'                => $this->model->getPays(),
         ];
     }
 
     public function save() {
         $mode = $this->request->getPost('mode');
-        $id = $this->request->getPost('id_traitement');
+        $ref  = $this->request->getPost('id_traitement');
 
         /* ---------------------------------------------------------
-        1) TRAITEMENT PRINCIPAL
+           1) TRAITEMENT PRINCIPAL
         --------------------------------------------------------- */
 
         $traitementData = [
-            'nom'        => $this->request->getPost('nom'),
-            'ref'        => $this->request->getPost('ref'),
-            'date_crea'  => $this->request->getPost('date_crea'),
-            'date_maj'   => $this->request->getPost('date_maj'),
-            'transfert'  => $this->request->getPost('checkboxTransfert') ? 1 : 0,
+            'REF'            => $this->request->getPost('ref'),
+            'NOM'            => $this->request->getPost('nom'),
+            'DATECREATION'   => $this->request->getPost('date_crea'),
+            'DATEMAJ'        => $this->request->getPost('date_maj'),
+            'TRANSFERTHHORSUE' => $this->request->getPost('checkboxTransfert') ? 1 : 0,
         ];
 
         if ($mode === 'create') {
-            // INSERT
-            $id = $this->actionPageInfo->insertTraitement($traitementData);
+            $ref = $this->model->insertTraitement($traitementData);
         } else {
-            // UPDATE
-            $this->actionPageInfo->updateTraitement($id, $traitementData);
-
-            // On supprime tous les blocs liés pour les remplacer
-            $this->actionPageInfo->deleteAllBlocs($id);
+            $this->model->updateTraitement($ref, $traitementData);
+            $this->model->deleteAllBlocs($ref);
         }
 
         /* ---------------------------------------------------------
-        2) ACTEURS
+           2) ACTEURS
         --------------------------------------------------------- */
 
         $noms = $this->request->getPost('acteur_nom');
         if ($noms) {
             foreach ($noms as $i => $nom) {
-                $this->actionPageInfo->insertActeur([
-                    'IDTRAITEMENT' => $id,
-                    'NOM'          => $nom,
-                    'ADRESSE'      => $this->request->getPost('acteur_adresse')[$i],
-                    'CP'           => $this->request->getPost('acteur_cp')[$i],
-                    'VILLE'        => $this->request->getPost('acteur_ville')[$i],
-                    'PAYS'         => $this->request->getPost('acteur_pays')[$i],
-                    'TEL'          => $this->request->getPost('acteur_tel')[$i],
-                    'MAIL'         => $this->request->getPost('acteur_mail')[$i],
-                    'IDTYPE'       => $this->request->getPost('categorie_type')[$i],
+
+                $idActeur = $this->model->insertActeur([
+                    'NOM'     => $nom,
+                    'ADRESSE' => $this->request->getPost('acteur_adresse')[$i],
+                    'CP'      => $this->request->getPost('acteur_cp')[$i],
+                    'VILLE'   => $this->request->getPost('acteur_ville')[$i],
+                    'PAYS'    => $this->request->getPost('acteur_pays')[$i],
+                    'TEL'     => $this->request->getPost('acteur_tel')[$i],
+                    'MAIL'    => $this->request->getPost('acteur_mail')[$i],
+                    'IDTYPE'  => $this->request->getPost('acteur_type')[$i],
                 ]);
+
+                $this->model->linkActeurToTraitement($idActeur, $ref);
             }
         }
 
         /* ---------------------------------------------------------
-        3) FINALITÉS
+           3) FINALITÉS
         --------------------------------------------------------- */
 
         $finalites = $this->request->getPost('finalite');
         if ($finalites) {
-            foreach ($finalites as $i => $finalite) {
-                $this->actionPageInfo->insertFinalite([
-                    'IDTRAITEMENT' => $id,
-                    'FINALITE'     => $finalite,
-                    'EST_PRINCIPAL'=> isset($this->request->getPost('est_principal')[$i]) ? 1 : 0,
+            foreach ($finalites as $i => $libelle) {
+                $this->model->insertFinalite([
+                    'REF'         => $ref,
+                    'LIBELLE'     => $libelle,
+                    'ESTPRINCIPAL'=> isset($this->request->getPost('est_principal')[$i]) ? 1 : 0,
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        4) CATÉGORIES DCP
+           4) CATÉGORIES DCP
         --------------------------------------------------------- */
 
         $catDesc = $this->request->getPost('categorie_description');
         if ($catDesc) {
             foreach ($catDesc as $i => $desc) {
-                $this->actionPageInfo->insertCategorie([
-                    'IDTRAITEMENT' => $id,
-                    'DESCRIPTION'  => $desc,
-                    'DUREE'        => $this->request->getPost('categorie_duree')[$i],
-                    'IDCATEGDCP'   => $this->request->getPost('categorie_type')[$i],
+                $this->model->insertCategorie([
+                    'REF'        => $ref,
+                    'DESCRIPTION'=> $desc,
+                    'DUREECONSERVATION' => $this->request->getPost('categorie_duree')[$i],
+                    'IDCATEG'    => $this->request->getPost('categorie_type')[$i],
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        5) DONNÉES SENSIBLES
+           5) DONNÉES SENSIBLES
         --------------------------------------------------------- */
 
         $sensDesc = $this->request->getPost('sensible_description');
         if ($sensDesc) {
             foreach ($sensDesc as $i => $desc) {
-                $this->actionPageInfo->insertSensible([
-                    'IDTRAITEMENT' => $id,
-                    'DESCRIPTION'  => $desc,
-                    'DUREE'        => $this->request->getPost('sensible_duree')[$i],
-                    'IDCATEGDCPSENSIBLE' => $this->request->getPost('sensible_categorie')[$i],
+                $this->model->insertSensible([
+                    'REF'        => $ref,
+                    'DESCRIPTION'=> $desc,
+                    'DUREECONSERVATION' => $this->request->getPost('sensible_duree')[$i],
+                    'IDCATEG'    => $this->request->getPost('sensible_categorie')[$i],
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        6) PERSONNES CONCERNÉES
+           6) PERSONNES CONCERNÉES
         --------------------------------------------------------- */
 
         $persDesc = $this->request->getPost('personne_description');
         if ($persDesc) {
-            foreach ($persDesc as $i => $desc) {
-                $this->actionPageInfo->insertPersonne([
-                    'IDTRAITEMENT' => $id,
-                    'IDCATEGPERSONNECONCERNE' => $desc,
-                    'PRECISION'    => $this->request->getPost('personne_precision')[$i],
+            foreach ($persDesc as $i => $idCat) {
+                $this->model->insertPersonne([
+                    'REF'        => $ref,
+                    'ID_EST_DE_CATEGORIE_PERSONNE' => $idCat,
+                    'PRECIS'     => $this->request->getPost('personne_precision')[$i],
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        7) DESTINATAIRES
+           7) DESTINATAIRES
         --------------------------------------------------------- */
 
         $destDesc = $this->request->getPost('destinataire_description');
         if ($destDesc) {
-            foreach ($destDesc as $i => $desc) {
-                $this->actionPageInfo->insertDestinataire([
-                    'IDTRAITEMENT' => $id,
-                    'IDTYPE'       => $desc,
-                    'PRECISION'    => $this->request->getPost('destinataire_precision')[$i],
+            foreach ($destDesc as $i => $idType) {
+                $this->model->insertDestinataire([
+                    'REF'        => $ref,
+                    'ID_EST_DE_TYPE_DESTINATAIRE' => $idType,
+                    'PRECIS'     => $this->request->getPost('destinataire_precision')[$i],
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        8) MESURES DE SÉCURITÉ
+           8) MESURES DE SÉCURITÉ
         --------------------------------------------------------- */
 
         $secDesc = $this->request->getPost('securite_description');
         if ($secDesc) {
-            foreach ($secDesc as $i => $desc) {
-                $this->actionPageInfo->insertSecurite([
-                    'IDTRAITEMENT' => $id,
-                    'IDTYPE'       => $desc,
-                    'PRECISION'    => $this->request->getPost('securite_precision')[$i],
+            foreach ($secDesc as $i => $idType) {
+                $this->model->insertSecurite([
+                    'REF'        => $ref,
+                    'ID_EST_DE_TYPE_DE_MESURE' => $idType,
+                    'PRECIS'     => $this->request->getPost('securite_precision')[$i],
                 ]);
             }
         }
 
         /* ---------------------------------------------------------
-        9) TRANSFERTS HORS UE
+           9) TRANSFERTS HORS UE
         --------------------------------------------------------- */
 
         $transDest = $this->request->getPost('transfert_destinataire');
         if ($transDest) {
             foreach ($transDest as $i => $dest) {
-                $this->actionPageInfo->insertTransfert([
-                    'IDTRAITEMENT' => $id,
+                $this->model->insertTransfert([
+                    'REF'        => $ref,
                     'DESTINATAIRE' => $dest,
-                    'IDPAYS'       => $this->request->getPost('transfert_pays')[$i],
-                    'IDTYPE'       => $this->request->getPost('transfert_garantie')[$i],
-                    'LIEN'         => $this->request->getPost('transfert_lien')[$i],
+                    'ID_TRANSFERT_VERS_PAYS' => $this->request->getPost('transfert_pays')[$i],
+                    'ID_GARANTIE_APPLIQUEE'  => $this->request->getPost('transfert_garantie')[$i],
+                    'LIENDOC'    => $this->request->getPost('transfert_lien')[$i],
                 ]);
             }
         }
 
-        return redirect()->to('/pageInfo/edit/'.$id)->with('success', 'Traitement sauvegardé');
+        return redirect()->to('/pageInfo/edit/'.$ref)->with('success', 'Traitement sauvegardé');
     }
 }

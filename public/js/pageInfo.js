@@ -225,4 +225,4 @@ document.addEventListener("DOMContentLoaded", function () {
         el.querySelector('input[name="transfert_lien[]"]').value = item.LIEN;
     });
 
-});
+})

@@ -22,7 +22,7 @@ class DataAccess extends Model
     public function getUtilisateur(string $login): ?array
     {
         $sql = "SELECT ID, LOGIN, MDP, DROIT
-                FROM utilisateurs
+                FROM UTILISATEURS
                 WHERE LOGIN = ?";
 
         return $this->db->query($sql, [$login])->getFirstRow('array');
@@ -33,7 +33,7 @@ class DataAccess extends Model
      */
     public function getHashUtilisateur(string $login): ?string
     {
-        $sql = "SELECT MDP FROM utilisateur WHERE LOGIN = ?";
+        $sql = "SELECT MDP FROM UTILISATEURS WHERE LOGIN = ?";
         $row = $this->db->query($sql, [$login])->getRow();
 
         return $row ? $row->MDP : null;
@@ -44,18 +44,18 @@ class DataAccess extends Model
      */
     public function insertUtilisateur(string $login, string $hash): bool
     {
-        $sql = "INSERT INTO utilisateur (LOGIN, MDP) VALUES (?, ?)";
+        $sql = "INSERT INTO UTILISATEURS (LOGIN, MDP) VALUES (?, ?)";
         return $this->db->query($sql, [$login, $hash]);
     }
 
     public function getAllTraitements()
     {
-        return $this->db->query("SELECT * FROM traitement ORDER BY REF DESC")->getResultArray();
+        return $this->db->query("SELECT * FROM TRAITEMENT ORDER BY REF DESC")->getResultArray();
     }
 
     public function getTraitementById($id)
     {
-        return $this->db->query("SELECT * FROM traitement WHERE REF = ?", [$id])->getRowArray();
+        return $this->db->query("SELECT * FROM TRAITEMENT WHERE REF = ?", [$id])->getRowArray();
     }
 
     public function getLogs()
@@ -65,24 +65,24 @@ class DataAccess extends Model
 
     public function getTraitementsAvecFinaliteEtSensibles($search = null)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     t.REF,
                     t.NOM,
                     t.DATECREATION,
                     t.DATEMAJ,
                     t.TRANSFERTHHORSUE,
                     f.LIBELLE AS FINALITE,
-                    CASE 
+                    CASE
                         WHEN EXISTS (
                             SELECT 1
-                            FROM listedcpsensible ls
+                            FROM LISTEDCPSENSIBLE ls
                             WHERE ls.REF = t.REF
                         )
                         THEN 'Oui'
                         ELSE 'Non'
                     END AS DONNEESSENSIBLES
-                FROM traitement t
-                LEFT JOIN finalite f 
+                FROM TRAITEMENT t
+                LEFT JOIN FINALITE f
                     ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
                 WHERE 1 = 1";
 
