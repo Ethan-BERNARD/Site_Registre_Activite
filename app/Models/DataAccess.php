@@ -69,8 +69,8 @@ class DataAccess extends Model
 
     public function getLogs($limit = 50)
     {
-        $sql = "SELECT log.*, UTILISATEURS.LOGIN
-                FROM log
+        $sql = "SELECT LOG.*, UTILISATEURS.LOGIN
+                FROM LOG
                 LEFT JOIN UTILISATEURS ON UTILISATEURS.ID = LOG.UTILISATEUR_ID
                 ORDER BY DATEMODIFICATION DESC";
 
@@ -93,7 +93,7 @@ class DataAccess extends Model
                     CASE 
                         WHEN EXISTS (
                             SELECT 1
-                            FROM listedcpsensible ls
+                            FROM LISTEDCPSENSIBLE ls
                             WHERE ls.REF = t.REF
                         )
                         THEN 'Oui'
