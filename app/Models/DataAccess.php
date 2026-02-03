@@ -88,8 +88,8 @@ class DataAccess extends Model
                     t.NOM,
                     t.DATECREATION,
                     t.DATEMAJ,
-                    t.TRANSFERTHHORSUE,
                     f.LIBELLE AS FINALITE,
+
                     CASE 
                         WHEN EXISTS (
                             SELECT 1
@@ -98,7 +98,13 @@ class DataAccess extends Model
                         )
                         THEN 'Oui'
                         ELSE 'Non'
-                    END AS DONNEESSENSIBLES
+                    END AS DONNEESSENSIBLES,
+
+                    CASE
+                        WHEN t.TRANSFERTHHORSUE = 1 THEN 'Oui'
+                        ELSE 'Non'
+                    END AS TRANSFERT_HORS_UE
+
                 FROM traitement t
                 LEFT JOIN finalite f 
                     ON f.REF = t.REF AND f.ESTPRINCIPAL = 1

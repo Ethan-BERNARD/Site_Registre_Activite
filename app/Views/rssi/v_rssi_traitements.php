@@ -17,28 +17,27 @@
     <button type="button" class="validate">Tag ▼</button>
 </form>
 
-<!-- Conteneur pour recharger le tableau via AJAX -->
 <div id="tableContainer">
 
     <table class="tableTraitements">
         <thead>
 
-            <!-- Ligne 1 : Types -->
+            <!-- Ligne 1 -->
             <tr>
                 <th colspan="4">Identification du traitement</th>
                 <th colspan="1">Finalité du traitement</th>
                 <th colspan="1">Données sensibles ?</th>
+                <th colspan="1">Transferts hors UE ?</th>
             </tr>
 
-            <!-- Ligne 2 : Sous-types -->
+            <!-- Ligne 2 -->
             <tr>
                 <th>Nom du traitement</th>
                 <th>N° / Réf</th>
                 <th>Date de création</th>
                 <th>Dernière mise à jour</th>
-
-                <th>Finalité</th>
-
+                <th>Finalité Principale</th>
+                <th>Oui / Non</th>
                 <th>Oui / Non</th>
             </tr>
 
@@ -56,6 +55,7 @@
                     <td><?= esc($t['DATEMAJ']) ?></td>
                     <td class="finalite"><?= esc($t['FINALITE']) ?></td>
                     <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
+                    <td><?= esc($t['TRANSFERT_HORS_UE']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -63,7 +63,6 @@
 
 </div>
 
-<!-- Script de recherche instantanée -->
 <script>
 let debounceTimer;
 document.getElementById('searchInput').addEventListener('keyup', function () {
@@ -76,7 +75,7 @@ document.getElementById('searchInput').addEventListener('keyup', function () {
             .then(html => {
                 document.getElementById('tbodyTraitements').innerHTML = html;
             });
-    }, 300); // délai en ms
+    }, 300);
 });
 </script>
 
