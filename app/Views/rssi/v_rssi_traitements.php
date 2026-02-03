@@ -47,7 +47,7 @@
         <tbody id="tbodyTraitements">
             <?php foreach ($traitements as $t) : ?>
                 <tr 
-                    onclick="window.location='<?= site_url('gestionTraitement/detail/' . $t['REF']) ?>';" 
+                    onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';"
                     class="clickable-row"
                 >
                     <td><?= esc($t['NOM']) ?></td>
@@ -60,6 +60,11 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <a href="<?= site_url('pageInfo') ?>" class="btn-ajout-traitement">
+        + Nouveau traitement
+    </a>
+
 
 </div>
 

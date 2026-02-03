@@ -53,7 +53,7 @@ class ActionPageInfo extends Model
        TRAITEMENT PRINCIPAL
     --------------------------------------------------------- */
 
-    public function getTraitementById($ref) {
+    public function getTraitementByRef($ref) {
         return $this->db->table('TRAITEMENT')
                         ->where('REF', $ref)
                         ->get()
@@ -61,7 +61,6 @@ class ActionPageInfo extends Model
     }
 
     public function insertTraitement($data) {
-        // REF doit être fourni dans $data
         $this->db->table('TRAITEMENT')->insert($data);
         return $data['REF'];
     }
@@ -78,18 +77,18 @@ class ActionPageInfo extends Model
 
     public function deleteAllBlocs($ref) {
         $tables = [
-            'ACTEURS',
             'FINALITE',
             'LISTEDCP',
             'LISTEDCPSENSIBLE',
             'LISTEPERSONNECONCERNE',
             'LISTEDESTINATAIRE',
             'LISTEMESURESECURITE',
-            'TRANSFERTHORSUE'
+            'TRANSFERTHORSUE',
+            'IMPLIQUE_PAR_ACTEUR'
         ];
 
         foreach ($tables as $t) {
-            $this->db->table($t)->where('REFTRAITEMENT', $ref)->delete();
+            $this->db->table($t)->where('REF', $ref)->delete();
         }
     }
 
@@ -98,7 +97,15 @@ class ActionPageInfo extends Model
     --------------------------------------------------------- */
 
     public function insertActeur($data) {
-        return $this->db->table('ACTEURS')->insert($data);
+        $this->db->table('ACTEURS')->insert($data);
+        return $this->db->insertID();
+    }
+
+    public function linkActeurToTraitement($idActeur, $ref) {
+        return $this->db->table('IMPLIQUE_PAR_ACTEUR')->insert([
+            'IDACTEUR' => $idActeur,
+            'REF'      => $ref
+        ]);
     }
 
     public function insertFinalite($data) {
@@ -134,57 +141,58 @@ class ActionPageInfo extends Model
     --------------------------------------------------------- */
 
     public function getActeursByTraitement($ref) {
-        return $this->db->table('ACTEURS')
-                        ->where('REFTRAITEMENT', $ref)
+        return $this->db->table('ACTEURS a')
+                        ->join('IMPLIQUE_PAR_ACTEUR ipa', 'ipa.IDACTEUR = a.IDACTEUR')
+                        ->where('ipa.REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getFinalitesByTraitement($ref) {
         return $this->db->table('FINALITE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getCategoriesByTraitement($ref) {
         return $this->db->table('LISTEDCP')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getSensiblesByTraitement($ref) {
         return $this->db->table('LISTEDCPSENSIBLE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getPersonnesByTraitement($ref) {
         return $this->db->table('LISTEPERSONNECONCERNE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getDestinatairesByTraitement($ref) {
         return $this->db->table('LISTEDESTINATAIRE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getSecuritesByTraitement($ref) {
         return $this->db->table('LISTEMESURESECURITE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
 
     public function getTransfertsByTraitement($ref) {
         return $this->db->table('TRANSFERTHORSUE')
-                        ->where('REFTRAITEMENT', $ref)
+                        ->where('REF', $ref)
                         ->get()
                         ->getResultArray();
     }
