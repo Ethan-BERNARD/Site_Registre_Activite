@@ -14,9 +14,10 @@ $routes->get('/rssi', 'Rssi::index');
 $routes->get('/rssi/seDeconnecter', 'Rssi::seDeconnecter');
 $routes->get('/gestionTraitement', 'Rssi::tableau');
 $routes->get('/logs', 'Rssi::logs');
+$routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
+
 $routes->get('/rssi/exportPDF', 'Rssi::exportPDF');
 $routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
-$routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
 
 $routes->get('/gestionTraitement/searchAjax', 'Rssi::searchAjax');
 

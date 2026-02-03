@@ -89,4 +89,6 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $helpers = [];
+
+    public $composerAutoload = ROOTPATH . 'vendor/autoload.php';
 }

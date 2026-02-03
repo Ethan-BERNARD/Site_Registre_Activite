@@ -23,7 +23,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php84\\' => 23,
             'Symfony\\Polyfill\\Php81\\' => 23,
@@ -43,7 +43,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
         ),
-        'R' => 
+        'R' =>
         array (
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
@@ -53,7 +53,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
             'React\\ChildProcess\\' => 19,
             'React\\Cache\\' => 12,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\EventDispatcher\\' => 20,
@@ -63,37 +63,37 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
             'PhpOption\\' => 10,
             'PhpCsFixer\\' => 11,
         ),
-        'N' => 
+        'N' =>
         array (
             'Nexus\\CsConfig\\' => 15,
         ),
-        'L' => 
+        'L' =>
         array (
             'Laminas\\Escaper\\' => 16,
         ),
-        'K' => 
+        'K' =>
         array (
             'Kint\\' => 5,
         ),
-        'G' => 
+        'G' =>
         array (
             'GrahamCampbell\\ResultType\\' => 26,
         ),
-        'F' => 
+        'F' =>
         array (
             'Fidry\\CpuCoreCounter\\' => 21,
             'Faker\\' => 6,
         ),
-        'E' => 
+        'E' =>
         array (
             'Evenement\\' => 10,
         ),
-        'D' => 
+        'D' =>
         array (
             'Dotenv\\' => 7,
             'DeepCopy\\' => 9,
         ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\XdebugHandler\\' => 23,
             'Composer\\Semver\\' => 16,
@@ -105,196 +105,196 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php84\\' => 
+        'Symfony\\Polyfill\\Php84\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php84',
         ),
-        'Symfony\\Polyfill\\Php81\\' => 
+        'Symfony\\Polyfill\\Php81\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Service\\' => 
+        'Symfony\\Contracts\\Service\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\EventDispatcher\\' => 
+        'Symfony\\Contracts\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Component\\String\\' => 
+        'Symfony\\Component\\String\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Stopwatch\\' => 
+        'Symfony\\Component\\Stopwatch\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/stopwatch',
         ),
-        'Symfony\\Component\\Process\\' => 
+        'Symfony\\Component\\Process\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\OptionsResolver\\' => 
+        'Symfony\\Component\\OptionsResolver\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
         ),
-        'Symfony\\Component\\Finder\\' => 
+        'Symfony\\Component\\Finder\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'Symfony\\Component\\Filesystem\\' => 
+        'Symfony\\Component\\Filesystem\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
         ),
-        'Symfony\\Component\\EventDispatcher\\' => 
+        'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'Symfony\\Component\\Console\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'React\\Stream\\' => 
+        'React\\Stream\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/stream/src',
         ),
-        'React\\Socket\\' => 
+        'React\\Socket\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/socket/src',
         ),
-        'React\\Promise\\' => 
+        'React\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
         ),
-        'React\\EventLoop\\' => 
+        'React\\EventLoop\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/event-loop/src',
         ),
-        'React\\Dns\\' => 
+        'React\\Dns\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/dns/src',
         ),
-        'React\\ChildProcess\\' => 
+        'React\\ChildProcess\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/child-process/src',
         ),
-        'React\\Cache\\' => 
+        'React\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/react/cache/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\EventDispatcher\\' => 
+        'Psr\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Predis\\' => 
+        'Predis\\' =>
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
-        'PhpParser\\' => 
+        'PhpParser\\' =>
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'PhpOption\\' => 
+        'PhpOption\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'PhpCsFixer\\' => 
+        'PhpCsFixer\\' =>
         array (
             0 => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src',
         ),
-        'Nexus\\CsConfig\\' => 
+        'Nexus\\CsConfig\\' =>
         array (
             0 => __DIR__ . '/..' . '/nexusphp/cs-config/src',
         ),
-        'Laminas\\Escaper\\' => 
+        'Laminas\\Escaper\\' =>
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
-        'Kint\\' => 
+        'Kint\\' =>
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
         ),
-        'GrahamCampbell\\ResultType\\' => 
+        'GrahamCampbell\\ResultType\\' =>
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Fidry\\CpuCoreCounter\\' => 
+        'Fidry\\CpuCoreCounter\\' =>
         array (
             0 => __DIR__ . '/..' . '/fidry/cpu-core-counter/src',
         ),
-        'Faker\\' => 
+        'Faker\\' =>
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
-        'Evenement\\' => 
+        'Evenement\\' =>
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
         ),
-        'Dotenv\\' => 
+        'Dotenv\\' =>
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'DeepCopy\\' => 
+        'DeepCopy\\' =>
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'Composer\\XdebugHandler\\' => 
+        'Composer\\XdebugHandler\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/xdebug-handler/src',
         ),
-        'Composer\\Semver\\' => 
+        'Composer\\Semver\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
-        'Composer\\Pcre\\' => 
+        'Composer\\Pcre\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/pcre/src',
         ),
-        'CodeIgniter\\CodingStandard\\' => 
+        'CodeIgniter\\CodingStandard\\' =>
         array (
             0 => __DIR__ . '/..' . '/codeigniter/coding-standard/src',
         ),
-        'CodeIgniter\\' => 
+        'CodeIgniter\\' =>
         array (
             0 => __DIR__ . '/../..' . '/system',
         ),
-        'Clue\\React\\NDJson\\' => 
+        'Clue\\React\\NDJson\\' =>
         array (
             0 => __DIR__ . '/..' . '/clue/ndjson-react/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'o' => 
+        'o' =>
         array (
-            'org\\bovigo\\vfs\\' => 
+            'org\\bovigo\\vfs\\' =>
             array (
                 0 => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php',
             ),
@@ -746,6 +746,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
         'Composer\\XdebugHandler\\Process' => __DIR__ . '/..' . '/composer/xdebug-handler/src/Process.php',
         'Composer\\XdebugHandler\\Status' => __DIR__ . '/..' . '/composer/xdebug-handler/src/Status.php',
         'Composer\\XdebugHandler\\XdebugHandler' => __DIR__ . '/..' . '/composer/xdebug-handler/src/XdebugHandler.php',
+        'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Exception\\PropertyException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',
@@ -1496,6 +1497,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
         'Nexus\\CsConfig\\Test\\AbstractRulesetTestCase' => __DIR__ . '/..' . '/nexusphp/cs-config/src/Test/AbstractRulesetTestCase.php',
         'Nexus\\CsConfig\\Test\\FixerProvider' => __DIR__ . '/..' . '/nexusphp/cs-config/src/Test/FixerProvider.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'PHPUnit\\Event\\Application\\Finished' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/Finished.php',
         'PHPUnit\\Event\\Application\\FinishedSubscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/FinishedSubscriber.php',
         'PHPUnit\\Event\\Application\\Started' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/Started.php',
@@ -3993,6 +3995,7 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
         'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/src/LoggerInterface.php',
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/src/NullLogger.php',
+        'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'React\\Cache\\ArrayCache' => __DIR__ . '/..' . '/react/cache/src/ArrayCache.php',
         'React\\Cache\\CacheInterface' => __DIR__ . '/..' . '/react/cache/src/CacheInterface.php',
         'React\\ChildProcess\\Process' => __DIR__ . '/..' . '/react/child-process/src/Process.php',
@@ -4529,6 +4532,15 @@ class ComposerStaticInit58024d93bcd7cb560cea7daaab0aee79
         'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'Symfony\\Polyfill\\Php84\\Php84' => __DIR__ . '/..' . '/symfony/polyfill-php84/Php84.php',
+        'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
+        'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
+        'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',
+        'TCPDF_COLORS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_colors.php',
+        'TCPDF_FILTERS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_filters.php',
+        'TCPDF_FONTS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_fonts.php',
+        'TCPDF_FONT_DATA' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_font_data.php',
+        'TCPDF_IMAGES' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_images.php',
+        'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
         'TheSeer\\Tokenizer\\NamespaceUriException' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUriException.php',

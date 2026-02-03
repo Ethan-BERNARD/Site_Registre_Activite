@@ -25,7 +25,12 @@
 
                 <?php foreach ($traitements as $t) : ?>
                     <option value="<?= $t['REF'] ?>">
-                        <?= esc($t['NOMTRAITEMENT']) ?>
+                        <?= esc($t['NOM']) ?>
+                        (<?= esc($t['REF']) ?>)
+                        — Créé le <?= esc($t['DATECREATION']) ?>
+                        — Finalité : <?= esc($t['FINALITE']) ?>
+                        — Sensibles : <?= esc($t['DONNEESSENSIBLES']) ?>
+                        — Hors UE : <?= esc($t['TRANSFERT_HORS_UE']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
