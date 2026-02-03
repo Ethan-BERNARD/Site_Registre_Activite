@@ -29,5 +29,5 @@ $routes->get('/user/seDeconnecter', 'User::seDeconnecter');
 $routes->get('/user/documents', 'User::documentsInternes');
 $routes->get('/user/communications', 'User::communicationsRSSI');
 
-
-$routes->get('rssi/testUpdate', 'Rssi::testUpdate');
+//jeu de test (http://registre.local:8080/jeu-test/generer)
+$routes->get('jeu-test/generer', 'JeuTest::generer');
