@@ -94,7 +94,7 @@ class Rssi extends BaseController
         $pdf = new TCPDF();
         $pdf->SetCreator('Registre RGPD');
         $pdf->SetAuthor($this->data['identite']);
-        $pdf->AddPage();
+        $pdf->AddPage('L');
 
         /* ============================================================
         *  EXPORT GLOBAL
@@ -132,13 +132,13 @@ class Rssi extends BaseController
             <table>
                 <thead>
                     <tr>
-                        <th>Nom du traitement</th>
-                        <th>N° / Réf</th>
-                        <th>Date de création</th>
-                        <th>Dernière mise à jour</th>
-                        <th>Finalité principale</th>
-                        <th>Données sensibles ?</th>
-                        <th>Transferts hors UE ?</th>
+                        <th width="15%">Nom du traitement</th>
+                        <th width="7%">N° / Réf</th>
+                        <th width="10%">Date de création</th>
+                        <th width="10%">Dernière mise à jour</th>
+                        <th width="38%">Finalité principale</th>
+                        <th width="10%">Transferts hors UE ?</th>
+                        <th width="10%">Données sensibles ?</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,13 +148,13 @@ class Rssi extends BaseController
 
                 $html .= '
                     <tr>
-                        <td>' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
-                        <td>' . esc($t['REF'] ?? 'Non renseigné') . '</td>
-                        <td>' . esc($t['DATECREATION'] ?? 'Non renseignée') . '</td>
-                        <td>' . esc($t['DATEMAJ'] ?? 'Non renseignée') . '</td>
-                        <td>' . esc($t['FINALITE'] ?? 'Non renseignée') . '</td>
-                        <td>' . esc($t['DONNEESSENSIBLES'] ?? 'Non renseigné') . '</td>
-                        <td>' . esc($t['TRANSFERT_HORS_UE'] ?? 'Non renseigné') . '</td>
+                        <td width="15%">' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
+                        <td width="7%">' . esc($t['REF'] ?? 'Non renseigné') . '</td>
+                        <td width="10%">' . esc($t['DATECREATION'] ?? 'Non renseignée') . '</td>
+                        <td width="10%">' . esc($t['DATEMAJ'] ?? 'Non renseignée') . '</td>
+                        <td width="38%">' . esc($t['FINALITE'] ?? 'Non renseignée') . '</td>
+                        <td width="10%">' . esc($t['TRANSFERT_HORS_UE'] ?? 'Non renseigné') . '</td>
+                        <td width="10%">' . esc($t['DONNEESSENSIBLES'] ?? 'Non renseigné') . '</td>
                     </tr>
                 ';
             }

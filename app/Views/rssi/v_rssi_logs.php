@@ -55,7 +55,7 @@
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="5">Aucun log enregistré pour le moment.</td>
+                                    <td colspan="4">Aucun log enregistré pour le moment.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

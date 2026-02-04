@@ -26,8 +26,8 @@
             <tr>
                 <th colspan="4">Identification du traitement</th>
                 <th colspan="1">Finalité du traitement</th>
-                <th colspan="1">Données sensibles ?</th>
                 <th colspan="1">Transferts hors UE ?</th>
+                <th colspan="1">Données sensibles ?</th>
             </tr>
 
             <!-- Ligne 2 -->
@@ -54,8 +54,8 @@
                     <td><?= esc($t['DATECREATION']) ?></td>
                     <td><?= esc($t['DATEMAJ']) ?></td>
                     <td class="finalite"><?= esc($t['FINALITE']) ?></td>
-                    <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
                     <td><?= esc($t['TRANSFERT_HORS_UE']) ?></td>
+                    <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

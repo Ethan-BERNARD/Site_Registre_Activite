@@ -8,16 +8,11 @@
 
     <div id="notify">
         <?php if ($mode === 'global') : ?>
-            La fiche PDF globale a été générée (simulation).
+            La fiche PDF globale a été générée.
         <?php else : ?>
-            La fiche PDF du traitement <strong><?= esc($traitement['NOM']) ?></strong> a été générée (simulation).
+            La fiche PDF du traitement <strong><?= esc($traitement['NOM']) ?></strong> a été générée.
         <?php endif; ?>
     </div>
-
-    <p>
-        Ceci est une page temporaire qui confirme la réception des données.
-        Plus tard, elle sera remplacée par le téléchargement automatique du PDF.
-    </p>
 
     <p>
         <a href="<?= site_url('rssi/exportPDF') ?>" class="validate">Retour à l’export</a>
