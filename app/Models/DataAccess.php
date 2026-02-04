@@ -64,7 +64,34 @@ class DataAccess extends Model
 
     public function getTraitementById($id)
     {
-        return $this->db->query("SELECT * FROM TRAITEMENT WHERE REF = ?", [$id])->getRowArray();
+        $sql = "SELECT 
+                    t.REF,
+                    t.NOM,
+                    t.DATECREATION,
+                    t.DATEMAJ,
+                    f.LIBELLE AS FINALITE,
+
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM listedcpsensible ls
+                            WHERE ls.REF = t.REF
+                        )
+                        THEN 'Oui'
+                        ELSE 'Non'
+                    END AS DONNEESSENSIBLES,
+
+                    CASE
+                        WHEN t.TRANSFERTHHORSUE = 1 THEN 'Oui'
+                        ELSE 'Non'
+                    END AS TRANSFERT_HORS_UE
+
+                FROM TRAITEMENT t
+                LEFT JOIN FINALITE f 
+                    ON f.REF = t.REF AND f.ESTPRINCIPAL = 1
+                WHERE t.REF = ?";
+
+        return $this->db->query($sql, [$id])->getRowArray();
     }
 
     public function getLogs($limit = 50)
