@@ -5,6 +5,7 @@ use App\Models\ActionsRssi;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use TCPDF;
 
 class Rssi extends BaseController
 {
@@ -77,7 +78,7 @@ class Rssi extends BaseController
 
     public function exportPDF()
     {
-        $traitements = $this->actRssi->getAllTraitements();
+        $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
 
         return view('rssi/v_rssi_export_form', [
             'identite' => $this->data['identite'],
@@ -89,34 +90,159 @@ class Rssi extends BaseController
     {
         $idTraitement = $this->request->getPost('idTraitement');
 
+        // Instanciation TCPDF
+        $pdf = new TCPDF();
+        $pdf->SetCreator('Registre RGPD');
+        $pdf->SetAuthor($this->data['identite']);
+        $pdf->AddPage('L');
+
+        /* ============================================================
+        *  EXPORT GLOBAL
+        * ============================================================ */
         if ($idTraitement === 'all') {
 
-            // --- LOG METIER : export global ---
             $this->logExportGlobal();
+            $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
 
-            $traitements = $this->actRssi->getAllTraitements();
+            $pdf->SetTitle('Export global du registre');
 
-            return view('rssi/v_rssi_export_result', [
-                'identite' => $this->data['identite'],
-                'mode' => 'global',
-                'traitements' => $traitements
-            ]);
+            // Style + tableau
+            $html = '
+            <h1>Export global du registre</h1>
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    font-size: 10pt;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    border: 1px solid #000;
+                    padding: 6px;
+                    text-align: center;
+                }
+                td {
+                    border: 1px solid #000;
+                    padding: 6px;
+                }
+            </style>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">Nom du traitement</th>
+                        <th width="7%">N° / Réf</th>
+                        <th width="10%">Date de création</th>
+                        <th width="10%">Dernière mise à jour</th>
+                        <th width="38%">Finalité principale</th>
+                        <th width="10%">Transferts hors UE ?</th>
+                        <th width="10%">Données sensibles ?</th>
+                    </tr>
+                </thead>
+                <tbody>
+            ';
+
+            foreach ($traitements as $t) {
+
+                $html .= '
+                    <tr>
+                        <td width="15%">' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
+                        <td width="7%">' . esc($t['REF'] ?? 'Non renseigné') . '</td>
+                        <td width="10%">' . esc($t['DATECREATION'] ?? 'Non renseignée') . '</td>
+                        <td width="10%">' . esc($t['DATEMAJ'] ?? 'Non renseignée') . '</td>
+                        <td width="38%">' . esc($t['FINALITE'] ?? 'Non renseignée') . '</td>
+                        <td width="10%">' . esc($t['TRANSFERT_HORS_UE'] ?? 'Non renseigné') . '</td>
+                        <td width="10%">' . esc($t['DONNEESSENSIBLES'] ?? 'Non renseigné') . '</td>
+                    </tr>
+                ';
+            }
+
+            $html .= '
+                </tbody>
+            </table>
+            ';
+
+            $pdf->writeHTML($html, true, false, true, false, '');
+
+            // Nettoyage complet des buffers AVANT la sortie PDF
+            while (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+
+            // Headers PDF
+            header('Content-Type: application/pdf');
+            header('Cache-Control: private, max-age=0, must-revalidate');
+            header('Pragma: public');
+
+            return $pdf->Output('export_global.pdf', 'I');
         }
 
-        // --- LOG METIER : export d’un traitement ---
+        /* ============================================================
+        *  EXPORT D’UN TRAITEMENT UNIQUE
+        * ============================================================ */
         $this->logExportTraitement($idTraitement);
-
         $traitement = $this->actRssi->getTraitementById($idTraitement);
 
         if (!$traitement) {
             return redirect()->back()->with('error', 'Traitement introuvable.');
         }
 
-        return view('rssi/v_rssi_export_result', [
-            'identite' => $this->data['identite'],
-            'mode' => 'single',
-            'traitement' => $traitement
-        ]);
+        $pdf->SetTitle('Export du traitement ' . $traitement['REF']);
+
+        $nom   = esc($traitement['NOM'] ?? 'Non renseigné');
+        $ref   = esc($traitement['REF'] ?? 'Non renseigné');
+        $dc    = esc($traitement['DATECREATION'] ?? 'Non renseignée');
+        $dm    = esc($traitement['DATEMAJ'] ?? 'Non renseignée');
+        $final = esc($traitement['FINALITE'] ?? 'Non renseignée');
+        $sens  = esc($traitement['DONNEESSENSIBLES'] ?? 'Non renseignées');
+        $hors  = esc($traitement['TRANSFERT_HORS_UE'] ?? 'Non renseigné');
+
+        $html = "
+            <h1>Traitement : $nom</h1>
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    font-size: 10pt;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    border: 1px solid #000;
+                    padding: 6px;
+                    text-align: left;
+                }
+                td {
+                    border: 1px solid #000;
+                    padding: 6px;
+                }
+            </style>
+
+            <table>
+                <tr><th>Référence</th><td>$ref</td></tr>
+                <tr><th>Date création</th><td>$dc</td></tr>
+                <tr><th>Date mise à jour</th><td>$dm</td></tr>
+                <tr><th>Finalité</th><td>$final</td></tr>
+                <tr><th>Données sensibles</th><td>$sens</td></tr>
+                <tr><th>Transferts hors UE</th><td>$hors</td></tr>
+            </table>
+        ";
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        // Nettoyage complet des buffers AVANT la sortie PDF
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        header('Content-Type: application/pdf');
+        header('Cache-Control: private, max-age=0, must-revalidate');
+        header('Pragma: public');
+
+        return $pdf->Output('export_traitement_' . $ref . '.pdf', 'I');
     }
 
     public function tableau()
