@@ -74,7 +74,7 @@ class DataAccess extends Model
                     CASE 
                         WHEN EXISTS (
                             SELECT 1
-                            FROM listedcpsensible ls
+                            FROM LISTEDCPSENSIBLE ls
                             WHERE ls.REF = t.REF
                         )
                         THEN 'Oui'
