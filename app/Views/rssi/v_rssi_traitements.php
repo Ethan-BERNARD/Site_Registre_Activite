@@ -4,84 +4,88 @@
 
 <?= $this->section('body') ?>
 
-<h2>Tableau des traitements</h2>
+<div id="contenu">
 
-<form method="get" class="barreRecherche">
-    <input 
-        type="text" 
-        id="searchInput"
-        autocomplete="off"
-        placeholder="Recherche..." 
-        value="<?= esc($_GET['search'] ?? '') ?>" 
-    >
-    <button type="button" class="validate">Tag ▼</button>
-</form>
+    <h2>Tableau des traitements</h2>
 
-<div id="tableContainer">
+    <form method="get" class="barreRecherche">
+        <input 
+            type="text" 
+            id="searchInput"
+            autocomplete="off"
+            placeholder="Recherche..." 
+            value="<?= esc($_GET['search'] ?? '') ?>" 
+        >
+        <button type="button" class="validate">Tag ▼</button>
+    </form>
 
-    <table class="tableTraitements">
-        <thead>
+    <div id="tableContainer">
 
-            <!-- Ligne 1 -->
-            <tr>
-                <th colspan="4">Identification du traitement</th>
-                <th colspan="1">Finalité du traitement</th>
-                <th colspan="1">Données sensibles ?</th>
-                <th colspan="1">Transferts hors UE ?</th>
-            </tr>
+        <table class="tableTraitements">
+            <thead>
 
-            <!-- Ligne 2 -->
-            <tr>
-                <th>Nom du traitement</th>
-                <th>N° / Réf</th>
-                <th>Date de création</th>
-                <th>Dernière mise à jour</th>
-                <th>Finalité Principale</th>
-                <th>Oui / Non</th>
-                <th>Oui / Non</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="tbodyTraitements">
-            <?php foreach ($traitements as $t) : ?>
-                <tr 
-                    onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';"
-                    class="clickable-row"
-                >
-                    <td><?= esc($t['NOM']) ?></td>
-                    <td><?= esc($t['REF']) ?></td>
-                    <td><?= esc($t['DATECREATION']) ?></td>
-                    <td><?= esc($t['DATEMAJ']) ?></td>
-                    <td class="finalite"><?= esc($t['FINALITE']) ?></td>
-                    <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
-                    <td><?= esc($t['TRANSFERT_HORS_UE']) ?></td>
+                <!-- Ligne 1 -->
+                <tr>
+                    <th colspan="4">Identification du traitement</th>
+                    <th colspan="1">Finalité du traitement</th>
+                    <th colspan="1">Données sensibles ?</th>
+                    <th colspan="1">Transferts hors UE ?</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
 
-    <a href="<?= site_url('pageInfo') ?>" class="btn-ajout-traitement">
-        + Nouveau traitement
-    </a>
+                <!-- Ligne 2 -->
+                <tr>
+                    <th>Nom du traitement</th>
+                    <th>N° / Réf</th>
+                    <th>Date de création</th>
+                    <th>Dernière mise à jour</th>
+                    <th>Finalité Principale</th>
+                    <th>Oui / Non</th>
+                    <th>Oui / Non</th>
+                </tr>
 
+            </thead>
+
+            <tbody id="tbodyTraitements">
+                <?php foreach ($traitements as $t) : ?>
+                    <tr 
+                        onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';"
+                        class="clickable-row"
+                    >
+                        <td><?= esc($t['NOM']) ?></td>
+                        <td><?= esc($t['REF']) ?></td>
+                        <td><?= esc($t['DATECREATION']) ?></td>
+                        <td><?= esc($t['DATEMAJ']) ?></td>
+                        <td class="finalite"><?= esc($t['FINALITE']) ?></td>
+                        <td><?= esc($t['DONNEESSENSIBLES']) ?></td>
+                        <td><?= esc($t['TRANSFERT_HORS_UE']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <a href="<?= site_url('pageInfo') ?>" class="btn-ajout-traitement">
+            + Nouveau traitement
+        </a>
+
+
+    </div>
+
+    <script>
+    let debounceTimer;
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        clearTimeout(debounceTimer);
+        let q = this.value;
+
+        debounceTimer = setTimeout(() => {
+            fetch("<?= site_url('gestionTraitement/searchAjax') ?>?q=" + encodeURIComponent(q) + "&_=" + Date.now())
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('tbodyTraitements').innerHTML = html;
+                });
+        }, 300);
+    });
+    </script>
 
 </div>
-
-<script>
-let debounceTimer;
-document.getElementById('searchInput').addEventListener('keyup', function () {
-    clearTimeout(debounceTimer);
-    let q = this.value;
-
-    debounceTimer = setTimeout(() => {
-        fetch("<?= site_url('gestionTraitement/searchAjax') ?>?q=" + encodeURIComponent(q) + "&_=" + Date.now())
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('tbodyTraitements').innerHTML = html;
-            });
-    }, 300);
-});
-</script>
 
 <?= $this->endSection() ?>

@@ -42,6 +42,7 @@ class PageInfoController extends BaseController
 
     private function loadCommonData() {
         return [
+            'identite'            => session()->get('LOGIN'),
             'categDCP'            => $this->model->getCategDCP(),
             'categDCPSensible'    => $this->model->getCategDCPSensible(),
             'personnesConcerne'   => $this->model->getPersonnesConcerne(),
