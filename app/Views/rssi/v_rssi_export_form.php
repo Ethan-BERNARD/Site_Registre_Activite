@@ -25,7 +25,7 @@
 
                 <?php foreach ($traitements as $t) : ?>
                     <option value="<?= $t['REF'] ?>">
-                        <?= esc($t['NOMTRAITEMENT']) ?>
+                        <?= esc($t['NOM']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
