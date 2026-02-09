@@ -41,4 +41,9 @@ class ActionsRssi
             $details
         );
     }
+
+    public function getDashboardStats()
+    {
+        return $this->dao->getDashboardStats();
+    }
 }

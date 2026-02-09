@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Intranet – Utilisateur</title>
 
-    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>">
+    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" />
 
     <script>
         function hideNotify() {

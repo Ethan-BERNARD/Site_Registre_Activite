@@ -42,7 +42,11 @@ class Rssi extends BaseController
 
     public function index()
     {
-        return view('rssi/v_rssi_accueil', $this->data);
+        $stats = $this->actRssi->getDashboardStats();
+        
+        return view('rssi/v_rssi_accueil', array_merge($this->data, [
+            'stats' => $stats
+        ]));
     }
 
     public function seDeconnecter()
@@ -180,7 +184,7 @@ class Rssi extends BaseController
         }
 
         /* ============================================================
-        *  EXPORT D’UN TRAITEMENT UNIQUE
+        *  EXPORT D'UN TRAITEMENT UNIQUE
         * ============================================================ */
         $this->logExportTraitement($idTraitement);
         $traitement = $this->actRssi->getTraitementById($idTraitement);
@@ -265,7 +269,7 @@ class Rssi extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
         }
 
-        // --- LOG METIER : consultation d’un traitement ---
+        // --- LOG METIER : consultation d'un traitement ---
         $this->logConsultationTraitement($ref);
 
         return view('rssi/v_rssi_traitement_detail', [
@@ -283,14 +287,31 @@ class Rssi extends BaseController
         $html = '';
 
         foreach ($traitements as $t) {
+            // Génération du badge pour "Données sensibles"
+            $badgeSensible = '';
+            if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui') {
+                $badgeSensible = '<span class="badge badge-oui">Oui</span>';
+            } else {
+                $badgeSensible = '<span class="badge badge-non">Non</span>';
+            }
+
+            // Génération du badge pour "Transferts hors UE"
+            $badgeTransfert = '';
+            if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1) {
+                $badgeTransfert = '<span class="badge badge-oui">Oui</span>';
+            } else {
+                $badgeTransfert = '<span class="badge badge-non">Non</span>';
+            }
+
             $html .= '
-                <tr onclick="window.location=\'' . site_url('gestionTraitement/detail/' . $t['REF']) . '\';" class="clickable-row">
-                    <td>' . esc($t['NOM']) . '</td>
-                    <td>' . esc($t['REF']) . '</td>
+                <tr onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';" class="clickable-row">
+                    <td><strong>' . esc($t['NOM']) . '</strong></td>
+                    <td><code>' . esc($t['REF']) . '</code></td>
                     <td>' . esc($t['DATECREATION']) . '</td>
                     <td>' . esc($t['DATEMAJ']) . '</td>
-                    <td>' . esc($t['FINALITE']) . '</td>
-                    <td>' . esc($t['DONNEESSENSIBLES']) . '</td>
+                    <td class="finalite">' . esc($t['FINALITE']) . '</td>
+                    <td>' . $badgeSensible . '</td>
+                    <td>' . $badgeTransfert . '</td>
                 </tr>
             ';
         }

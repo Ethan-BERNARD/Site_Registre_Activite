@@ -166,4 +166,51 @@ class DataAccess extends Model
         ]);
     }
 
+
+    /**
+     * Récupère les statistiques pour le dashboard RSSI
+     */
+    public function getDashboardStats()
+    {
+        $stats = [];
+
+        // Nombre total de traitements
+        $sql = "SELECT COUNT(*) as total FROM TRAITEMENT";
+        $stats['total_traitements'] = $this->db->query($sql)->getRow()->total;
+
+        // Nombre de traitements avec données sensibles
+        $sql = "SELECT COUNT(DISTINCT t.REF) as total
+                FROM TRAITEMENT t
+                WHERE EXISTS (
+                    SELECT 1 FROM LISTEDCPSENSIBLE ls WHERE ls.REF = t.REF
+                )";
+        $stats['traitements_sensibles'] = $this->db->query($sql)->getRow()->total;
+
+        // Nombre de traitements avec transferts hors UE
+        $sql = "SELECT COUNT(*) as total
+                FROM TRAITEMENT
+                WHERE TRANSFERTHHORSUE = 1";
+        $stats['transferts_hors_ue'] = $this->db->query($sql)->getRow()->total;
+
+        // Dernière action (log le plus récent)
+        $sql = "SELECT TYPEACTION, DETAILS, DATEMODIFICATION, LOGIN
+                FROM LOG
+                LEFT JOIN UTILISATEURS ON UTILISATEURS.ID = LOG.UTILISATEUR_ID
+                ORDER BY DATEMODIFICATION DESC
+                LIMIT 1";
+        $lastLog = $this->db->query($sql)->getRowArray();
+        
+        if ($lastLog) {
+            $stats['derniere_action'] = [
+                'type' => $lastLog['TYPEACTION'],
+                'details' => $lastLog['DETAILS'],
+                'date' => $lastLog['DATEMODIFICATION'],
+                'utilisateur' => $lastLog['LOGIN']
+            ];
+        } else {
+            $stats['derniere_action'] = null;
+        }
+
+        return $stats;
+    }
 }

@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ---------------------------------------------------------
-       OUTILS GÉNÉRIQUES
-    --------------------------------------------------------- */
-
+    /* --- OUTILS GÉNÉRIQUES --- */
     function fillSelect(select, data, valueField, labelField) {
         if (!select || !data) return;
         data.forEach(item => {
@@ -33,23 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(element);
         }
 
-        // 👉 MODE CREATE : toujours 1 bloc vide
-        if (mode === "create" && !container.children.length) {
-            ajouter();
-        }
-
+        // Suppression de la logique "MODE CREATE/EDIT : toujours 1 bloc vide"
+        // On laisse simplement l'écouteur sur le bouton "+"
         btn.addEventListener("click", ajouter);
-
-        // 👉 MODE EDIT : si aucune donnée → 1 bloc vide
-        setTimeout(() => {
-            if (mode === "edit" && container.children.length === 0) {
-                ajouter();
-            }
-        }, 0);
     }
 
     function prefillBloc(dataArray, addButtonId, containerSelector, fillCallback) {
-        if (mode !== "edit" || !dataArray?.length) return;
+        // En mode édition, si on a des données, on simule le clic pour remplir
+        if (mode !== "edit" || !dataArray || dataArray.length === 0) return;
 
         const addBtn = document.getElementById(addButtonId);
         const container = document.querySelector(containerSelector);
@@ -57,16 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!addBtn || !container) return;
 
         dataArray.forEach(item => {
-            addBtn.click();
+            addBtn.click(); // Crée le bloc
             const element = container.lastElementChild;
-            fillCallback(element, item);
+            fillCallback(element, item); // Remplit les champs
         });
     }
 
-    /* ---------------------------------------------------------
-       INITIALISATION DES BLOCS
-    --------------------------------------------------------- */
-
+    /* --- INITIALISATION DES BLOCS --- */
     gestionBloc("addActeur", "acteurs-container", "acteur-template", ".supprimer-acteur", el => {
         fillSelect(el.querySelector('select[name="acteur_type[]"]'), typeActeur, "IDTYPE", "LIBELLE");
     });
@@ -98,30 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fillSelect(el.querySelector('select[name="transfert_garantie[]"]'), typeGarantie, "ID", "LIBELLE");
     });
 
-    /* ---------------------------------------------------------
-       AFFICHAGE / MASQUAGE TRANSFERT
-    --------------------------------------------------------- */
-
-    const checkbox = document.getElementById("checkboxTransfert");
-    const blocTransfert = document.getElementById("blocTransfert");
-
-    if (checkbox && blocTransfert) {
-        checkbox.addEventListener("change", () => {
-            blocTransfert.style.display = checkbox.checked ? "block" : "none";
-            if (checkbox.checked && !document.querySelector("#transfert-container").children.length) {
-                document.getElementById("addTransfert").click();
-            }
-        });
-
-        if (mode === "edit" && checkbox.checked) {
-            blocTransfert.style.display = "block";
-        }
-    }
-
-    /* ---------------------------------------------------------
-       PRÉREMPLISSAGE
-    --------------------------------------------------------- */
-
+    /* --- GESTION DES PRÉREMPLISSAGES (Uniquement si données existantes) --- */
     prefillBloc(acteursData, "addActeur", "#acteurs-container", (el, item) => {
         el.querySelector('input[name="acteur_nom[]"]').value = item.NOM;
         el.querySelector('input[name="acteur_adresse[]"]').value = item.ADRESSE;
@@ -172,4 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
         el.querySelector('input[name="transfert_lien[]"]').value = item.LIENDOC;
     });
 
+    /* --- TRANSFERT UE LOGIC --- */
+    const checkbox = document.getElementById("checkboxTransfert");
+    const blocTransfert = document.getElementById("blocTransfert");
+    if (checkbox && blocTransfert) {
+        checkbox.addEventListener("change", () => {
+            blocTransfert.style.display = checkbox.checked ? "block" : "none";
+        });
+        if (checkbox.checked) blocTransfert.style.display = "block";
+    }
 });

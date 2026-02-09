@@ -3,7 +3,7 @@
 <head>
     <title>Espace d’Identification du Personnel</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" />
+    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" /> <!-- demander a modifer la page de connexion car pas jolie (voir Claude IA) -->
 </head>
 
 <body>
