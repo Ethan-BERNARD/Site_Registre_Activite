@@ -92,27 +92,37 @@ class Rssi extends BaseController
 
     public function genererPDF()
     {
-        $idTraitement = $this->request->getPost('idTraitement');
+        $selection = $this->request->getPost('selection');
+        
+        // Si c'est une sélection JSON (checkboxes)
+        if ($selection && $selection !== 'all') {
+            $refs = json_decode($selection, true);
+            
+            if (empty($refs)) {
+                return redirect()->back()->with('error', 'Aucun traitement sélectionné.');
+            }
+            
+            $this->logExportSelection($refs);
+            
+            // Instanciation TCPDF
+            $pdf = new TCPDF();
+            $pdf->SetCreator('Registre RGPD');
+            $pdf->SetAuthor($this->data['identite']);
+            $pdf->AddPage('L');
+            $pdf->SetTitle('Export sélectif du registre');
 
-        // Instanciation TCPDF
-        $pdf = new TCPDF();
-        $pdf->SetCreator('Registre RGPD');
-        $pdf->SetAuthor($this->data['identite']);
-        $pdf->AddPage('L');
+            // Récupérer les traitements sélectionnés
+            $traitements = [];
+            foreach ($refs as $ref) {
+                $t = $this->actRssi->getTraitementById($ref);
+                if ($t) {
+                    $traitements[] = $t;
+                }
+            }
 
-        /* ============================================================
-        *  EXPORT GLOBAL
-        * ============================================================ */
-        if ($idTraitement === 'all') {
-
-            $this->logExportGlobal();
-            $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
-
-            $pdf->SetTitle('Export global du registre');
-
-            // Style + tableau
+            // Générer le tableau HTML
             $html = '
-            <h1>Export global du registre</h1>
+            <h1>Export sélectif du registre</h1>
 
             <style>
                 table {
@@ -121,7 +131,8 @@ class Rssi extends BaseController
                     font-size: 10pt;
                 }
                 th {
-                    background-color: #f2f2f2;
+                    background-color: #3b82f6;
+                    color: white;
                     font-weight: bold;
                     border: 1px solid #000;
                     padding: 6px;
@@ -149,7 +160,6 @@ class Rssi extends BaseController
             ';
 
             foreach ($traitements as $t) {
-
                 $html .= '
                     <tr>
                         <td width="15%">' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
@@ -170,83 +180,24 @@ class Rssi extends BaseController
 
             $pdf->writeHTML($html, true, false, true, false, '');
 
-            // Nettoyage complet des buffers AVANT la sortie PDF
+            // Nettoyage des buffers
             while (ob_get_level() > 0) {
                 ob_end_clean();
             }
 
-            // Headers PDF
             header('Content-Type: application/pdf');
             header('Cache-Control: private, max-age=0, must-revalidate');
             header('Pragma: public');
 
-            return $pdf->Output('export_global.pdf', 'I');
+            return $pdf->Output('export_selection.pdf', 'I');
         }
-
-        /* ============================================================
-        *  EXPORT D'UN TRAITEMENT UNIQUE
-        * ============================================================ */
-        $this->logExportTraitement($idTraitement);
-        $traitement = $this->actRssi->getTraitementById($idTraitement);
-
-        if (!$traitement) {
-            return redirect()->back()->with('error', 'Traitement introuvable.');
-        }
-
-        $pdf->SetTitle('Export du traitement ' . $traitement['REF']);
-
-        $nom   = esc($traitement['NOM'] ?? 'Non renseigné');
-        $ref   = esc($traitement['REF'] ?? 'Non renseigné');
-        $dc    = esc($traitement['DATECREATION'] ?? 'Non renseignée');
-        $dm    = esc($traitement['DATEMAJ'] ?? 'Non renseignée');
-        $final = esc($traitement['FINALITE'] ?? 'Non renseignée');
-        $sens  = esc($traitement['DONNEESSENSIBLES'] ?? 'Non renseignées');
-        $hors  = esc($traitement['TRANSFERT_HORS_UE'] ?? 'Non renseigné');
-
-        $html = "
-            <h1>Traitement : $nom</h1>
-
-            <style>
-                table {
-                    border-collapse: collapse;
-                    width: 100%;
-                    font-size: 10pt;
-                }
-                th {
-                    background-color: #f2f2f2;
-                    font-weight: bold;
-                    border: 1px solid #000;
-                    padding: 6px;
-                    text-align: left;
-                }
-                td {
-                    border: 1px solid #000;
-                    padding: 6px;
-                }
-            </style>
-
-            <table>
-                <tr><th>Référence</th><td>$ref</td></tr>
-                <tr><th>Date création</th><td>$dc</td></tr>
-                <tr><th>Date mise à jour</th><td>$dm</td></tr>
-                <tr><th>Finalité</th><td>$final</td></tr>
-                <tr><th>Données sensibles</th><td>$sens</td></tr>
-                <tr><th>Transferts hors UE</th><td>$hors</td></tr>
-            </table>
-        ";
-
-        $pdf->writeHTML($html, true, false, true, false, '');
-
-        // Nettoyage complet des buffers AVANT la sortie PDF
-        while (ob_get_level() > 0) {
-            ob_end_clean();
-        }
-
-        header('Content-Type: application/pdf');
-        header('Cache-Control: private, max-age=0, must-revalidate');
-        header('Pragma: public');
-
-        return $pdf->Output('export_traitement_' . $ref . '.pdf', 'I');
+        
+    }
+    
+    private function logExportSelection($refs)
+    {
+        $count = count($refs);
+        $this->actRssi->logAction('EXPORT', "Export PDF de $count traitement(s) : " . implode(', ', $refs));
     }
 
     public function tableau()
@@ -287,15 +238,15 @@ class Rssi extends BaseController
         $html = '';
 
         foreach ($traitements as $t) {
-            // Génération du badge pour "Données sensibles"
-            $badgeSensible = '';
+            // Badge données sensibles
+            $badgeSensibles = '';
             if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui') {
-                $badgeSensible = '<span class="badge badge-oui">Oui</span>';
+                $badgeSensibles = '<span class="badge badge-oui">Oui</span>';
             } else {
-                $badgeSensible = '<span class="badge badge-non">Non</span>';
+                $badgeSensibles = '<span class="badge badge-non">Non</span>';
             }
 
-            // Génération du badge pour "Transferts hors UE"
+            // Badge transfert hors UE
             $badgeTransfert = '';
             if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1) {
                 $badgeTransfert = '<span class="badge badge-oui">Oui</span>';
@@ -304,14 +255,17 @@ class Rssi extends BaseController
             }
 
             $html .= '
-                <tr onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';" class="clickable-row">
-                    <td><strong>' . esc($t['NOM']) . '</strong></td>
-                    <td><code>' . esc($t['REF']) . '</code></td>
-                    <td>' . esc($t['DATECREATION']) . '</td>
-                    <td>' . esc($t['DATEMAJ']) . '</td>
-                    <td class="finalite">' . esc($t['FINALITE']) . '</td>
-                    <td>' . $badgeSensible . '</td>
-                    <td>' . $badgeTransfert . '</td>
+                <tr class="clickable-row">
+                    <td onclick="event.stopPropagation();">
+                        <input type="checkbox" class="checkbox-traitement" value="' . esc($t['REF']) . '">
+                    </td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';"><strong>' . esc($t['NOM']) . '</strong></td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';"><code>' . esc($t['REF']) . '</code></td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['DATECREATION']) . '</td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['DATEMAJ']) . '</td>
+                    <td class="finalite" onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['FINALITE']) . '</td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . $badgeSensibles . '</td>
+                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . $badgeTransfert . '</td>
                 </tr>
             ';
         }

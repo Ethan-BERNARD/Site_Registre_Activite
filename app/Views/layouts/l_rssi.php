@@ -4,7 +4,7 @@
 <head>
     <title>Intranet – Registre des Activités de Traitement</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" />
+    <link rel="stylesheet" href="<?= site_url('css/styles_modified.css') ?>" />
 
     <script>
         function hideNotify() {
@@ -45,10 +45,6 @@
 
                     <li class="smenu">
                         <?= anchor('logs', 'Historique des modifications', 'title="Historique des actions"') ?>
-                    </li>
-
-                    <li class="smenu">
-                        <?= anchor('rssi/exportPDF', 'Exporter la fiche PDF', 'title="Génération automatique du PDF"') ?>
                     </li>
 
                     <br>
