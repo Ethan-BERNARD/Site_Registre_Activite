@@ -23,7 +23,7 @@ class Authentif extends Model
     public function estRssi(): bool
     {
         return $this->session->get('ID') !== null
-            && $this->session->get('DROIT') === 'rssi';
+            && $this->session->get('DROIT') === 'AD';
     }
 
     /**
@@ -32,7 +32,7 @@ class Authentif extends Model
     public function estUtilisateur(): bool
     {
         return $this->session->get('ID') !== null
-            && $this->session->get('DROIT') === 'utilisateur';
+            && $this->session->get('DROIT') === 'US';
     }
 
     /**

@@ -19,7 +19,7 @@
 
         <!-- En-tête -->
         <div id="entete">
-            <h1>Registre des Activités de Traitement – Espace RSSI</h1>
+            <h1>Registre des Activités de Traitement – Espace RSN</h1>
         </div>
 
         <!-- Corps principal : menu + contenu -->
@@ -29,7 +29,7 @@
             <div id="menuGauche">
                 <div id="infosUtil">
                     <h2>
-                        RSSI : 
+                        RSN : 
                         <?= esc($identite) ?>
                     </h2>
                 </div>

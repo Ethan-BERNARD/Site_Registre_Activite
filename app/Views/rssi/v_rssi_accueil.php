@@ -3,10 +3,10 @@
 <?= $this->section('body') ?>
 <div id="contenu">
 
-    <h2>Espace RSSI</h2>
+    <h2>Espace RSN</h2>
 
     <div id="notify">
-        👋 <strong>Bienvenue <?= esc($identite) ?></strong> — Vous êtes connecté en tant que <strong>RSSI</strong>.
+        👋 <strong>Bienvenue <?= esc($identite) ?></strong> — Vous êtes connecté en tant que <strong>RSN</strong>.
     </div>
 
     <!-- Statistiques en cartes -->
@@ -69,25 +69,25 @@
         <tbody>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('gestionTraitement') ?>">📊 Gérer les traitements</a>
+                    <a href="<?= site_url('gestionTraitement') ?>">Gérer les traitements</a>
                 </td>
                 <td>Créer, modifier ou supprimer une activité de traitement</td>
             </tr>
             <tr>
                 <td class="action-cell">
-                    <a href="#">✅ Contrôle RGPD</a>
+                    <a href="#">Contrôle RGPD</a>
                 </td>
                 <td>Vérifier la conformité des données saisies</td>
             </tr>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('logs') ?>">📜 Historique</a>
+                    <a href="<?= site_url('logs') ?>">Historique</a>
                 </td>
                 <td>Consulter les modifications effectuées</td>
             </tr>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('rssi/exportPDF') ?>">📄 Export PDF</a>
+                    <a href="<?= site_url('rssi/exportPDF') ?>">Export PDF</a>
                 </td>
                 <td>Générer automatiquement une fiche récapitulative</td>
             </tr>
