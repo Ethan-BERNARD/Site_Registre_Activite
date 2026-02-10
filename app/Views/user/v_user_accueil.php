@@ -67,13 +67,13 @@
     <h3 style="margin-top: 40px;">Navigation rapide</h3>
     <div class="navigation-grid">
         
-        <a href="<?= site_url('gestionTraitement') ?>" class="nav-card">
+        <a href="<?= site_url('/user/tableau') ?>" class="nav-card">
             <div class="nav-icon">📋</div>
             <div class="nav-title">Gestion</div>
             <div class="nav-desc">Liste des traitements</div>
         </a>
 
-        <a href="<?= site_url('pageInfo') ?>" class="nav-card nav-card-primary">
+        <a href="<?= site_url('/user/creer') ?>" class="nav-card nav-card-primary">
             <div class="nav-icon">➕</div>
             <div class="nav-title">Nouveau</div>
             <div class="nav-desc">Créer un traitement</div>

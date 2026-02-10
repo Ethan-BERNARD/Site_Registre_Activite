@@ -17,8 +17,8 @@ $routes->get('/logs', 'Rssi::logs');
 $routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
 $routes->get('/gestionTraitement/searchAjax', 'Rssi::searchAjax');
 
-// PageInfo (édition/création) - RSSI uniquement
-$routes->get('pageInfo', 'Rssi::creer');
+// PageInfo (édition/création) - Utilisé par RSSI
+$routes->get('pageInfo', 'PageInfoController::index');
 $routes->get('pageInfo/edit/(:segment)', 'Rssi::edit/$1');
 $routes->post('pageInfo/save', 'Rssi::save');
 
@@ -31,5 +31,5 @@ $routes->get('/user/consulter/(:segment)', 'User::consulter/$1');
 $routes->post('/user/save', 'User::save');
 $routes->get('/user/searchAjax', 'User::searchAjax');
 
-// Jeu de test
+// Jeu de test (http://registre.local:8080/jeu-test/generer)
 $routes->get('jeu-test/generer', 'JeuTest::generer');
