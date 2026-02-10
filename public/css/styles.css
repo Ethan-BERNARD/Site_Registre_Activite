@@ -1278,7 +1278,19 @@ code {
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     border: 2px solid var(--grey-200);
+
+
+
+    margin-bottom: 32px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    max-height: 850px;
+    overflow-y: auto;
+    border: 2px solid var(--grey-200);
+    box-shadow: var(--shadow-md);
+    background: white;
 }
+
 
 .tableTraitements {
     width: 100% !important;
