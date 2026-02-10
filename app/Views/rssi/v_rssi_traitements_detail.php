@@ -33,11 +33,11 @@
                 </div>
                 <div class="ligne">
                     <label>Date de création</label>
-                    <input type="date" name="date_crea" value="<?= $traitement['DATECREATION'] ?? '' ?>">
+                    <input type="date" name="date_crea" value="<?= $traitement['DATECREATION'] ?? '' ?>" readonly>
                 </div>
                 <div class="ligne">
                     <label>Date de mise à jour</label>
-                    <input type="date" name="date_maj" value="<?= $traitement['DATEMAJ'] ?? '' ?>">
+                    <input type="date" name="date_maj" value="<?= $traitement['DATEMAJ'] ?? '' ?>" readonly>
                 </div>
                 <div class="ligne checkbox-ligne">
                     <label for="checkboxTransfert">Transfert hors UE</label>

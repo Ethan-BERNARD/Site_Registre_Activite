@@ -65,15 +65,17 @@ class PageInfoController extends BaseController
         $traitementData = [
             'REF'            => $this->request->getPost('ref'),
             'NOM'            => $this->request->getPost('nom'),
-            'DATECREATION'   => $this->request->getPost('date_crea'),
-            'DATEMAJ'        => $this->request->getPost('date_maj'),
             'TRANSFERTHHORSUE' => $this->request->getPost('checkboxTransfert') ? 1 : 0,
-            
         ];
 
+        // Gestion automatique des dates
         if ($mode === 'create') {
+            $traitementData['DATECREATION'] = date('Y-m-d');
+            $traitementData['DATEMAJ'] = date('Y-m-d');
             $ref = $this->model->insertTraitement($traitementData);
         } else {
+            // En modification, on met à jour uniquement DATEMAJ
+            $traitementData['DATEMAJ'] = date('Y-m-d');
             $this->model->updateTraitement($ref, $traitementData);
             $this->model->deleteAllBlocs($ref);
         }
