@@ -4,7 +4,7 @@
 <head>
     <title>Intranet – Registre des Activités de Traitement</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="<?= site_url('css/styles_modified.css') ?>" />
+    <link rel="stylesheet" href="<?= site_url('css/styles.css') ?>" />
 
     <script>
         function hideNotify() {

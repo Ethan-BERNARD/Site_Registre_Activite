@@ -20,9 +20,9 @@ $routes->get('/gestionTraitement/detail/(:segment)', 'Rssi::detail/$1');
 
 $routes->get('/gestionTraitement/searchAjax', 'Rssi::searchAjax');
 
-$routes->get('pageInfo/edit/(:segment)', 'PageInfoController::edit/$1');
-$routes->get('pageInfo', 'PageInfoController::index');
-$routes->post('pageInfo/save', 'PageInfoController::save');
+$routes->get('pageInfo/edit/(:segment)', 'Rssi::edit/$1');
+$routes->get('pageInfo', 'Rssi::indexDetails');
+$routes->post('pageInfo/save', 'Rssi::save');
 
 
 // Routes Utilisateur

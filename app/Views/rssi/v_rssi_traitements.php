@@ -78,6 +78,7 @@
         </div>
     </div>
 
+    
     <div id="tableContainer">
 
         <table class="tableTraitements">
@@ -158,6 +159,20 @@
     <script src="<?= base_url('js/filtreRecherche.js') ?>"></script>
     <script>const baseUrl = '<?= base_url() ?>';</script>
     <script src="<?= base_url('js/traitements.js') ?>"></script>
+
+    <!--pop-up enregistrement-->
+    <?php if (session()->getFlashdata('success')) : ?>
+        <div id="toast-success" class="toast">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
+    <script>
+    const toast = document.getElementById('toast-success');
+    if (toast) {
+        setTimeout(() => toast.classList.add('show'), 200); // apparition
+        setTimeout(() => toast.classList.remove('show'), 3000); // disparition
+    }
+    </script>
 
 </div>
 

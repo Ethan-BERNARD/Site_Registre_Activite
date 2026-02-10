@@ -25,19 +25,19 @@
             <div class="static-inputs">
                 <div class="ligne">
                     <label>Nom du traitement</label>
-                    <input type="text" name="nom" value="<?= $traitement['NOM'] ?? '' ?>">
+                    <input type="text" name="nom" value="<?= $traitement['NOM'] ?? '' ?>" required>
                 </div>
                 <div class="ligne">
                     <label>N° / Référence</label>
-                    <input type="text" name="ref" value="<?= $traitement['REF'] ?? '' ?>">
+                    <input type="text" name="ref" value="<?= $traitement['REF'] ?? '' ?>" required>
                 </div>
                 <div class="ligne">
                     <label>Date de création</label>
-                    <input type="date" name="date_crea" value="<?= $traitement['DATECREATION'] ?? '' ?>" readonly>
+                    <input type="date" name="date_crea" value="<?= $traitement['DATECREATION'] ?? date('Y-m-d') ?>" readonly>
                 </div>
                 <div class="ligne">
                     <label>Date de mise à jour</label>
-                    <input type="date" name="date_maj" value="<?= $traitement['DATEMAJ'] ?? '' ?>" readonly>
+                    <input type="date" name="date_maj" value="<?= $traitement['DATEMAJ'] ?? date('Y-m-d') ?>" readonly>
                 </div>
                 <div class="ligne checkbox-ligne">
                     <label for="checkboxTransfert">Transfert hors UE</label>
@@ -57,16 +57,16 @@
                 <template id="acteur-template">
                     <div class="acteur card-item">
                         <button type="button" class="supprimer-acteur btn-close-linux">&times;</button>
-                        <div class="ligne"><label>Nom</label><input type="text" name="acteur_nom[]"></div>
-                        <div class="ligne"><label>Adresse</label><input type="text" name="acteur_adresse[]"></div>
-                        <div class="ligne"><label>Code Postal</label><input type="text" name="acteur_cp[]"></div>
-                        <div class="ligne"><label>Ville</label><input type="text" name="acteur_ville[]"></div>
-                        <div class="ligne"><label>Pays</label><input type="text" name="acteur_pays[]"></div>
-                        <div class="ligne"><label>Téléphone</label><input type="text" name="acteur_tel[]"></div>
-                        <div class="ligne"><label>Mail</label><input type="text" name="acteur_mail[]"></div>
+                        <div class="ligne"><label>Nom</label><input type="text" name="acteur_nom[]" required></div>
+                        <div class="ligne"><label>Adresse</label><input type="text" name="acteur_adresse[]" required></div>
+                        <div class="ligne"><label>Code Postal</label><input type="text" name="acteur_cp[]" required></div>
+                        <div class="ligne"><label>Ville</label><input type="text" name="acteur_ville[]" required></div>
+                        <div class="ligne"><label>Pays</label><input type="text" name="acteur_pays[]" required></div>
+                        <div class="ligne"><label>Téléphone</label><input type="tel" name="acteur_tel[]" required></div>
+                        <div class="ligne"><label>Mail</label><input type="email" name="acteur_mail[]" required></div>
                         <div class="ligne">
                             <label>Type d'acteur</label>
-                            <select name="acteur_type[]"><option value="">-- Choisir --</option></select>
+                            <select name="acteur_type[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
                     </div>
                 </template>
@@ -80,7 +80,7 @@
                 <template id="finalite-template">
                     <div class="finaliteBloc card-item">
                         <button type="button" class="supprimer btn-close-linux">&times;</button>
-                        <div class="ligne"><label>Finalité</label><input type="text" name="finalite[]"></div>
+                        <div class="ligne"><label>Finalité</label><input type="text" name="finalite[]" required></div>
                         <div class="ligne checkbox-ligne"><label>Est principal</label><input type="checkbox" name="est_principal[]"></div>
                     </div>
                 </template>
@@ -94,11 +94,11 @@
                 <template id="categorie-template">
                     <div class="categorie card-item">
                         <button type="button" class="supprimer-categorie btn-close-linux">&times;</button>
-                        <div class="ligne"><label>Description</label><input type="text" name="categorie_description[]"></div>
-                        <div class="ligne"><label>Durée conservation</label><input type="text" name="categorie_duree[]"></div>
+                        <div class="ligne"><label>Description</label><input type="text" name="categorie_description[]" required></div>
+                        <div class="ligne"><label>Durée conservation</label><input type="number" name="categorie_duree[]" required></div>
                         <div class="ligne">
                             <label>Catégorie</label>
-                            <select name="categorie_type[]"><option value="">-- Choisir --</option></select>
+                            <select name="categorie_type[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
                     </div>
                 </template>
@@ -112,11 +112,11 @@
                 <template id="sensible-template">
                     <div class="sensible card-item">
                         <button type="button" class="supprimer-sensible btn-close-linux">&times;</button>
-                        <div class="ligne"><label>Description</label><input type="text" name="sensible_description[]"></div>
-                        <div class="ligne"><label>Durée conservation</label><input type="text" name="sensible_duree[]"></div>
+                        <div class="ligne"><label>Description</label><input type="text" name="sensible_description[]" required></div>
+                        <div class="ligne"><label>Durée conservation</label><input type="number" name="sensible_duree[]" required></div>
                         <div class="ligne">
                             <label>Catégorie</label>
-                            <select name="sensible_categorie[]"><option value="">-- Choisir --</option></select>
+                            <select name="sensible_categorie[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
                     </div>
                 </template>
@@ -132,9 +132,9 @@
                         <button type="button" class="supprimer-personne btn-close-linux">&times;</button>
                         <div class="ligne">
                             <label>Catégorie</label>
-                            <select name="personne_description[]"><option value="">-- Choisir --</option></select>
+                            <select name="personne_description[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
-                        <div class="ligne"><label>Précision</label><input type="text" name="personne_precision[]"></div>
+                        <div class="ligne"><label>Précision</label><input type="text" name="personne_precision[]" required></div>
                     </div>
                 </template>
             </div>
@@ -149,9 +149,9 @@
                         <button type="button" class="supprimer-destinataire btn-close-linux">&times;</button>
                         <div class="ligne">
                             <label>Type</label>
-                            <select name="destinataire_description[]"><option value="">-- Choisir --</option></select>
+                            <select name="destinataire_description[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
-                        <div class="ligne"><label>Précision</label><input type="text" name="destinataire_precision[]"></div>
+                        <div class="ligne"><label>Précision</label><input type="text" name="destinataire_precision[]" required></div>
                     </div>
                 </template>
             </div>
@@ -166,9 +166,9 @@
                         <button type="button" class="supprimer-securite btn-close-linux">&times;</button>
                         <div class="ligne">
                             <label>Type</label>
-                            <select name="securite_description[]"><option value="">-- Choisir --</option></select>
+                            <select name="securite_description[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
-                        <div class="ligne"><label>Précision</label><input type="text" name="securite_precision[]"></div>
+                        <div class="ligne"><label>Précision</label><input type="text" name="securite_precision[]" required></div>
                     </div>
                 </template>
             </div>
@@ -181,16 +181,16 @@
                 <template id="transfert-template">
                     <div class="transfert card-item">
                         <button type="button" class="supprimer-transfert btn-close-linux">&times;</button>
-                        <div class="ligne"><label>Destinataire</label><input type="text" name="transfert_destinataire[]"></div>
+                        <div class="ligne"><label>Destinataire</label><input type="text" name="transfert_destinataire[]" required></div>
                         <div class="ligne">
                             <label>Pays</label>
-                            <select name="transfert_pays[]"><option value="">-- Choisir --</option></select>
+                            <select name="transfert_pays[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
                         <div class="ligne">
                             <label>Garantie</label>
-                            <select name="transfert_garantie[]"><option value="">-- Choisir --</option></select>
+                            <select name="transfert_garantie[]" required><option value="" disabled selected>-- Choisir --</option></select>
                         </div>
-                        <div class="ligne"><label>Lien doc.</label><input type="text" name="transfert_lien[]"></div>
+                        <div class="ligne"><label>Lien doc.</label><input type="text" name="transfert_lien[]" required></div>
                     </div>
                 </template>
             </div>

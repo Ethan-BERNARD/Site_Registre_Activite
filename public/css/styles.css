@@ -861,6 +861,36 @@ td.finalite {
     margin: 0;
 }
 
+.header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-export-selection {
+    background: var(--warning);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-export-selection:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-export-selection:disabled {
+    background: var(--grey-300);
+    cursor: not-allowed;
+    transform: none;
+}
+
 .header-titre {
     margin-bottom: 32px;
 }
@@ -1273,6 +1303,13 @@ code {
 /* Colonne Nom : largeur maximale */
 .tableTraitements th:nth-child(1),
 .tableTraitements td:nth-child(1) {
+    width: 50px;
+    text-align: center;
+    padding: 12px 8px;
+}
+
+.tableTraitements th:nth-child(2),
+.tableTraitements td:nth-child(2) {
     width: 100%;
     text-align: left;
     padding-left: 24px;
@@ -1281,19 +1318,27 @@ code {
     color: var(--grey-900);
 }
 
+/* Checkbox dans le tableau */
+.tableTraitements input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-main);
+}
+
 /* Autres colonnes : compression */
-.tableTraitements th:nth-child(2), .tableTraitements td:nth-child(2),
 .tableTraitements th:nth-child(3), .tableTraitements td:nth-child(3),
 .tableTraitements th:nth-child(4), .tableTraitements td:nth-child(4),
-.tableTraitements th:nth-child(5), .tableTraitements td:nth-child(5) {
+.tableTraitements th:nth-child(5), .tableTraitements td:nth-child(5),
+.tableTraitements th:nth-child(6), .tableTraitements td:nth-child(6) {
     width: 1%;
     white-space: nowrap;
     padding: 12px 18px;
 }
 
 /* Colonnes Oui/Non très fines */
-.tableTraitements th:nth-child(6), .tableTraitements td:nth-child(6),
-.tableTraitements th:nth-child(7), .tableTraitements td:nth-child(7) {
+.tableTraitements th:nth-child(7), .tableTraitements td:nth-child(7),
+.tableTraitements th:nth-child(8), .tableTraitements td:nth-child(8) {
     width: 80px;
     min-width: 80px;
     max-width: 80px;
@@ -1895,4 +1940,24 @@ code {
     z-index: 10;
     background: var(--grey-800) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    background: #4caf50;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .4s, transform .4s;
+    z-index: 9999;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }
