@@ -36,8 +36,8 @@ class ActionsRssi
     public function logAction($typeAction, $details)
     {
         $this->dao->enregistrerLog(
-            $typeAction,
             $this->idRssi,
+            $typeAction,
             $details
         );
     }

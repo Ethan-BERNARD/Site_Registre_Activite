@@ -68,6 +68,7 @@ class PageInfoController extends BaseController
             'DATECREATION'   => $this->request->getPost('date_crea'),
             'DATEMAJ'        => $this->request->getPost('date_maj'),
             'TRANSFERTHHORSUE' => $this->request->getPost('checkboxTransfert') ? 1 : 0,
+            
         ];
 
         if ($mode === 'create') {

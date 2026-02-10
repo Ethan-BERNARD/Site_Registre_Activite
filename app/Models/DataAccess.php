@@ -154,7 +154,7 @@ class DataAccess extends Model
         return $this->db->query($sql)->getResultArray();
     }
 
-    public function enregistrerLog($typeAction, $idUtilisateur, $details)
+public function enregistrerLog($idUtilisateur, $typeAction, $details)
     {
         $sql = "INSERT INTO LOG (UTILISATEUR_ID, TYPEACTION, DETAILS, DATEMODIFICATION)
                 VALUES (?, ?, ?, NOW())";

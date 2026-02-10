@@ -11,6 +11,11 @@ class ActionPageInfo extends Model
     {
         parent::__construct();
         $this->db = Database::connect();
+        
+        $userId = session()->get('ID');
+        if ($userId) {
+            $this->db->query("SET @user_id = " . intval($userId));
+        }
     }
 
     /* ---------------------------------------------------------
