@@ -1,21 +1,39 @@
 <?php namespace App\Models;
 
-use CodeIgniter\Model;
 use App\Models\DataAccess;
 
-/**
- * Logique métier liée aux actions d’un utilisateur authentifié.
- */
-class ActionsUser extends Model
+class ActionsUser
 {
     private $dao;
-    private $idUtilisateur;
+    private $idUser;
 
-    public function __construct($idUtilisateur)
+    public function __construct($idUser)
     {
-        parent::__construct();
+        $this->idUser = $idUser;
+        $this->dao = new DataAccess($idUser);
+    }
 
-        $this->dao = new DataAccess();
-        $this->idUtilisateur = $idUtilisateur;
+    public function getTraitementsAvecFinaliteEtSensibles($search = null)
+    {
+        return $this->dao->getTraitementsAvecFinaliteEtSensibles($search);
+    }
+
+    public function getTraitementById($id)
+    {
+        return $this->dao->getTraitementById($id);
+    }
+
+    public function logAction($typeAction, $details)
+    {
+        $this->dao->enregistrerLog(
+            $this->idUser,
+            $typeAction,
+            $details
+        );
+    }
+
+    public function getDashboardStats()
+    {
+        return $this->dao->getDashboardStats();
     }
 }

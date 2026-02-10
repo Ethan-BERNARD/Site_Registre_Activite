@@ -138,14 +138,25 @@ class DataAccess extends Model
                 WHERE 1 = 1";
 
         if (!empty($search)) {
-            $search = strtolower($search);
-            $escaped = $this->db->escape('%' . $search . '%');
-
-            $sql .= " AND (
-                LOWER(COALESCE(t.NOM, '')) LIKE $escaped
-                OR LOWER(COALESCE(t.REF, '')) LIKE $escaped
-                OR LOWER(COALESCE(f.LIBELLE, '')) LIKE $escaped
-            )";
+            $search = strtolower(trim($search));
+            
+            // Si c'est un nombre pur, recherche exacte sur REF
+            if (is_numeric($search)) {
+                $escapedExact = $this->db->escape($search);
+                $sql .= " AND t.REF = $escapedExact";
+            } else {
+                // Recherche intelligente : début de mot ou mot entier
+                $escapedStart = $this->db->escape($search . '%');
+                $escapedWord = $this->db->escape('% ' . $search . '%');
+                
+                $sql .= " AND (
+                    LOWER(COALESCE(t.NOM, '')) LIKE $escapedStart
+                    OR LOWER(COALESCE(t.NOM, '')) LIKE $escapedWord
+                    OR LOWER(COALESCE(t.REF, '')) LIKE $escapedStart
+                    OR LOWER(COALESCE(f.LIBELLE, '')) LIKE $escapedStart
+                    OR LOWER(COALESCE(f.LIBELLE, '')) LIKE $escapedWord
+                )";
+            }
             log_message('debug', 'Requête SQL : ' . $sql);
         }
 

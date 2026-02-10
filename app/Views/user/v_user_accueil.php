@@ -6,17 +6,43 @@
     <h2>Espace Utilisateur</h2>
 
     <div id="notify">
-        Bienvenue <?= esc($identite) ?>, vous êtes connecté en tant que <strong>Utilisateur</strong>.
+        👋 <strong>Bienvenue <?= esc($identite) ?></strong> — Vous êtes connecté en tant qu'<strong>Utilisateur</strong>.
     </div>
 
-    <p>
-        Cet espace vous permet d’accéder aux documents internes, aux communications du RSSI
-        et aux informations essentielles de l’établissement.
-        Vous disposez d’un accès simplifié et sécurisé pour consulter les ressources mises à votre disposition.
-    </p>
+    <!-- Statistiques en cartes -->
+    <h3>Tableau de bord</h3>
+    <div class="dashboard-grid">
+        
+        <!-- Carte 1 : Traitements -->
+        <div class="dashboard-card card-blue">
+            <div class="card-icon">📋</div>
+            <div class="card-label">Traitements</div>
+            <div class="card-value"><?= $stats['total_traitements'] ?? 0 ?></div>
+            <div class="card-subtitle">Total enregistrés</div>
+        </div>
+        <!-- Carte 2 : Dernière mise à jour -->
+        <div class="dashboard-card card-green">
+            <div class="card-icon">🕐</div>
+            <div class="card-label">Dernière action</div>
+            <div class="card-value">
+                <?php 
+                if (!empty($stats['derniere_action'])) {
+                    $date = new DateTime($stats['derniere_action']['date']);
+                    echo $date->format('d/m/Y');
+                } else {
+                    echo 'Aucune';
+                }
+                ?>
+            </div>
+            <div class="card-subtitle">
+                <?= !empty($stats['derniere_action']) ? esc($stats['derniere_action']['type']) : 'Pas d\'activité récente' ?>
+            </div>
+        </div>
 
-    <h3>Fonctionnalités principales</h3>
-    <table>
+    </div>
+
+    <h3>Vos missions principales</h3>
+    <table class="table-missions">
         <thead>
             <tr>
                 <th>Action</th>
@@ -25,34 +51,35 @@
         </thead>
         <tbody>
             <tr>
-                <td>Documents internes</td>
-                <td>Consulter les documents mis à disposition par l’établissement</td>
+                <td class="action-cell">
+                    <a href="#">Liste des traitements</a>
+                </td>
+                <td>Consulter les traitements enregistrés</td>
             </tr>
             <tr>
-                <td>Communications</td>
-                <td>Lire les messages et annonces du RSSI</td>
-            </tr>
-            <tr>
-                <td>Profil</td>
-                <td>Mettre à jour certaines informations personnelles</td>
-            </tr>
-            <tr>
-                <td>Support</td>
-                <td>Accéder aux informations d’aide et de contact</td>
+                <td class="action-cell">
+                    <a href="#">Ajout d'un traitement</a>
+                </td>
+                <td>Possibilité de créer un nouveau traitement</td>
             </tr>
         </tbody>
     </table>
+    <h3 style="margin-top: 40px;">Navigation rapide</h3>
+    <div class="navigation-grid">
+        
+        <a href="<?= site_url('gestionTraitement') ?>" class="nav-card">
+            <div class="nav-icon">📋</div>
+            <div class="nav-title">Gestion</div>
+            <div class="nav-desc">Liste des traitements</div>
+        </a>
 
-    <h3>Navigation</h3>
-    <p>Utilisez le menu latéral pour accéder aux différentes fonctionnalités :</p>
-    <ul>
-        <li><strong>Accueil</strong> – cette page</li>
-        <li><strong>Documents internes</strong> – accès aux fichiers</li>
-        <li><strong>Communications</strong> – messages du RSSI</li>
-        <li><strong>Profil</strong> – informations personnelles</li>
-        <li><strong>Déconnexion</strong> – quitter l’espace sécurisé</li>
-    </ul>
+        <a href="<?= site_url('pageInfo') ?>" class="nav-card nav-card-primary">
+            <div class="nav-icon">➕</div>
+            <div class="nav-title">Nouveau</div>
+            <div class="nav-desc">Créer un traitement</div>
+        </a>
+
+    </div>
 
 </div>
 <?= $this->endSection() ?>
-

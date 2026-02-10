@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/l_rssi') ?>
+<?= $this->extend('layouts/l_user') ?>
 
 <?= $this->section('title') ?>Tableau des traitements<?= $this->endSection() ?>
 
@@ -9,10 +9,7 @@
     <div class="header-table">
         <h2>Tableau des traitements</h2>
         <div class="header-actions">
-            <button id="btnExportSelection" class="btn-export-selection" disabled>
-                Exporter la sélection
-            </button>
-            <a href="<?= site_url('pageInfo') ?>" class="btn-ajout-traitement">
+            <a href="<?= site_url('user/creer') ?>" class="btn-ajout-traitement">
                 + Nouveau traitement
             </a>
         </div>
@@ -81,18 +78,17 @@
     
     <div id="tableContainer">
 
-        <table class="tableTraitements">
+        <table class="tableTraitements table-user-view">
             <thead>
 
                 <tr>
-                    <th colspan="5">Identification du traitement</th>
+                    <th colspan="4">Identification du traitement</th>
                     <th colspan="1">Finalité du traitement</th>
                     <th colspan="1">Données sensibles ?</th>
                     <th colspan="1">Transferts hors UE ?</th>
                 </tr>
 
                 <tr>
-                    <th><input type="checkbox" id="checkAll" title="Tout sélectionner"></th>
                     <th>Nom du traitement</th>
                     <th>N° / Réf</th>
                     <th>Date de création</th>
@@ -107,42 +103,25 @@
             <tbody id="tbodyTraitements">
                 <?php foreach ($traitements as $t) : ?>
                     <tr 
-                        onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';"
+                        onclick="window.location='<?= site_url('user/consulter/' . $t['REF']) ?>';"
                         class="clickable-row"
                         data-sensibles="<?= strtolower($t['DONNEESSENSIBLES']) ?>"
                         data-transferts="<?= strtolower($t['TRANSFERT_HORS_UE']) ?>"
                         data-date="<?= $t['DATECREATION'] ?>"
                     >
-                        <td onclick="event.stopPropagation();">
-                            <input 
-                                type="checkbox" 
-                                class="checkbox-traitement" 
-                                value="<?= esc($t['REF']) ?>"
-                            >
-                        </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
-                            <strong><?= esc($t['NOM']) ?></strong>
-                        </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
-                            <code><?= esc($t['REF']) ?></code>
-                        </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
-                            <?= esc($t['DATECREATION']) ?>
-                        </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
-                            <?= esc($t['DATEMAJ']) ?>
-                        </td>
-                        <td class="finalite" onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
-                            <?= esc($t['FINALITE']) ?>
-                        </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td><strong><?= esc($t['NOM']) ?></strong></td>
+                        <td><code><?= esc($t['REF']) ?></code></td>
+                        <td><?= esc($t['DATECREATION']) ?></td>
+                        <td><?= esc($t['DATEMAJ']) ?></td>
+                        <td class="finalite"><?= esc($t['FINALITE']) ?></td>
+                        <td>
                             <?php if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui'): ?>
                                 <span class="badge badge-oui">Oui</span>
                             <?php else: ?>
                                 <span class="badge badge-non">Non</span>
                             <?php endif; ?>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td>
                             <?php if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1): ?>
                                 <span class="badge badge-oui">Oui</span>
                             <?php else: ?>
@@ -158,9 +137,8 @@
 
     <script src="<?= base_url('js/filtreRecherche.js') ?>"></script>
     <script>const baseUrl = '<?= base_url() ?>';</script>
-    <script src="<?= base_url('js/traitements.js') ?>"></script>
+    <script src="<?= base_url('js/traitements_user.js') ?>"></script>
 
-    <!--pop-up enregistrement-->
     <?php if (session()->getFlashdata('success')) : ?>
         <div id="toast-success" class="toast">
             <?= session()->getFlashdata('success') ?>
@@ -169,8 +147,8 @@
     <script>
     const toast = document.getElementById('toast-success');
     if (toast) {
-        setTimeout(() => toast.classList.add('show'), 200); // apparition
-        setTimeout(() => toast.classList.remove('show'), 3000); // disparition
+        setTimeout(() => toast.classList.add('show'), 200);
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
     </script>
 
