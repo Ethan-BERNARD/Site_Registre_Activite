@@ -69,7 +69,7 @@
         <tbody>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('gestionTraitement') ?>">Gérer les traitements</a>
+                    <a href="#">Gérer les traitements</a>
                 </td>
                 <td>Créer, modifier ou supprimer une activité de traitement</td>
             </tr>
@@ -81,13 +81,13 @@
             </tr>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('logs') ?>">Historique</a>
+                    <a href="#">Historique</a>
                 </td>
                 <td>Consulter les modifications effectuées</td>
             </tr>
             <tr>
                 <td class="action-cell">
-                    <a href="<?= site_url('rssi/exportPDF') ?>">Export PDF</a>
+                    <a href="#">Export PDF</a>
                 </td>
                 <td>Générer automatiquement une fiche récapitulative</td>
             </tr>
