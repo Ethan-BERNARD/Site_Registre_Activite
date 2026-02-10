@@ -9,27 +9,54 @@ $routes->get('/', 'Anonyme::index');
 $routes->get('/anonyme', 'Anonyme::index');
 $routes->post('/anonyme/seConnecter', 'Anonyme::seConnecter');
 
-// ========== Routes RSSI ==========
-$routes->get('/rssi', 'Rssi::index');
-$routes->get('/rssi/seDeconnecter', 'Rssi::seDeconnecter');
-$routes->get('/gestionTraitement', 'Rssi::tableau');
-$routes->get('/logs', 'Rssi::logs');
-$routes->post('/rssi/genererPDF', 'Rssi::genererPDF');
-$routes->get('/gestionTraitement/searchAjax', 'Rssi::searchAjax');
 
-// PageInfo (édition/création) - Utilisé par RSSI
-$routes->get('pageInfo', 'PageInfoController::index');
-$routes->get('pageInfo/edit/(:segment)', 'Rssi::edit/$1');
-$routes->post('pageInfo/save', 'Rssi::save');
 
-// ========== Routes USER ==========
-$routes->get('/user', 'User::index');
-$routes->get('/user/seDeconnecter', 'User::seDeconnecter');
-$routes->get('/user/tableau', 'User::tableau');
-$routes->get('/user/creer', 'User::creer');
-$routes->get('/user/consulter/(:segment)', 'User::consulter/$1');
-$routes->post('/user/save', 'User::save');
-$routes->get('/user/searchAjax', 'User::searchAjax');
+// Accessible uniquement avec DROIT = 'AD'
+$routes->group('rssi', function($routes) {
+    // Dashboard
+    $routes->get('/', 'Rssi::index');
+    
+    // Déconnexion
+    $routes->get('seDeconnecter', 'Rssi::seDeconnecter');
+    
+    // Gestion des traitements
+    $routes->get('tableau', 'Rssi::tableau');
+    $routes->get('searchAjax', 'Rssi::searchAjax');
+    
+    // Création/Édition de traitement
+    $routes->get('create', 'Rssi::create');
+    $routes->get('edit/(:num)', 'Rssi::edit/$1');
+    $routes->post('save', 'Rssi::save');
+    
+    // Logs système
+    $routes->get('logs', 'Rssi::logs');
+    
+    // Export PDF
+    $routes->post('genererPDF', 'Rssi::genererPDF');
+});
 
-// Jeu de test (http://registre.local:8080/jeu-test/generer)
-$routes->get('jeu-test/generer', 'JeuTest::generer');
+
+// Accessible uniquement avec DROIT = 'US'
+$routes->group('user', function($routes) {
+    // Dashboard
+    $routes->get('/', 'User::index');
+    
+    // Déconnexion
+    $routes->get('seDeconnecter', 'User::seDeconnecter');
+    
+    // Consultation des traitements (lecture seule)
+    $routes->get('tableau', 'User::tableau');
+    $routes->get('searchAjax', 'User::searchAjax');
+    $routes->get('consulter/(:num)', 'User::consulter/$1');
+    
+    // Création de traitement (si autorisé)
+    $routes->get('creer', 'User::creer');
+    $routes->post('save', 'User::save');
+});
+
+
+
+// ROUTES DE TEST (désactiver en production)
+if (ENVIRONMENT !== 'production') {
+    $routes->get('jeu-test/generer', 'JeuTest::generer');
+}

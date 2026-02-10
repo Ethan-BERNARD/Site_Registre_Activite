@@ -7,7 +7,7 @@
 <div id="contenu">
 
     <!-- Bouton retour intuitif -->
-    <a href="<?= site_url('gestionTraitement') ?>" class="btn-retour">
+    <a href="<?= site_url('/rssi/tableau') ?>" class="btn-retour">
         Retour au tableau
     </a>
 
@@ -15,7 +15,7 @@
         <h2><?= $mode === 'edit' ? 'Modifier un traitement' : 'Créer un traitement' ?></h2>
     </div>
 
-    <form class="formInfos" method="post" action="/pageInfo/save">
+    <form class="formInfos" method="post" action="<?= site_url('/rssi/save') ?>">
 
         <input type="hidden" name="mode" value="<?= $mode ?>">
         <input type="hidden" name="id_traitement" value="<?= $traitement['REF'] ?? '' ?>">

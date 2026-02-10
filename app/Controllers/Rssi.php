@@ -25,8 +25,23 @@ class Rssi extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
+        // Vérifier que l'utilisateur est connecté
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
+            exit;
+        }
+
+        // 🔒 SÉCURITÉ CRITIQUE : Vérifier que l'utilisateur est bien ADMIN (RSSI)
+        if ($this->session->get('DROIT') !== 'AD') {
+            // Si ce n'est pas un admin, bloquer l'accès
+            if ($this->session->get('DROIT') === 'US') {
+                // Utilisateur standard : rediriger vers son espace
+                redirect()->to('/user')->send();
+            } else {
+                // Rôle inconnu : déconnecter
+                $this->session->destroy();
+                redirect()->to('/anonyme')->send();
+            }
             exit;
         }
 
@@ -533,6 +548,6 @@ class Rssi extends BaseController
             }
         }
         session()->setFlashdata('success', 'Le traitement a bien été enregistré.');
-        return redirect()->to('/gestionTraitement')->with('success', 'Traitement sauvegardé');
+        return redirect()->to('/rssi/tableau')->with('success', 'Traitement sauvegardé');
     }
 }

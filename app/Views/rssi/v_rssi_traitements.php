@@ -12,7 +12,7 @@
             <button id="btnExportSelection" class="btn-export-selection" disabled>
                 Exporter la sélection
             </button>
-            <a href="<?= site_url('pageInfo') ?>" class="btn-ajout-traitement">
+            <a href="<?= site_url('/rssi/create') ?>" class="btn-ajout-traitement">
                 + Nouveau traitement
             </a>
         </div>
@@ -107,7 +107,7 @@
             <tbody id="tbodyTraitements">
                 <?php foreach ($traitements as $t) : ?>
                     <tr 
-                        onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';"
+                        onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';"
                         class="clickable-row"
                         data-sensibles="<?= strtolower($t['DONNEESSENSIBLES']) ?>"
                         data-transferts="<?= strtolower($t['TRANSFERT_HORS_UE']) ?>"
@@ -120,29 +120,29 @@
                                 value="<?= esc($t['REF']) ?>"
                             >
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <strong><?= esc($t['NOM']) ?></strong>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <code><?= esc($t['REF']) ?></code>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <?= esc($t['DATECREATION']) ?>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <?= esc($t['DATEMAJ']) ?>
                         </td>
-                        <td class="finalite" onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td class="finalite" onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <?= esc($t['FINALITE']) ?>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <?php if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui'): ?>
                                 <span class="badge badge-oui">Oui</span>
                             <?php else: ?>
                                 <span class="badge badge-non">Non</span>
                             <?php endif; ?>
                         </td>
-                        <td onclick="window.location='<?= site_url('pageInfo/edit/' . $t['REF']) ?>';">
+                        <td onclick="window.location='<?= site_url('/rssi/edit/' . $t['REF']) ?>';">
                             <?php if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1): ?>
                                 <span class="badge badge-oui">Oui</span>
                             <?php else: ?>

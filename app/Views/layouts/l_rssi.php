@@ -40,11 +40,11 @@
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('gestionTraitement', 'Gestion des traitements', 'title="Liste des activités de traitement"') ?>
+                        <?= anchor('/rssi/tableau', 'Gestion des traitements', 'title="Liste des activités de traitement"') ?>
                     </li>
 
                     <li class="smenu">
-                        <?= anchor('logs', 'Historique des modifications', 'title="Historique des actions"') ?>
+                        <?= anchor('/rssi/logs', 'Historique des modifications', 'title="Historique des actions"') ?>
                     </li>
 
                     <br>
