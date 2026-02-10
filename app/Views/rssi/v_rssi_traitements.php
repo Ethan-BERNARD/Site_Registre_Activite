@@ -158,7 +158,7 @@
 
     <script src="<?= base_url('js/filtreRecherche.js') ?>"></script>
     <script>const baseUrl = '<?= base_url() ?>';</script>
-    <script src="<?= base_url('js/traitements.js') ?>"></script>
+    <script src="<?= base_url('js/traitements_rssi.js') ?>"></script>
 
     <!--pop-up enregistrement-->
     <?php if (session()->getFlashdata('success')) : ?>

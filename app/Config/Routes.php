@@ -50,13 +50,14 @@ $routes->group('user', function($routes) {
     $routes->get('consulter/(:num)', 'User::consulter/$1');
     
     // Création de traitement (si autorisé)
-    $routes->get('creer', 'User::creer');
+    $routes->get('create', 'User::creer');
     $routes->post('save', 'User::save');
 });
 
 
 
 // ROUTES DE TEST (désactiver en production)
+// (http://registre.local:8080/jeu-test/generer)
 if (ENVIRONMENT !== 'production') {
     $routes->get('jeu-test/generer', 'JeuTest::generer');
 }

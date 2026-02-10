@@ -278,7 +278,7 @@
         });
     </script>
 
-    <script src="/js/pageInfo.js?v=2"></script>
+    <script src="<?= base_url('js/traitements_detail.js') ?>"></script>
 
 </div>
 

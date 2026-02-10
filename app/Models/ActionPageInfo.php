@@ -3,6 +3,8 @@
 use CodeIgniter\Model;
 use Config\Database;
 
+//via requête SQL disponible avec CodeIgniter
+
 class ActionPageInfo extends Model
 {
     protected $db;

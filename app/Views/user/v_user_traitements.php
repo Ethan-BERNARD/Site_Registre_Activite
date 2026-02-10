@@ -9,7 +9,7 @@
     <div class="header-table">
         <h2>Tableau des traitements</h2>
         <div class="header-actions">
-            <a href="<?= site_url('user/creer') ?>" class="btn-ajout-traitement">
+            <a href="<?= site_url('user/create') ?>" class="btn-ajout-traitement">
                 + Nouveau traitement
             </a>
         </div>

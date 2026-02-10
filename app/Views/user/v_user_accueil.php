@@ -34,9 +34,6 @@
                 }
                 ?>
             </div>
-            <div class="card-subtitle">
-                <?= !empty($stats['derniere_action']) ? esc($stats['derniere_action']['type']) : 'Pas d\'activité récente' ?>
-            </div>
         </div>
 
     </div>
@@ -73,7 +70,7 @@
             <div class="nav-desc">Liste des traitements</div>
         </a>
 
-        <a href="<?= site_url('/user/creer') ?>" class="nav-card nav-card-primary">
+        <a href="<?= site_url('/user/create') ?>" class="nav-card nav-card-primary">
             <div class="nav-icon">➕</div>
             <div class="nav-title">Nouveau</div>
             <div class="nav-desc">Créer un traitement</div>

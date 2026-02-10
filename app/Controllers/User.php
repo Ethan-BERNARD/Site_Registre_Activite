@@ -24,23 +24,8 @@ class User extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // Vérifier que l'utilisateur est connecté
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
-            exit;
-        }
-
-        // 🔒 SÉCURITÉ CRITIQUE : Vérifier que l'utilisateur est bien USER (utilisateur standard)
-        if ($this->session->get('DROIT') !== 'US') {
-            // Si ce n'est pas un utilisateur standard, bloquer l'accès
-            if ($this->session->get('DROIT') === 'AD') {
-                // Admin : rediriger vers l'espace admin
-                redirect()->to('/rssi')->send();
-            } else {
-                // Rôle inconnu : déconnecter
-                $this->session->destroy();
-                redirect()->to('/anonyme')->send();
-            }
             exit;
         }
 

@@ -2,10 +2,8 @@
 
 use CodeIgniter\Model;
 
-/**
- * Accès SQL brut à la base de données.
- * Toutes les requêtes SQL de l'application passent par ce modèle.
- */
+//via requête SQL Brute
+
 class DataAccess extends Model
 {
     protected $db;
