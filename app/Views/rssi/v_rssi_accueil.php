@@ -109,12 +109,6 @@
             <div class="nav-desc">Suivi des modifications</div>
         </a>
 
-        <a href="<?= site_url('rssi/exportPDF') ?>" class="nav-card">
-            <div class="nav-icon">📄</div>
-            <div class="nav-title">Export</div>
-            <div class="nav-desc">Génération PDF</div>
-        </a>
-
         <a href="<?= site_url('pageInfo') ?>" class="nav-card nav-card-primary">
             <div class="nav-icon">➕</div>
             <div class="nav-title">Nouveau</div>
