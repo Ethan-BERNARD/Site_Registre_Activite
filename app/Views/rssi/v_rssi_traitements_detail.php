@@ -28,10 +28,6 @@
                     <input type="text" name="nom" value="<?= $traitement['NOM'] ?? '' ?>" required>
                 </div>
                 <div class="ligne">
-                    <label>N° / Référence</label>
-                    <input type="text" name="ref" value="<?= $traitement['REF'] ?? '' ?>" required>
-                </div>
-                <div class="ligne">
                     <label>Date de création</label>
                     <input type="date" name="date_crea" value="<?= $traitement['DATECREATION'] ?? date('Y-m-d') ?>" readonly>
                 </div>
@@ -78,7 +74,7 @@
                 <button type="button" id="addFinalite" class="btn-add">+ Ajouter une finalité</button>
 
                 <template id="finalite-template">
-                    <div class="finaliteBloc card-item">
+                    <div class="finaliteBloc card-item" >
                         <button type="button" class="supprimer btn-close-linux">&times;</button>
                         <div class="ligne"><label>Finalité</label><input type="text" name="finalite[]" required></div>
                         <div class="ligne checkbox-ligne"><label>Est principal</label><input type="checkbox" name="est_principal[]"></div>
@@ -203,6 +199,30 @@
 
     </form>
 
+    <!-- MODALE DE VALIDATION FINALITÉ -->
+    <div id="modaleFinalite" class="modale-overlay">
+        <div class="modale-container">
+            <div class="modale-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+            </div>
+            <h3 class="modale-titre">Finalité requise</h3>
+            <p class="modale-message">
+                Vous devez ajouter au moins une finalité avant d'enregistrer le traitement.
+                <br><br>
+                La finalité est obligatoire selon le RGPD.
+            </p>
+            <div class="modale-actions">
+                <button type="button" class="btn-modal-retour" onclick="fermerModaleFinalite()">
+                    Compris
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Passage des variables PHP au JS
         const categDCP = <?= json_encode($categDCP) ?>;
@@ -223,9 +243,43 @@
         const destinatairesData = <?= json_encode($destinataires ?? []) ?>;
         const securitesData = <?= json_encode($securites ?? []) ?>;
         const transfertsData = <?= json_encode($transferts ?? []) ?>;
+
+        // Fonction pour fermer la modale
+        function fermerModaleFinalite() {
+            document.getElementById('modaleFinalite').style.display = 'none';
+        }
+
+        // Fonction pour afficher la modale
+        function afficherModaleFinalite() {
+            document.getElementById('modaleFinalite').style.display = 'flex';
+        }
+
+        // Validation du formulaire
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const blocs = document.querySelectorAll('.finaliteBloc');
+            if (blocs.length === 0) {
+                e.preventDefault();
+                afficherModaleFinalite();
+            }
+        });
+
+        // Fermer la modale en cliquant sur l'overlay
+        document.getElementById('modaleFinalite').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fermerModaleFinalite();
+            }
+        });
+
+        // Fermer la modale avec la touche Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fermerModaleFinalite();
+            }
+        });
     </script>
 
     <script src="/js/pageInfo.js?v=2"></script>
+
 </div>
 
 <?= $this->endSection() ?>

@@ -67,7 +67,7 @@ class ActionPageInfo extends Model
 
     public function insertTraitement($data) {
         $this->db->table('TRAITEMENT')->insert($data);
-        return $data['REF'];
+        return $this->db->insertID(); // Retourner l'ID auto-généré
     }
 
     public function updateTraitement($ref, $data) {

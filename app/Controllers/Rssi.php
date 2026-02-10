@@ -307,6 +307,14 @@ class Rssi extends BaseController
         $this->actRssi->logAction('EXPORT', "Export PDF du traitement $idTraitement");
     }
 
+    public function create() {
+        $data = $this->loadCommonData();
+        $data['mode'] = 'create';
+        $data['traitement'] = null;
+
+        return view('rssi/v_rssi_traitements_detail', $data);
+    }
+
     public function edit($ref) {
         $data = $this->loadCommonData();
 
@@ -352,15 +360,17 @@ class Rssi extends BaseController
         --------------------------------------------------------- */
 
         $traitementData = [
-            'REF'            => $this->request->getPost('ref'),
             'NOM'            => $this->request->getPost('nom'),
             'TRANSFERTHHORSUE' => $this->request->getPost('checkboxTransfert') ? 1 : 0,
         ];
 
         // Gestion automatique des dates
         if ($mode === 'create') {
+            // Ne pas inclure REF - elle sera auto-générée par la base de données
             $traitementData['DATECREATION'] = date('Y-m-d');
             $traitementData['DATEMAJ'] = date('Y-m-d');
+            
+            // Insérer le traitement et récupérer la REF auto-générée
             $ref = $this->model->insertTraitement($traitementData);
         } else {
             // En modification, on met à jour uniquement DATEMAJ
@@ -525,24 +535,4 @@ class Rssi extends BaseController
         session()->setFlashdata('success', 'Le traitement a bien été enregistré.');
         return redirect()->to('/gestionTraitement')->with('success', 'Traitement sauvegardé');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
