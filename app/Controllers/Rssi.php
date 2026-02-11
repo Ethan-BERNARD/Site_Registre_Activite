@@ -148,21 +148,6 @@ class Rssi extends BaseController
     }
 
     /**
-     * Affiche le formulaire de sélection pour l'export PDF.
-     *
-     * @return string Vue du formulaire d'export
-     */
-    public function exportPDF()
-    {
-        $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
-
-        return view('rssi/v_rssi_export_form', [
-            'identite' => $this->data['identite'],
-            'traitements' => $traitements
-        ]);
-    }
-
-    /**
      * Génère un PDF contenant les traitements sélectionnés.
      * Enregistre l'export dans les logs.
      *
