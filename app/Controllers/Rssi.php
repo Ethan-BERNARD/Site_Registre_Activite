@@ -256,17 +256,26 @@ class Rssi extends BaseController
     }
 
     /**
-     * Affiche le tableau des traitements avec support de recherche.
+     * Affiche le tableau complet des traitements avec recherche.
+     * Enregistre la consultation dans les logs.
      *
-     * @return string Vue du tableau avec résultats de recherche
+     * @return string Vue du tableau des traitements
      */
     public function tableau()
     {
+        $this->logConsultationListe();
+
+        // CORRECTION SÉCURITÉ : Validation et nettoyage du paramètre de recherche
         $search = $this->request->getGet('search');
+        if ($search !== null) {
+            $search = trim(strip_tags($search));
+            // Limiter la longueur de recherche
+            $search = mb_substr($search, 0, 100);
+        }
 
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($search);
 
-        return view('rssi/v_rssi_traitements', [
+       return view('rssi/v_rssi_traitements', [
             'identite' => $this->data['identite'],
             'traitements' => $traitements
         ], ['saveData' => true]);
@@ -299,49 +308,79 @@ class Rssi extends BaseController
     /**
      * Point d'entrée AJAX pour la recherche dynamique de traitements.
      * Retourne le HTML des lignes du tableau filtrées avec checkbox pour export.
+     * Sécurisé : nettoyage des entrées, échappement complet, URLs protégées.
      *
-     * @return \CodeIgniter\HTTP\Response Réponse HTTP contenant le HTML généré
+     * @return \CodeIgniter\HTTP\Response
      */
     public function searchAjax()
     {
-        $q = $this->request->getGet('q');
+        helper('html'); // nécessaire pour esc()
 
+        // Nettoyage du paramètre q
+        $q = $this->request->getGet('q');
+        if ($q !== null) {
+            $q = trim(strip_tags($q));
+            $q = mb_substr($q, 0, 100);
+        }
+
+        // Récupération des traitements
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles($q);
 
         $html = '';
 
         foreach ($traitements as $t) {
-            $badgeSensibles = '';
-            if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui') {
-                $badgeSensibles = '<span class="badge badge-oui">Oui</span>';
-            } else {
-                $badgeSensibles = '<span class="badge badge-non">Non</span>';
-            }
 
-            $badgeTransfert = '';
-            if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1) {
-                $badgeTransfert = '<span class="badge badge-oui">Oui</span>';
-            } else {
-                $badgeTransfert = '<span class="badge badge-non">Non</span>';
-            }
+            // Normalisation des valeurs sensibles
+            $donneesSensibles = strtolower(trim($t['DONNEESSENSIBLES'] ?? 'non'));
+            $transfertHorsUE  = strtolower(trim($t['TRANSFERT_HORS_UE'] ?? 'non'));
 
-            $html .= '
-                <tr class="clickable-row">
+            // Badges sécurisés
+            $badgeSensibles = ($donneesSensibles === 'oui')
+                ? '<span class="badge badge-oui">Oui</span>'
+                : '<span class="badge badge-non">Non</span>';
+
+            $badgeTransfert = ($transfertHorsUE === 'oui' || $t['TRANSFERT_HORS_UE'] == 1)
+                ? '<span class="badge badge-oui">Oui</span>'
+                : '<span class="badge badge-non">Non</span>';
+
+            // URL sécurisée
+            $editUrl = esc(site_url('pageInfo/edit/' . intval($t['REF'])), 'attr');
+
+            // Construction HTML sécurisée
+            $html .= sprintf(
+                '<tr class="clickable-row">
                     <td onclick="event.stopPropagation();">
-                        <input type="checkbox" class="checkbox-traitement" value="' . esc($t['REF']) . '">
+                        <input type="checkbox" class="checkbox-traitement" value="%s">
                     </td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';"><strong>' . esc($t['NOM']) . '</strong></td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';"><code>' . esc($t['REF']) . '</code></td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['DATECREATION']) . '</td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['DATEMAJ']) . '</td>
-                    <td class="finalite" onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . esc($t['FINALITE']) . '</td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . $badgeSensibles . '</td>
-                    <td onclick="window.location=\'' . site_url('pageInfo/edit/' . $t['REF']) . '\';">' . $badgeTransfert . '</td>
-                </tr>
-            ';
+                    <td onclick="window.location=\'%s\';"><strong>%s</strong></td>
+                    <td onclick="window.location=\'%s\';"><code>%s</code></td>
+                    <td onclick="window.location=\'%s\';">%s</td>
+                    <td onclick="window.location=\'%s\';">%s</td>
+                    <td class="finalite" onclick="window.location=\'%s\';">%s</td>
+                    <td onclick="window.location=\'%s\';">%s</td>
+                    <td onclick="window.location=\'%s\';">%s</td>
+                </tr>',
+                esc($t['REF'], 'attr'),
+                $editUrl,
+                esc($t['NOM']),
+                $editUrl,
+                esc($t['REF']),
+                $editUrl,
+                esc($t['DATECREATION']),
+                $editUrl,
+                esc($t['DATEMAJ']),
+                $editUrl,
+                esc($t['FINALITE']),
+                $editUrl,
+                $badgeSensibles,
+                $editUrl,
+                $badgeTransfert
+            );
         }
 
-        return $this->response->setBody($html);
+        return $this->response
+                    ->setHeader('Content-Type', 'text/html; charset=UTF-8')
+                    ->setBody($html);
     }
 
     /**

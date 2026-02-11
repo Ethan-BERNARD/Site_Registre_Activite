@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let q = this.value;
 
             debounceTimer = setTimeout(() => {
-                fetch(baseUrl + "/gestionTraitement/searchAjax?q=" + encodeURIComponent(q) + "&_=" + Date.now())
+                fetch(baseUrl + "/rssi/searchAjax?q=" + encodeURIComponent(q) + "&_=" + Date.now())
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('tbodyTraitements').innerHTML = html;
