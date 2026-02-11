@@ -91,7 +91,7 @@
                     <div class="categorie card-item">
                         <button type="button" class="supprimer-categorie btn-close-linux">&times;</button>
                         <div class="ligne"><label>Description</label><input type="text" name="categorie_description[]" required></div>
-                        <div class="ligne"><label>Durée conservation</label><input type="number" name="categorie_duree[]" required></div>
+                        <div class="ligne"><label>Durée conservation (mois)</label><input type="number" name="categorie_duree[]" required></div>
                         <div class="ligne">
                             <label>Catégorie</label>
                             <select name="categorie_type[]" required><option value="" disabled selected>-- Choisir --</option></select>
@@ -109,7 +109,7 @@
                     <div class="sensible card-item">
                         <button type="button" class="supprimer-sensible btn-close-linux">&times;</button>
                         <div class="ligne"><label>Description</label><input type="text" name="sensible_description[]" required></div>
-                        <div class="ligne"><label>Durée conservation</label><input type="number" name="sensible_duree[]" required></div>
+                        <div class="ligne"><label>Durée conservation (mois)</label><input type="number" name="sensible_duree[]" required></div>
                         <div class="ligne">
                             <label>Catégorie</label>
                             <select name="sensible_categorie[]" required><option value="" disabled selected>-- Choisir --</option></select>

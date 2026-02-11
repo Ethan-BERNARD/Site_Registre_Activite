@@ -230,30 +230,4 @@ class JeuTest extends Controller
 
     return "Jeu de test créé avec succès.";
     }
-
-    public function supprimer()
-    {
-        $db = Database::connect();
-
-        // Désactiver les contraintes de clés étrangères temporairement
-        $db->query("SET FOREIGN_KEY_CHECKS = 0");
-
-        // Supprimer toutes les données (sauf tables de référence)
-        $db->query("TRUNCATE TABLE TRANSFERTHORSUE");
-        $db->query("TRUNCATE TABLE LISTEMESURESECURITE");
-        $db->query("TRUNCATE TABLE LISTEDESTINATAIRE");
-        $db->query("TRUNCATE TABLE LISTEPERSONNECONCERNE");
-        $db->query("TRUNCATE TABLE LISTEDCPSENSIBLE");
-        $db->query("TRUNCATE TABLE LISTEDCP");
-        $db->query("TRUNCATE TABLE FINALITE");
-        $db->query("TRUNCATE TABLE TRAITEMENT");
-        $db->query("DELETE FROM ACTEURS WHERE IDACTEUR > 0");
-        $db->query("DELETE FROM UTILISATEURS WHERE ID > 1"); // Garde admin
-        $db->query("TRUNCATE TABLE LOG");
-
-        // Réactiver les contraintes
-        $db->query("SET FOREIGN_KEY_CHECKS = 1");
-
-        return "Jeu de test supprimé (admin conservé).";
-    }
 }

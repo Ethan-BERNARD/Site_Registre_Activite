@@ -89,7 +89,7 @@
                     <?php foreach ($categories as $cat): ?>
                         <div class="card-item">
                             <div class="ligne"><label>Description</label><input type="text" value="<?= esc($cat['DESCRIPTION']) ?>" disabled></div>
-                            <div class="ligne"><label>Durée conservation</label><input type="text" value="<?= esc($cat['DUREECONSERVATION']) ?>" disabled></div>
+                            <div class="ligne"><label>Durée conservation (mois)</label><input type="text" value="<?= esc($cat['DUREECONSERVATION']) ?>" disabled></div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -103,7 +103,7 @@
                     <?php foreach ($sensibles as $s): ?>
                         <div class="card-item">
                             <div class="ligne"><label>Description</label><input type="text" value="<?= esc($s['DESCRIPTION']) ?>" disabled></div>
-                            <div class="ligne"><label>Durée conservation</label><input type="text" value="<?= esc($s['DUREECONSERVATION']) ?>" disabled></div>
+                            <div class="ligne"><label>Durée conservation (mois)</label><input type="text" value="<?= esc($s['DUREECONSERVATION']) ?>" disabled></div>
                         </div>
                     <?php endforeach; ?>
                 </div>
