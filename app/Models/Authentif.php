@@ -4,11 +4,11 @@ use CodeIgniter\Model;
 use App\Models\DataAccess;
 
 /**
- * Gestion de l’authentification et des rôles utilisateur.
+ * Gestion de l'authentification et des rôles utilisateur.
  */
 class Authentif extends Model
 {
-    /** @var \CodeIgniter\Session\Session */
+    /** @var \CodeIgniter\Session\Session Session utilisateur */
     private $session;
 
     public function __construct()
@@ -18,7 +18,9 @@ class Authentif extends Model
     }
 
     /**
-     * Indique si l'utilisateur connecté est RSSI.
+     * Vérifie si l'utilisateur connecté possède le rôle RSSI (Administrateur).
+     *
+     * @return bool True si l'utilisateur est RSSI, false sinon
      */
     public function estRssi(): bool
     {
@@ -27,7 +29,9 @@ class Authentif extends Model
     }
 
     /**
-     * Indique si l'utilisateur connecté est un utilisateur standard.
+     * Vérifie si l'utilisateur connecté possède le rôle utilisateur standard.
+     *
+     * @return bool True si l'utilisateur est un utilisateur standard, false sinon
      */
     public function estUtilisateur(): bool
     {
@@ -36,7 +40,10 @@ class Authentif extends Model
     }
 
     /**
-     * Enregistre les informations de l'utilisateur en session.
+     * Enregistre les informations de l'utilisateur en session après authentification réussie.
+     *
+     * @param array $authUser Tableau contenant les informations utilisateur (ID, LOGIN, DROIT)
+     * @return void
      */
     public function connecter(array $authUser): void
     {
@@ -49,6 +56,9 @@ class Authentif extends Model
 
     /**
      * Déconnecte l'utilisateur et détruit la session.
+     * Redirige vers la page de connexion.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirection vers /anonyme
      */
     public function deconnecter()
     {
@@ -59,8 +69,12 @@ class Authentif extends Model
     }
 
     /**
-     * Authentifie un utilisateur via login + mot de passe.
-     * Retourne les données utilisateur ou null si échec.
+     * Authentifie un utilisateur via login et mot de passe.
+     * Vérifie les credentials et retourne les données utilisateur si valides.
+     *
+     * @param string $login Login de l'utilisateur
+     * @param string $mdp Mot de passe en clair
+     * @return array|null Données utilisateur (sans le hash du mot de passe) ou null si échec
      */
     public function authentifier(string $login, string $mdp): ?array
     {
@@ -75,14 +89,17 @@ class Authentif extends Model
             return null;
         }
 
-        // On ne renvoie jamais le hash
         $authUser['MDP'] = '';
 
         return $authUser;
     }
 
     /**
-     * Crée un utilisateur avec hashage automatique du mot de passe.
+     * Crée un nouvel utilisateur avec hashage automatique du mot de passe.
+     *
+     * @param string $login Login du nouvel utilisateur
+     * @param string $mdp Mot de passe en clair (sera hashé automatiquement)
+     * @return bool True si la création a réussi, false sinon
      */
     public function creerUtilisateur(string $login, string $mdp): bool
     {
@@ -93,7 +110,12 @@ class Authentif extends Model
     }
 
     /**
-     * Vérification rapide des identifiants (hash déjà connu).
+     * Vérifie rapidement les identifiants d'un utilisateur.
+     * Utile pour les vérifications de connexion sans récupérer toutes les données utilisateur.
+     *
+     * @param string $login Login de l'utilisateur
+     * @param string $mdp Mot de passe en clair
+     * @return bool True si les identifiants sont valides, false sinon
      */
     public function verifierConnexion(string $login, string $mdp): bool
     {

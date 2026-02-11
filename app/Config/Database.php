@@ -16,55 +16,13 @@ class Database extends Config
 
     /**
      * Groupe par défaut.
-     * Sera défini dynamiquement dans le constructeur.
      */
-    public string $defaultGroup = 'development';
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        // MAGIE ICI :
-        // On force le groupe par défaut à être égal au nom de l'environnement.
-        // Si CI_ENVIRONMENT = production, ça utilisera le groupe $production.
-        // Si CI_ENVIRONMENT = development, ça utilisera le groupe $development.
-        $this->defaultGroup = ENVIRONMENT;
-    }
+    public string $defaultGroup = 'default';
 
     /**
-     * Configuration DEVELOPMENT (vide, remplie par .env)
+     * Configuration DEFAULT (utilisée pour dev et prod)
      */
-    public array $development = [
-        'DSN'          => '',
-        'hostname'     => '',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'foundRows'    => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
-
-    /**
-     * Configuration PRODUCTION (vide, remplie par .env)
-     */
-    public array $production = [
+    public array $default = [
         'DSN'          => '',
         'hostname'     => '',
         'username'     => '',

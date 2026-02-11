@@ -8,14 +8,36 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use TCPDF;
 
+/**
+ * Contrôleur RSSI (administrateur) : gestion avancée du registre de traitement.
+ * Permet la consultation, création, modification, suppression et export des traitements RGPD.
+ */
 class Rssi extends BaseController
 {
+    /** @var \CodeIgniter\Session\Session Session utilisateur */
     protected $session;
+    
+    /** @var Authentif Service d'authentification */
     private $authentif;
+    
+    /** @var int Identifiant du RSSI courant */
     private $idRssi;
+    
+    /** @var array Données communes à transmettre aux vues */
     private $data = [];
+    
+    /** @var ActionsRssi Gestionnaire d'actions métier RSSI */
     private $actRssi;
 
+    /**
+     * Initialise le contrôleur à chaque requête.
+     * Vérifie l'authentification, les droits d'accès RSSI et configure les en-têtes de cache.
+     *
+     * @param RequestInterface $request Requête HTTP
+     * @param ResponseInterface $response Réponse HTTP
+     * @param LoggerInterface $logger Logger
+     * @return void
+     */
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
@@ -25,20 +47,15 @@ class Rssi extends BaseController
         $this->authentif = new Authentif();
         $this->session   = session();
 
-        // Vérifier que l'utilisateur est connecté
         if (!$this->session->get('ID')) {
             redirect()->to('/anonyme')->send();
             exit;
         }
 
-        // 🔒 SÉCURITÉ CRITIQUE : Vérifier que l'utilisateur est bien ADMIN (RSSI)
         if ($this->session->get('DROIT') !== 'AD') {
-            // Si ce n'est pas un admin, bloquer l'accès
             if ($this->session->get('DROIT') === 'US') {
-                // Utilisateur standard : rediriger vers son espace
                 redirect()->to('/user')->send();
             } else {
-                // Rôle inconnu : déconnecter
                 $this->session->destroy();
                 redirect()->to('/anonyme')->send();
             }
@@ -56,6 +73,12 @@ class Rssi extends BaseController
         $this->model = new ActionPageInfo();
     }
 
+    /**
+     * Page d'accueil du tableau de bord RSSI.
+     * Affiche les statistiques globales du registre de traitement.
+     *
+     * @return string Vue du tableau de bord
+     */
     public function index()
     {
         $stats = $this->actRssi->getDashboardStats();
@@ -65,6 +88,11 @@ class Rssi extends BaseController
         ]));
     }
 
+    /**
+     * Affiche la page de détails des traitements (mode création).
+     *
+     * @return string Vue des détails de traitement
+     */
     public function indexDetails() {
         $data = $this->loadCommonData();
         $data['mode'] = 'create';
@@ -73,14 +101,24 @@ class Rssi extends BaseController
         return view('rssi/v_rssi_traitements_detail', $data);
     }
 
+    /**
+     * Déconnecte le RSSI et redirige vers la page de connexion.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirection vers /anonyme
+     */
     public function seDeconnecter()
     {
         return $this->authentif->deconnecter();
     }
 
+    /**
+     * Affiche le tableau des traitements.
+     * Enregistre la consultation dans les logs.
+     *
+     * @return string Vue du tableau des traitements
+     */
     public function tab()
     {
-        // --- LOG METIER : consultation liste ---
         $this->logConsultationListe();
 
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
@@ -91,6 +129,11 @@ class Rssi extends BaseController
         ]);
     }
 
+    /**
+     * Affiche l'historique des logs système avec filtrage par limite.
+     *
+     * @return string Vue des logs
+     */
     public function logs()
     {
         $limit = $this->request->getGet('limit') ?? 50;
@@ -104,6 +147,11 @@ class Rssi extends BaseController
         ]);
     }
 
+    /**
+     * Affiche le formulaire de sélection pour l'export PDF.
+     *
+     * @return string Vue du formulaire d'export
+     */
     public function exportPDF()
     {
         $traitements = $this->actRssi->getTraitementsAvecFinaliteEtSensibles();
@@ -114,11 +162,16 @@ class Rssi extends BaseController
         ]);
     }
 
+    /**
+     * Génère un PDF contenant les traitements sélectionnés.
+     * Enregistre l'export dans les logs.
+     *
+     * @return \CodeIgniter\HTTP\Response|string PDF généré ou redirection en cas d'erreur
+     */
     public function genererPDF()
     {
         $selection = $this->request->getPost('selection');
         
-        // Si c'est une sélection JSON (checkboxes)
         if ($selection && $selection !== 'all') {
             $refs = json_decode($selection, true);
             
@@ -128,14 +181,12 @@ class Rssi extends BaseController
             
             $this->logExportSelection($refs);
             
-            // Instanciation TCPDF
             $pdf = new TCPDF();
             $pdf->SetCreator('Registre RGPD');
             $pdf->SetAuthor($this->data['identite']);
             $pdf->AddPage('L');
             $pdf->SetTitle('Export sélectif du registre');
 
-            // Récupérer les traitements sélectionnés
             $traitements = [];
             foreach ($refs as $ref) {
                 $t = $this->actRssi->getTraitementById($ref);
@@ -144,7 +195,6 @@ class Rssi extends BaseController
                 }
             }
 
-            // Générer le tableau HTML
             $html = '
             <h1>Export sélectif du registre</h1>
 
@@ -204,7 +254,6 @@ class Rssi extends BaseController
 
             $pdf->writeHTML($html, true, false, true, false, '');
 
-            // Nettoyage des buffers
             while (ob_get_level() > 0) {
                 ob_end_clean();
             }
@@ -217,13 +266,12 @@ class Rssi extends BaseController
         }
         
     }
-    
-    private function logExportSelection($refs)
-    {
-        $count = count($refs);
-        $this->actRssi->logAction('EXPORT', "Export PDF de $count traitement(s) : " . implode(', ', $refs));
-    }
 
+    /**
+     * Affiche le tableau des traitements avec support de recherche.
+     *
+     * @return string Vue du tableau avec résultats de recherche
+     */
     public function tableau()
     {
         $search = $this->request->getGet('search');
@@ -236,6 +284,14 @@ class Rssi extends BaseController
         ], ['saveData' => true]);
     }
 
+    /**
+     * Affiche le détail d'un traitement spécifique.
+     * Enregistre la consultation dans les logs.
+     *
+     * @param int $ref Référence du traitement
+     * @return string Vue détaillée du traitement
+     * @throws \CodeIgniter\Exceptions\PageNotFoundException Si le traitement n'existe pas
+     */
     public function detail($ref)
     {
         $traitement = $this->actRssi->getTraitementById($ref);
@@ -244,7 +300,6 @@ class Rssi extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Traitement introuvable");
         }
 
-        // --- LOG METIER : consultation d'un traitement ---
         $this->logConsultationTraitement($ref);
 
         return view('rssi/v_rssi_traitement_detail', [
@@ -253,6 +308,12 @@ class Rssi extends BaseController
         ]);
     }
 
+    /**
+     * Point d'entrée AJAX pour la recherche dynamique de traitements.
+     * Retourne le HTML des lignes du tableau filtrées avec checkbox pour export.
+     *
+     * @return \CodeIgniter\HTTP\Response Réponse HTTP contenant le HTML généré
+     */
     public function searchAjax()
     {
         $q = $this->request->getGet('q');
@@ -262,7 +323,6 @@ class Rssi extends BaseController
         $html = '';
 
         foreach ($traitements as $t) {
-            // Badge données sensibles
             $badgeSensibles = '';
             if (trim(strtolower($t['DONNEESSENSIBLES'])) === 'oui') {
                 $badgeSensibles = '<span class="badge badge-oui">Oui</span>';
@@ -270,7 +330,6 @@ class Rssi extends BaseController
                 $badgeSensibles = '<span class="badge badge-non">Non</span>';
             }
 
-            // Badge transfert hors UE
             $badgeTransfert = '';
             if (trim(strtolower($t['TRANSFERT_HORS_UE'])) === 'oui' || $t['TRANSFERT_HORS_UE'] == 1) {
                 $badgeTransfert = '<span class="badge badge-oui">Oui</span>';
@@ -297,31 +356,11 @@ class Rssi extends BaseController
         return $this->response->setBody($html);
     }
 
-    /* ============================================================
-     *  SECTION LOGS METIER (actions non SQL)
-     *  Ces logs restent car les triggers ne couvrent pas ces actions
-     * ============================================================ */
-
-    private function logConsultationListe()
-    {
-        $this->actRssi->logAction('CONSULTATION_LISTE', 'Consultation de la liste des traitements');
-    }
-
-    private function logConsultationTraitement($ref)
-    {
-        $this->actRssi->logAction('CONSULTATION', "Consultation du traitement $ref");
-    }
-
-    private function logExportGlobal()
-    {
-        $this->actRssi->logAction('EXPORT', 'Export PDF global du registre');
-    }
-
-    private function logExportTraitement($idTraitement)
-    {
-        $this->actRssi->logAction('EXPORT', "Export PDF du traitement $idTraitement");
-    }
-
+    /**
+     * Affiche le formulaire de création d'un nouveau traitement.
+     *
+     * @return string Vue du formulaire de création
+     */
     public function create() {
         $data = $this->loadCommonData();
         $data['mode'] = 'create';
@@ -330,6 +369,14 @@ class Rssi extends BaseController
         return view('rssi/v_rssi_traitements_detail', $data);
     }
 
+    /**
+     * Affiche le formulaire d'édition d'un traitement existant.
+     * Charge toutes les données associées au traitement.
+     *
+     * @param int $ref Référence du traitement à éditer
+     * @return string Vue du formulaire d'édition
+     * @throws \CodeIgniter\Exceptions\PageNotFoundException Si le traitement n'existe pas
+     */
     public function edit($ref) {
         $data = $this->loadCommonData();
 
@@ -352,51 +399,32 @@ class Rssi extends BaseController
         return view('rssi/v_rssi_traitements_detail', $data);
     }
 
-    private function loadCommonData() {
-        return [
-            'identite'            => session()->get('LOGIN'),
-            'categDCP'            => $this->model->getCategDCP(),
-            'categDCPSensible'    => $this->model->getCategDCPSensible(),
-            'personnesConcerne'   => $this->model->getPersonnesConcerne(),
-            'typeActeur'          => $this->model->getTypeActeur(),
-            'typeMesureSecurite'  => $this->model->getTypeMesureSecurite(),
-            'typeDestinataire'    => $this->model->getTypeDestinataire(),
-            'typeGarantie'        => $this->model->getTypeGarantie(),
-            'pays'                => $this->model->getPays(),
-        ];
-    }
-
+    /**
+     * Enregistre un traitement (création ou modification) avec tous ses blocs associés.
+     * Gère automatiquement les dates de création et de mise à jour.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirection vers le tableau avec message de succès
+     */
     public function save() {
         $mode = $this->request->getPost('mode');
         $ref  = $this->request->getPost('id_traitement');
-
-        /* ---------------------------------------------------------
-           1) TRAITEMENT PRINCIPAL
-        --------------------------------------------------------- */
 
         $traitementData = [
             'NOM'            => $this->request->getPost('nom'),
             'TRANSFERTHHORSUE' => $this->request->getPost('checkboxTransfert') ? 1 : 0,
         ];
 
-        // Gestion automatique des dates
         if ($mode === 'create') {
-            // Ne pas inclure REF - elle sera auto-générée par la base de données
             $traitementData['DATECREATION'] = date('Y-m-d');
             $traitementData['DATEMAJ'] = date('Y-m-d');
             
-            // Insérer le traitement et récupérer la REF auto-générée
             $ref = $this->model->insertTraitement($traitementData);
         } else {
-            // En modification, on met à jour uniquement DATEMAJ
             $traitementData['DATEMAJ'] = date('Y-m-d');
             $this->model->updateTraitement($ref, $traitementData);
             $this->model->deleteAllBlocs($ref);
         }
 
-        /* ---------------------------------------------------------
-           2) ACTEURS
-        --------------------------------------------------------- */
         $noms = $this->request->getPost('acteur_nom');
         if ($noms) {
             foreach ($noms as $i => $nom) {
@@ -418,9 +446,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           3) FINALITÉS
-        --------------------------------------------------------- */
         $finalites = $this->request->getPost('finalite');
         if ($finalites) {
             foreach ($finalites as $i => $libelle) {
@@ -435,9 +460,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           4) CATÉGORIES DCP
-        --------------------------------------------------------- */
         $catDesc = $this->request->getPost('categorie_description');
         if ($catDesc) {
             foreach ($catDesc as $i => $desc) {
@@ -455,9 +477,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           5) DONNÉES SENSIBLES
-        --------------------------------------------------------- */
         $sensDesc = $this->request->getPost('sensible_description');
         if ($sensDesc) {
             foreach ($sensDesc as $i => $desc) {
@@ -475,9 +494,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           6) PERSONNES CONCERNÉES
-        --------------------------------------------------------- */
         $persDesc = $this->request->getPost('personne_description');
         if ($persDesc) {
             foreach ($persDesc as $i => $idCat) {
@@ -492,9 +508,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           7) DESTINATAIRES
-        --------------------------------------------------------- */
         $destDesc = $this->request->getPost('destinataire_description');
         if ($destDesc) {
             foreach ($destDesc as $i => $idType) {
@@ -509,9 +522,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           8) MESURES DE SÉCURITÉ
-        --------------------------------------------------------- */
         $secDesc = $this->request->getPost('securite_description');
         if ($secDesc) {
             foreach ($secDesc as $i => $idType) {
@@ -526,9 +536,6 @@ class Rssi extends BaseController
             }
         }
 
-        /* ---------------------------------------------------------
-           9) TRANSFERTS HORS UE
-        --------------------------------------------------------- */
         $transDest = $this->request->getPost('transfert_destinataire');
         if ($transDest) {
             foreach ($transDest as $i => $dest) {
@@ -549,5 +556,78 @@ class Rssi extends BaseController
         }
         session()->setFlashdata('success', 'Le traitement a bien été enregistré.');
         return redirect()->to('/rssi/tableau')->with('success', 'Traitement sauvegardé');
+    }
+
+    /**
+     * Charge toutes les données de référence nécessaires pour les formulaires.
+     *
+     * @return array Tableau associatif contenant toutes les listes de référence
+     */
+    private function loadCommonData() {
+        return [
+            'identite'            => session()->get('LOGIN'),
+            'categDCP'            => $this->model->getCategDCP(),
+            'categDCPSensible'    => $this->model->getCategDCPSensible(),
+            'personnesConcerne'   => $this->model->getPersonnesConcerne(),
+            'typeActeur'          => $this->model->getTypeActeur(),
+            'typeMesureSecurite'  => $this->model->getTypeMesureSecurite(),
+            'typeDestinataire'    => $this->model->getTypeDestinataire(),
+            'typeGarantie'        => $this->model->getTypeGarantie(),
+            'pays'                => $this->model->getPays(),
+        ];
+    }
+
+    /**
+     * Enregistre dans les logs la consultation de la liste des traitements.
+     *
+     * @return void
+     */
+    private function logConsultationListe()
+    {
+        $this->actRssi->logAction('CONSULTATION_LISTE', 'Consultation de la liste des traitements');
+    }
+
+    /**
+     * Enregistre dans les logs la consultation d'un traitement spécifique.
+     *
+     * @param int $ref Référence du traitement consulté
+     * @return void
+     */
+    private function logConsultationTraitement($ref)
+    {
+        $this->actRssi->logAction('CONSULTATION', "Consultation du traitement $ref");
+    }
+
+    /**
+     * Enregistre dans les logs un export PDF global du registre.
+     *
+     * @return void
+     */
+    private function logExportGlobal()
+    {
+        $this->actRssi->logAction('EXPORT', 'Export PDF global du registre');
+    }
+
+    /**
+     * Enregistre dans les logs un export PDF d'un traitement spécifique.
+     *
+     * @param int $idTraitement Référence du traitement exporté
+     * @return void
+     */
+    private function logExportTraitement($idTraitement)
+    {
+        $this->actRssi->logAction('EXPORT', "Export PDF du traitement $idTraitement");
+    }
+
+    /**
+     * Enregistre dans les logs un export PDF de traitements sélectionnés.
+     *
+     * @param array $refs Liste des références des traitements exportés
+     * @return void
+     */
+    private function logExportSelection($refs)
+    {
+        $count = count($refs);
+        $this->actRssi->logAction('EXPORT', "Export PDF de $count traitement(s) : " . implode(', ', $refs));
     }
 }

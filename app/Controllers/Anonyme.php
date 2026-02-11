@@ -8,8 +8,10 @@ use App\Models\Authentif;
 class Anonyme extends BaseController
 {
     /**
-     * Page d’accueil publique.
-     * Redirige automatiquement si l’utilisateur est déjà connecté.
+     * Page d'accueil publique.
+     * Redirige automatiquement si l'utilisateur est déjà connecté vers son espace approprié.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Redirection ou vue de connexion
      */
     public function index()
     {
@@ -29,7 +31,8 @@ class Anonyme extends BaseController
     /**
      * Affiche le formulaire de connexion.
      *
-     * @param string|null $errMsg Message d’erreur éventuel.
+     * @param string|null $errMsg Message d'erreur à afficher (optionnel)
+     * @return string Vue du formulaire de connexion
      */
     public function login($errMsg = null)
     {
@@ -38,6 +41,9 @@ class Anonyme extends BaseController
 
     /**
      * Traite la soumission du formulaire de connexion.
+     * Authentifie l'utilisateur et le redirige vers son espace ou affiche une erreur.
+     *
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Redirection vers l'espace utilisateur ou formulaire avec erreur
      */
     public function seConnecter()
     {
