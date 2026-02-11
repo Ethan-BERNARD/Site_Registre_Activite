@@ -87,8 +87,8 @@
                 <tr>
                     <th colspan="5">Identification du traitement</th>
                     <th colspan="1">Finalité du traitement</th>
-                    <th colspan="1">Données sensibles ?</th>
-                    <th colspan="1">Transferts hors UE ?</th>
+                    <th colspan="1">Données<br>sensibles ?</th>
+                    <th colspan="1">Transferts<br>hors UE ?</th>
                 </tr>
 
                 <tr>
