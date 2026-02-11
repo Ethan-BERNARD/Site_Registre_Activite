@@ -201,18 +201,21 @@ class Rssi extends BaseController
                     border: 1px solid #000;
                     padding: 6px;
                 }
+                th.tinyCard {
+                    text-align: left;
+                }
             </style>
 
             <table>
                 <thead>
                     <tr>
-                        <th width="15%">Nom du traitement</th>
-                        <th width="7%">N° / Réf</th>
-                        <th width="10%">Date de création</th>
-                        <th width="10%">Dernière mise à jour</th>
-                        <th width="38%">Finalité principale</th>
-                        <th width="10%">Transferts hors UE ?</th>
-                        <th width="10%">Données sensibles ?</th>
+                        <th width="20%">Nom du traitement</th>
+                        <th width="6%">N° / Réf</th>
+                        <th class="tinyCard" width="7.5%">Date de création</th>
+                        <th class="tinyCard" width="7.5%">Dernière mise à jour</th>
+                        <th width="43%">Finalité principale</th>
+                        <th class="tinyCard" width="8%">Transferts hors UE ?</th>
+                        <th class="tinyCard" width="8%">Données sensibles ?</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -221,13 +224,13 @@ class Rssi extends BaseController
             foreach ($traitements as $t) {
                 $html .= '
                     <tr>
-                        <td width="15%">' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
-                        <td width="7%">' . esc($t['REF'] ?? 'Non renseigné') . '</td>
-                        <td width="10%">' . esc($t['DATECREATION'] ?? 'Non renseignée') . '</td>
-                        <td width="10%">' . esc($t['DATEMAJ'] ?? 'Non renseignée') . '</td>
-                        <td width="38%">' . esc($t['FINALITE'] ?? 'Non renseignée') . '</td>
-                        <td width="10%">' . esc($t['TRANSFERT_HORS_UE'] ?? 'Non renseigné') . '</td>
-                        <td width="10%">' . esc($t['DONNEESSENSIBLES'] ?? 'Non renseigné') . '</td>
+                        <td width="20%">' . esc($t['NOM'] ?? 'Non renseigné') . '</td>
+                        <td width="6%">' . esc($t['REF'] ?? 'Non renseigné') . '</td>
+                        <td width="7.5%">' . esc($t['DATECREATION'] ?? 'Non renseignée') . '</td>
+                        <td width="7.5%">' . esc($t['DATEMAJ'] ?? 'Non renseignée') . '</td>
+                        <td width="43%">' . esc($t['FINALITE'] ?? 'Non renseignée') . '</td>
+                        <td width="8%">' . esc($t['TRANSFERT_HORS_UE'] ?? 'Non renseigné') . '</td>
+                        <td width="8%">' . esc($t['DONNEESSENSIBLES'] ?? 'Non renseigné') . '</td>
                     </tr>
                 ';
             }
